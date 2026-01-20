@@ -128,7 +128,7 @@ a,
 button,
 time,
 span {
-  display: block;
+  
 }
 
 button {
@@ -499,7 +499,7 @@ main {
 .navbar-link {
   color: var(--light-gray);
   font-size: var(--fs-8);
-  padding: 20px 7px;
+  padding: 20px 8px;
   transition: color var(--transition-1);
 }
 
@@ -1959,11 +1959,11 @@ textarea.form-input::-webkit-resizer {
 
   .sidebar {
     position: sticky;
-    top: 80px;
+    top: 0px;
     max-height: max-content;
     height: 100%;
     margin-bottom: 0;
-    padding-top: 60px;
+    padding-top: 35px;
     z-index: 1;
   }
 
