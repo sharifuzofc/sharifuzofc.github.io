@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="YX6t-_fqW6P0uBzF7qk8kandtDpxl9VAuAgq4Vjpoew" />
-  <title>Sharifuz Zaman | Web developer &amp; SQA tester</title>
-  <meta name="description" content="Sharifuz Zaman — web developer, SQA tester, graphics designer, video editor and digital marketer from Dhaka, Bangladesh." />
+  <title>Sharifuz Zaman® — Digital Craftsman</title>
+  <meta name="description" content="Sharifuz Zaman — web developer, SQA tester, graphics designer, video editor and digital marketer. Building pixel-perfect, battle-tested digital experiences from Dhaka, Bangladesh." />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQM31CXY13"></script>
@@ -19,105 +19,274 @@
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
 <body>
 
-  <header class="site-header">
-    <a href="./index.html" class="logo" aria-label="Sharifuz Zaman — home">SZ</a>
-    <nav class="main-nav" data-nav>
-      <a href="./about.html">about</a>
-      <a href="./portfolio.html">portfolio</a>
-      <a href="./contact.html">contact</a>
+  <!-- grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- custom cursor -->
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" data-preloader aria-hidden="true">
+    <p class="pre-name"><span>S</span><span>H</span><span>A</span><span>R</span><span>I</span><span>F</span><span>U</span><span>Z</span></p>
+    <p class="pre-count" data-pre-count>0</p>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" data-nav-bar>
+    <a class="nav-logo" href="#top">SZ<span class="accent">.</span></a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div class="header-social">
-      <a href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2m0 1.76c-3.15 0-3.52.01-4.76.07-1.08.05-1.66.23-2.05.38-.51.2-.88.44-1.26.82-.38.38-.62.75-.82 1.26-.15.39-.33.97-.38 2.05-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.05 1.08.23 1.66.38 2.05.2.51.44.88.82 1.26.38.38.75.62 1.26.82.39.15.97.33 2.05.38 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c1.08-.05 1.66-.23 2.05-.38.51-.2.88-.44 1.26-.82.38-.38.62-.75.82-1.26.15-.39.33-.97.38-2.05.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.05-1.08-.23-1.66-.38-2.05-.2-.51-.44-.88-.82-1.26a3.4 3.4 0 0 0-1.26-.82c-.39-.15-.97-.33-2.05-.38-1.24-.06-1.61-.07-4.76-.07m0 3a5.04 5.04 0 1 1 0 10.08A5.04 5.04 0 0 1 12 6.96m0 1.76a3.28 3.28 0 1 0 0 6.56 3.28 3.28 0 0 0 0-6.56m5.23-2.13a1.18 1.18 0 1 1 0 2.36 1.18 1.18 0 0 1 0-2.36z"/></svg>
-      </a>
-      <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.56 9.56 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
-      </a>
+    <div class="nav-meta">
+      <span class="nav-dot" aria-hidden="true"></span>
+      <span data-local-time>Dhaka —:—</span>
     </div>
-    <button class="nav-burger" data-burger aria-label="Menu"><span></span><span></span><span></span></button>
   </header>
 
-  <main>
+  <main id="top">
 
-    <!-- ============ SPLIT HERO ============ -->
+    <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-side hero-left">
-          <h1>designer</h1>
-          <p>Graphics designer &amp; video editor crafting bold visuals, brands and stories.</p>
-        </div>
+      <p class="hero-eyebrow reveal-line">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Available for freelance — Dhaka, Bangladesh
+      </p>
 
-        <div class="hero-portrait">
-          <div class="code-bg" aria-hidden="true">
-            <span>&lt;html&gt;</span>
-            <span>height:184px;}</span>
-            <span>&lt;div class="jedi"&gt;</span>
-            <span class="big">CSS3 <em>HTML5</em></span>
-            <span>color:#000;</span>
-            <span>expect(bug).toBe(fixed);</span>
-          </div>
-          <img src="./assets/images/hero-split.png" alt="Sharifuz Zaman — half painted illustration, half photo" />
-        </div>
+      <h1 class="hero-title" aria-label="Sharifuz Zaman">
+        <span class="line"><span class="word" data-split>SHARIFUZ</span></span>
+        <span class="line line-2">
+          <em class="serif">creative</em>
+          <span class="word" data-split>ZAMAN</span><sup class="reg">®</sup>
+        </span>
+      </h1>
 
-        <div class="hero-side hero-right">
-          <h1 class="mono">&lt;coder&gt;</h1>
-          <p>Web developer &amp; SQA tester who writes clean, elegant and well-tested code.</p>
-        </div>
+      <div class="hero-foot">
+        <p class="hero-roles">
+          <span class="roles-label">I work as</span>
+          <span class="roles-swap" data-roles>
+            <span>a web developer</span>
+            <span>an SQA tester</span>
+            <span>a graphics designer</span>
+            <span>a video editor</span>
+            <span>a digital marketer</span>
+          </span>
+        </p>
+        <a class="hero-cta magnetic" href="#work">
+          <span>See the work</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
       </div>
     </section>
 
-    <!-- ============ LATEST WORK ============ -->
-    <section class="latest">
-      <h3 class="section-kicker">Some of my latest work</h3>
-      <ul class="card-grid cols-3">
-        <li class="card reveal">
-          <a href="./portfolio.html">
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Develop <i>✦</i> Test <i>✦</i> Design <i>✦</i> Edit <i>✦</i> Market <i>✦</i> </span>
+        <span>Develop <i>✦</i> Test <i>✦</i> Design <i>✦</i> Edit <i>✦</i> Market <i>✦</i> </span>
+      </div>
+    </div>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <section class="work" id="work">
+      <div class="section-head">
+        <h2><em class="serif">selected</em> WORK</h2>
+        <span class="section-count">(06)</span>
+      </div>
+
+      <ul class="work-list">
+        <li class="work-item reveal" data-tilt>
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
             <figure><img src="./assets/images/project-1.jpg" alt="Finance web app" loading="lazy" /></figure>
-            <h4>Finance web app</h4>
-            <p>Web development</p>
+            <div class="work-meta">
+              <span class="work-idx">01</span>
+              <h3>Finance Web App</h3>
+              <p>Web Development — 2025</p>
+            </div>
           </a>
         </li>
-        <li class="card reveal">
-          <a href="./portfolio.html">
-            <figure><img src="./assets/images/project-6.png" alt="MetaSpark brand design" loading="lazy" /></figure>
-            <h4>MetaSpark brand design</h4>
-            <p>Graphics design</p>
+        <li class="work-item reveal" data-tilt>
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
+            <figure><img src="./assets/images/project-4.png" alt="Brawlhalla app QA" loading="lazy" /></figure>
+            <div class="work-meta">
+              <span class="work-idx">02</span>
+              <h3>Brawlhalla App QA</h3>
+              <p>SQA &amp; Automation — 2025</p>
+            </div>
           </a>
         </li>
-        <li class="card reveal">
-          <a href="./portfolio.html">
-            <figure><img src="./assets/images/project-4.png" alt="Brawlhalla app testing" loading="lazy" /></figure>
-            <h4>Brawlhalla app testing</h4>
-            <p>SQA testing</p>
+        <li class="work-item reveal" data-tilt>
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
+            <figure><img src="./assets/images/project-6.png" alt="MetaSpark identity" loading="lazy" /></figure>
+            <div class="work-meta">
+              <span class="work-idx">03</span>
+              <h3>MetaSpark Identity</h3>
+              <p>Graphics Design — 2024</p>
+            </div>
+          </a>
+        </li>
+        <li class="work-item reveal" data-tilt>
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
+            <figure><img src="./assets/images/project-2.png" alt="Orizon platform" loading="lazy" /></figure>
+            <div class="work-meta">
+              <span class="work-idx">04</span>
+              <h3>Orizon Platform</h3>
+              <p>Web Development — 2024</p>
+            </div>
+          </a>
+        </li>
+        <li class="work-item reveal" data-tilt>
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
+            <figure><img src="./assets/images/project-8.jpg" alt="Task manager API testing" loading="lazy" /></figure>
+            <div class="work-meta">
+              <span class="work-idx">05</span>
+              <h3>TaskFlow API Testing</h3>
+              <p>SQA — Postman / JMeter — 2024</p>
+            </div>
+          </a>
+        </li>
+        <li class="work-item reveal" data-tilt>
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
+            <figure><img src="./assets/images/project-9.png" alt="Arrival campaign" loading="lazy" /></figure>
+            <div class="work-meta">
+              <span class="work-idx">06</span>
+              <h3>Arrival Campaign</h3>
+              <p>Digital Marketing — Video — 2024</p>
+            </div>
           </a>
         </li>
       </ul>
     </section>
 
-  </main>
+    <!-- ============ SERVICES ============ -->
+    <section class="services" id="services">
+      <div class="section-head">
+        <h2><em class="serif">what i</em> DO</h2>
+        <span class="section-count">(05)</span>
+      </div>
 
-  <footer class="site-footer">
-    <button class="back-to-top" data-back-to-top aria-label="Back to top">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg>
-    </button>
-    <div class="footer-inner">
-      <p class="footer-copy">© 2026 Sharifuz Zaman</p>
-      <nav class="footer-nav">
-        <a href="./about.html">about</a>
-        <a href="./portfolio.html">portfolio</a>
-        <a href="./contact.html">contact</a>
-      </nav>
-    </div>
-  </footer>
+      <ul class="svc-list">
+        <li class="svc reveal" data-svc>
+          <button class="svc-head" aria-expanded="false">
+            <span class="svc-idx">01</span>
+            <span class="svc-name">Web Development</span>
+            <span class="svc-plus" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-body">
+            <p>Fast, responsive, accessible websites and web apps — from landing pages to full products. Clean HTML, modern CSS and JavaScript that ships and scales.</p>
+            <span class="svc-tags">HTML · CSS · JavaScript · Git · REST APIs</span>
+          </div>
+        </li>
+        <li class="svc reveal" data-svc>
+          <button class="svc-head" aria-expanded="false">
+            <span class="svc-idx">02</span>
+            <span class="svc-name">SQA &amp; Testing</span>
+            <span class="svc-plus" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-body">
+            <p>I break software before your users do. Manual &amp; automated testing, regression suites, API and performance testing with clear, actionable bug reports.</p>
+            <span class="svc-tags">Selenium · Cypress · Postman · JMeter · JIRA</span>
+          </div>
+        </li>
+        <li class="svc reveal" data-svc>
+          <button class="svc-head" aria-expanded="false">
+            <span class="svc-idx">03</span>
+            <span class="svc-name">Graphics Design</span>
+            <span class="svc-plus" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-body">
+            <p>Logos, brand identities, social creatives, thumbnails and UI graphics with a sharp, consistent visual language that makes brands memorable.</p>
+            <span class="svc-tags">Photoshop · Illustrator · Figma</span>
+          </div>
+        </li>
+        <li class="svc reveal" data-svc>
+          <button class="svc-head" aria-expanded="false">
+            <span class="svc-idx">04</span>
+            <span class="svc-name">Video Editing</span>
+            <span class="svc-plus" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-body">
+            <p>Cinematic edits, reels, ads and motion graphics — pacing, sound design and color grading that keep people watching to the last frame.</p>
+            <span class="svc-tags">Premiere Pro · After Effects · DaVinci Resolve</span>
+          </div>
+        </li>
+        <li class="svc reveal" data-svc>
+          <button class="svc-head" aria-expanded="false">
+            <span class="svc-idx">05</span>
+            <span class="svc-name">Digital Marketing</span>
+            <span class="svc-plus" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-body">
+            <p>SEO, paid campaigns, content strategy and analytics — getting the right work in front of the right people, measurably.</p>
+            <span class="svc-tags">Google Analytics · Meta Ads · SEO</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <div class="about-grid">
+        <figure class="about-photo reveal">
+          <img src="./assets/images/my-avatar.png" alt="Sharifuz Zaman" />
+          <figcaption>Sharifuz Zaman — Dhaka, BD</figcaption>
+        </figure>
+
+        <div class="about-copy">
+          <h2 class="reveal"><em class="serif">about</em> ME</h2>
+          <p class="about-lead reveal">
+            One person, full pipeline — I build it, test it, design it,
+            edit it and market it.
+          </p>
+          <p class="reveal">
+            I'm a Computer Science &amp; Engineering student at Sonargaon University and a
+            multi-disciplinary digital craftsman. Where most people hand work between five
+            specialists, I carry an idea from the first line of code to the final ad
+            campaign — with quality checks at every step.
+          </p>
+
+          <ul class="stats">
+            <li class="reveal"><strong data-count="5">0</strong><span>disciplines mastered</span></li>
+            <li class="reveal"><strong data-count="30">0</strong><span>projects shipped</span></li>
+            <li class="reveal"><strong data-count="100">0</strong><span>% bug-hunting energy</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT / FOOTER ============ -->
+    <footer class="contact" id="contact">
+      <p class="contact-kicker reveal">Got a project in mind?</p>
+      <a class="contact-huge magnetic" href="mailto:sharifuzofc@gmail.com">
+        <span class="line"><span>LET'S</span></span>
+        <span class="line"><em class="serif">work</em> <span>TOGETHER</span></span>
+      </a>
+
+      <div class="contact-row">
+        <a class="pill" href="mailto:sharifuzofc@gmail.com">sharifuzofc@gmail.com</a>
+        <a class="pill" href="tel:+8801919729159">+880 1919-729159</a>
+      </div>
+
+      <div class="footer-bar">
+        <span>© 2026 Sharifuz Zaman</span>
+        <nav class="footer-social">
+          <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener">Instagram</a>
+        </nav>
+        <button class="to-top" data-back-to-top>Back to top ↑</button>
+      </div>
+    </footer>
+
+  </main>
 
   <script src="./assets/js/script.js"></script>
 </body>
