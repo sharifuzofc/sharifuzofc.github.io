@@ -20,7 +20,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
@@ -44,333 +44,301 @@
     <a href="#contact" class="nav-link" data-nav-link>Contact</a>
   </nav>
 
-  <!-- side email -->
-  <a href="mailto:sharifuzofc@gmail.com" class="side-email">sharifuzofc@gmail.com</a>
-
   <main>
 
-    <!-- ==================== INTRO ==================== -->
+    <!-- ==================== INTRO / PAINTING ==================== -->
     <section class="intro" id="intro">
+      <div class="intro-bg" aria-hidden="true"></div>
+
+      <!-- diagonal arrow linework -->
+      <svg class="intro-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g stroke="#f4f1ea" stroke-width="10" fill="none">
+          <path d="M 430 -60 L 130 330 L 470 780" />
+          <path d="M 360 -60 L 60 330 L 400 780" opacity="0.85" />
+          <path d="M 620 980 L 940 480 L 560 40" opacity="0.9" />
+        </g>
+        <g fill="#f4f1ea" opacity="0.92">
+          <path d="M 560 170 L 1010 170 L 1010 148 L 1105 185 L 1010 222 L 1010 200 L 560 200 Z" />
+        </g>
+      </svg>
 
       <!-- scattered giant letters -->
       <div class="intro-letters" aria-hidden="true">
-        <span style="top:4%;  left:6%;">S</span>
-        <span style="top:12%; left:78%;">H</span>
-        <span style="top:30%; left:14%;">A</span>
-        <span style="top:52%; left:84%;">R</span>
-        <span style="top:64%; left:4%;">I</span>
-        <span style="top:76%; left:70%;">F</span>
-        <span style="top:40%; left:46%;">U</span>
-        <span style="top:84%; left:30%;">Z</span>
+        <span class="lt serif" style="top:2%;   left:20%;">S</span>
+        <span class="lt"       style="top:1%;   left:66%;">H</span>
+        <span class="lt serif" style="top:14%;  left:84%;">A</span>
+        <span class="lt"       style="top:26%;  left:22%;">R</span>
+        <span class="lt serif" style="top:30%;  left:60%;">I</span>
+        <span class="lt"       style="top:44%;  left:86%;">F</span>
+        <span class="lt serif" style="top:56%;  left:24%;">U</span>
+        <span class="lt"       style="top:58%;  left:64%;">Z</span>
+        <span class="lt serif" style="top:74%;  left:44%;">S</span>
+        <span class="lt"       style="top:76%;  left:84%;">D</span>
       </div>
 
-      <!-- diagonal commandments marquees -->
-      <div class="commandments c-one" aria-hidden="true">
-        <div class="commandments-track">
-          <span>Thou shalt not ship without testing.&nbsp; Thou shalt not overload your Landing Page.&nbsp; Thou shalt keep it clean and simple.&nbsp; Thou shalt not use effects for no reason.&nbsp; Thou shalt not confuse people.&nbsp; Thou shalt not choose UI over UX.&nbsp; Thou shalt report every bug thou findest.&nbsp; Thou shalt not change thy design style within a project.&nbsp;</span>
-          <span>Thou shalt not ship without testing.&nbsp; Thou shalt not overload your Landing Page.&nbsp; Thou shalt keep it clean and simple.&nbsp; Thou shalt not use effects for no reason.&nbsp; Thou shalt not confuse people.&nbsp; Thou shalt not choose UI over UX.&nbsp; Thou shalt report every bug thou findest.&nbsp; Thou shalt not change thy design style within a project.&nbsp;</span>
-        </div>
-      </div>
-      <div class="commandments c-two" aria-hidden="true">
-        <div class="commandments-track reverse">
-          <span>Thou shalt not write vertical.&nbsp; Thou shalt not create a hidden section nobody can find.&nbsp; Thou shalt not critique thine own portfolio.&nbsp; Thou shalt automate thy regression suite.&nbsp; Thou shalt not deploy on Friday.&nbsp; Thou shalt color-grade thy footage.&nbsp; Thou shalt not draw crap on Pieter Bruegel's masterpiece.&nbsp;</span>
-          <span>Thou shalt not write vertical.&nbsp; Thou shalt not create a hidden section nobody can find.&nbsp; Thou shalt not critique thine own portfolio.&nbsp; Thou shalt automate thy regression suite.&nbsp; Thou shalt not deploy on Friday.&nbsp; Thou shalt color-grade thy footage.&nbsp; Thou shalt not draw crap on Pieter Bruegel's masterpiece.&nbsp;</span>
-        </div>
+      <!-- commandments column -->
+      <div class="intro-commandments">
+        Thou shalt not overload your landing page. Thou shalt not draw crap on
+        Pieter Bruegel's masterpiece. Thou shalt not use effects for no reason.
+        Thou shalt keep it clean and simple. Thou shalt not create a hidden
+        section nobody can find. Thou shalt not ship without testing. Thou
+        shalt not write vertical. Thou shalt not confuse people. Thou shalt
+        not choose UI over UX. Thou shalt not critique your own portfolio.
       </div>
 
-      <!-- center block -->
-      <div class="intro-center">
-        <p class="intro-eyebrow mono" data-scramble>MUHAMMAD&nbsp;SHARIFUZ</p>
-        <h1 class="intro-title">
-          <span class="intro-title-top">Portfolio&nbsp;II</span>
-          <span class="intro-title-name">Muhammad Sharifuz</span>
-        </h1>
-        <h2 class="intro-sub">(SQA Engineer&nbsp;/&nbsp;Graphic Designer &amp; Video Editor)</h2>
-        <p class="intro-glyphs mono" aria-hidden="true">©®█§§ ¦ #░░▀▄░░©©©©</p>
-      </div>
-
-      <div class="intro-welcome mono" aria-hidden="true">
-        <div class="intro-welcome-track">
-          <span>II&nbsp;&nbsp;WELCOME TO PORTFOLIO II OF MUHAMMAD SHARIFUZ&nbsp;&nbsp;II&nbsp;&nbsp;WELCOME TO PORTFOLIO II OF MUHAMMAD SHARIFUZ&nbsp;&nbsp;</span>
-          <span>II&nbsp;&nbsp;WELCOME TO PORTFOLIO II OF MUHAMMAD SHARIFUZ&nbsp;&nbsp;II&nbsp;&nbsp;WELCOME TO PORTFOLIO II OF MUHAMMAD SHARIFUZ&nbsp;&nbsp;</span>
-        </div>
-      </div>
-
+      <!-- top right pitch -->
       <div class="intro-pitch">
-        <p>
-          Since you landed here you are probably looking for someone who can test your software until
-          it begs for mercy — or design something people actually want to click. Well done! You found
-          the man for the job. I handle projects from scratch (yes, even your logo and brand identity,
-          so don't worry): QA from test plan to release, design from moodboard to pixel, video from
-          raw cut to cinematic grade. No matter the size of your project — I can do it all.
-        </p>
-        <p class="intro-role mono">SQA &amp; ( GFX, VFX ) — Dhaka, Bangladesh</p>
+        I'm the guy who makes sure people can buy your stuff. I do software
+        quality testing, graphic design, video editing and digital marketing.
+        From time to time I get paid to coach people so they become as awesome
+        as I am (doesn't really work tho).
       </div>
 
-      <div class="scroll-hint mono" aria-hidden="true">SCROLL ▼</div>
+      <!-- vertical label -->
+      <div class="intro-vertical" aria-hidden="true">SQA&nbsp;ENGINEER&nbsp;&amp;<br />GFX&nbsp;/&nbsp;VFX&nbsp;DESIGNER</div>
+
+      <!-- center identity -->
+      <div class="intro-id">
+        <h1>
+          <span class="intro-id-top">Portfolio II</span>
+          <span class="intro-id-name">Muhammad Sharifuz</span>
+        </h1>
+        <h2 class="intro-id-sub">(Adaptive SQA Engineer / Graphic Designer &amp; Video Editor)</h2>
+        <p class="intro-id-glyphs">©®█§§ ¦ #░░▀▄░░©©©©</p>
+      </div>
+
+      <!-- mirrored bottom text, because rules are made to be broken -->
+      <div class="intro-mirror" aria-hidden="true">
+        Since you landed here you are probably looking for someone who can
+        handle your project from scratch. Well done! You found the man for the
+        job. QA, design, video — no matter the size of your project, I can do
+        it all. Part of a network of creative professionals capable of
+        handling even the most challenging jobs.
+      </div>
     </section>
 
-    <!-- ==================== WORK ==================== -->
+    <!-- ==================== WORK / TV ==================== -->
     <section class="work" id="work">
-      <header class="section-head">
-        <h2 class="section-label mono">Selected Works 2023 — 2026</h2>
-      </header>
 
-      <ul class="work-list" data-work-list>
-        <li class="work-item" data-work-item data-img="./assets/images/project-1.jpg">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">01</span>
-            <h3 class="work-title">Finance</h3>
-            <span class="work-meta mono">2026 / Web development / QA</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-2.png">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">02</span>
-            <h3 class="work-title">Orizon</h3>
-            <span class="work-meta mono">2026 / Web development / Branding</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-3.jpg">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">03</span>
-            <h3 class="work-title">Fundo</h3>
-            <span class="work-meta mono">2025 / Web design / GFX</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-4.png">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">04</span>
-            <h3 class="work-title">Brawlhalla</h3>
-            <span class="work-meta mono">2025 / Application / QA</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-5.png">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">05</span>
-            <h3 class="work-title">DSM.</h3>
-            <span class="work-meta mono">2025 / Web design / Branding</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-6.png">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">06</span>
-            <h3 class="work-title">MetaSpark</h3>
-            <span class="work-meta mono">2024 / Web design / VFX</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-7.png">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">07</span>
-            <h3 class="work-title">Summary</h3>
-            <span class="work-meta mono">2024 / Web development / QA</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-8.jpg">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">08</span>
-            <h3 class="work-title">Task Manager</h3>
-            <span class="work-meta mono">2023 / Application / QA</span>
-          </a>
-        </li>
-        <li class="work-item" data-work-item data-img="./assets/images/project-9.png">
-          <a href="#" onclick="return false">
-            <span class="work-index mono">09</span>
-            <h3 class="work-title">Arrival</h3>
-            <span class="work-meta mono">2023 / Web development / GFX</span>
-          </a>
-        </li>
-      </ul>
+      <div class="work-stage" aria-hidden="false">
+        <div class="work-stage-bg"></div>
 
-      <div class="work-preview" data-work-preview>
-        <img src="" alt="" data-work-preview-img />
+        <p class="work-stage-label">Selected Works 2023 — 2026</p>
+
+        <div class="tv">
+          <div class="tv-body">
+            <div class="tv-screen" data-tv-screen>
+              <img src="" alt="" data-tv-img />
+              <div class="tv-glare"></div>
+            </div>
+            <div class="tv-controls"><i></i><i></i></div>
+          </div>
+          <div class="tv-feet"><i></i><i></i></div>
+        </div>
+
+        <p class="work-meta" data-work-meta></p>
       </div>
 
-      <p class="work-outro">You like what you see? Let's talk:
-        <a href="mailto:sharifuzofc@gmail.com">sharifuzofc@gmail.com</a>
-      </p>
-      <p class="work-cipher mono" aria-hidden="true">19 8 1 18 9 6 21 26</p>
+      <div class="work-scroll">
+        <ul class="work-names" data-work-names>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-1.jpg"  data-meta="2026&nbsp;&nbsp;/&nbsp;&nbsp;WEBDESIGN&nbsp;&nbsp;/&nbsp;&nbsp;DEVELOPMENT&nbsp;&nbsp;/&nbsp;&nbsp;QA">Finance</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-2.png"  data-meta="2026&nbsp;&nbsp;/&nbsp;&nbsp;WEBDESIGN&nbsp;&nbsp;/&nbsp;&nbsp;DEVELOPMENT&nbsp;&nbsp;/&nbsp;&nbsp;BRANDING">Orizon</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-3.jpg"  data-meta="2025&nbsp;&nbsp;/&nbsp;&nbsp;WEBDESIGN&nbsp;&nbsp;/&nbsp;&nbsp;GFX&nbsp;&nbsp;/&nbsp;&nbsp;BRANDING">Fundo</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-4.png"  data-meta="2025&nbsp;&nbsp;/&nbsp;&nbsp;APPLICATION&nbsp;&nbsp;/&nbsp;&nbsp;QA&nbsp;&nbsp;/&nbsp;&nbsp;AUTOMATION">Brawlhalla</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-5.png"  data-meta="2025&nbsp;&nbsp;/&nbsp;&nbsp;WEBDESIGN&nbsp;&nbsp;/&nbsp;&nbsp;BRANDING">DSM.</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-6.png"  data-meta="2024&nbsp;&nbsp;/&nbsp;&nbsp;WEBDESIGN&nbsp;&nbsp;/&nbsp;&nbsp;VFX&nbsp;&nbsp;/&nbsp;&nbsp;MOTION">MetaSpark</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-7.png"  data-meta="2024&nbsp;&nbsp;/&nbsp;&nbsp;WEB&nbsp;DEVELOPMENT&nbsp;&nbsp;/&nbsp;&nbsp;QA">Summary</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-8.jpg"  data-meta="2023&nbsp;&nbsp;/&nbsp;&nbsp;APPLICATION&nbsp;&nbsp;/&nbsp;&nbsp;QA&nbsp;&nbsp;/&nbsp;&nbsp;API&nbsp;TESTING">Task Manager</a></li>
+          <li><a href="#" onclick="return false" data-work-item data-img="./assets/images/project-9.png"  data-meta="2023&nbsp;&nbsp;/&nbsp;&nbsp;WEB&nbsp;DEVELOPMENT&nbsp;&nbsp;/&nbsp;&nbsp;GFX">Arrival</a></li>
+        </ul>
+
+        <div class="work-outro">
+          <p class="work-outro-small">You like what you see? Let's talk:</p>
+          <a href="mailto:sharifuzofc@gmail.com" class="work-outro-mail">sharifuzofc@gmail.com</a>
+        </div>
+      </div>
     </section>
 
-    <!-- ==================== ABOUT ==================== -->
+    <!-- ==================== ABOUT / FOG ==================== -->
     <section class="about" id="about">
-      <div class="about-frame">
-        <figure class="about-photo">
-          <img src="./assets/images/my-avatar.png" alt="Muhammad Sharifuz" />
-          <figcaption class="mono">Fig. 01 — Yes, it's really me.</figcaption>
-        </figure>
+      <p class="about-cipher">19&nbsp;8&nbsp;1&nbsp;18&nbsp;9&nbsp;6&nbsp;21&nbsp;26</p>
 
-        <div class="about-copy">
-          <p class="about-lede">
-            Hi! I'm Sharifuz. I'm the guy who makes sure people can actually buy your stuff —
-            because I break your software before your users do, and I design the things that make
-            them click in the first place.
-          </p>
-          <p>
-            I don't have one specific style. Because real professionals adapt to clients. I will go
-            out of my way to make something that enhances your brand and tells your story — not mine.
-            I mainly do software quality assurance, graphic design &amp; video editing, but from time
-            to time I also do digital marketing, illustration and pretty much anything else.
-          </p>
-        </div>
+      <div class="about-text">
+        <p>
+          Hi! I'm Sharifuz. I am a tester and a designer. Means I don't have a
+          specific style. Because real professionals adapt to clients. I will
+          go out of my way to make something that enhances your brand and
+          tells your story – not mine.
+        </p>
+        <p>
+          I mainly do software quality testing, graphic design &amp; video
+          editing but from time to time I also do digital marketing, seo,
+          illustration and pretty much anything else.
+        </p>
       </div>
 
-      <div class="about-grid">
-        <div class="about-card">
-          <h3 class="about-card-title mono">🛡️ Software Quality Testing</h3>
-          <p>Functional &amp; non-functional testing, manual &amp; automated (Selenium, Cypress, JMeter),
-             API testing with Postman, regression &amp; smoke, performance &amp; security,
-             bug tracking with JIRA — from test plan to post-release.</p>
-        </div>
-        <div class="about-card">
-          <h3 class="about-card-title mono">🎨 Graphics Design</h3>
-          <p>Logo &amp; brand identity, illustration, thumbnails, posters, banners, social media design,
-             UI/UX graphics — Photoshop, Illustrator, Figma, InDesign.</p>
-        </div>
-        <div class="about-card">
-          <h3 class="about-card-title mono">🎬 Video Editing</h3>
-          <p>Music videos, ads, reels &amp; short-form, motion graphics, VFX enhancement, subtitles,
-             cinematic color grading — Premiere Pro, After Effects, DaVinci Resolve.</p>
-        </div>
-        <div class="about-card">
-          <h3 class="about-card-title mono">📈 Digital Marketing</h3>
-          <p>SEO, Meta &amp; Google Ads, content strategy, email campaigns, analytics &amp;
-             conversion tracking — data-driven, creative-first.</p>
-        </div>
-      </div>
+      <figure class="about-portrait">
+        <img src="./assets/images/my-avatar.png" alt="Muhammad Sharifuz" />
+      </figure>
+
+      <h2 class="about-awards-title" aria-label="Awards">AWARDS</h2>
 
       <div class="about-awards">
-        <h3 class="section-label mono">Stats &amp; Facts</h3>
-        <ul class="awards-list">
-          <li><strong>B.Sc. CSE</strong> — Sonargaon University, Dhaka (2023 — Present)</li>
-          <li><strong>4</strong> disciplines mastered: QA, GFX, VFX, Marketing</li>
-          <li><strong>90%</strong> Graphics Design / <strong>75%</strong> SQA / <strong>75%</strong> Marketing / <strong>40%</strong> Video (and climbing)</li>
-          <li><strong>∞</strong> bugs found. <strong>0</strong> bugs forgiven.</li>
-        </ul>
+        <p class="about-awards-group"><strong>Education</strong><br />
+          B.Sc. in Computer Science &amp; Engineering — Sonargaon University, Dhaka (2023 — Present)</p>
+        <p class="about-awards-group"><strong>Disciplines</strong><br />
+          4x mastered — Software Quality Assurance, Graphics Design, Video Editing, Digital Marketing</p>
+        <p class="about-awards-group"><strong>Skill levels</strong><br />
+          90% Graphics Design · 75% SQA · 75% Digital Marketing · 40% Video Editing (and climbing)</p>
+        <p class="about-awards-group"><strong>Record</strong><br />
+          ∞ bugs found. 0 bugs forgiven.</p>
       </div>
     </section>
 
-    <!-- ==================== PROCESS ==================== -->
+    <!-- ==================== PROCESS / RED ==================== -->
     <section class="process" id="process">
-      <header class="section-head">
-        <h2 class="section-label mono">My Process — Project start to finish, 6 steps, Version .02</h2>
+      <div class="process-grid-strip" aria-hidden="true"></div>
+
+      <header class="process-head">
+        <h2 class="process-title">MY PROCESS</h2>
+        <div class="process-head-meta">
+          MUHAMMAD&nbsp;&nbsp;&nbsp;SHARIFUZ<br />
+          PROJECT START TO FINISH<br />
+          6&nbsp;&nbsp;&nbsp;STEPS<br />
+          VERSION&nbsp;&nbsp;&nbsp;.02
+        </div>
       </header>
 
       <ol class="process-list">
         <li class="process-item">
-          <span class="process-num">1</span>
-          <h3>Briefing</h3>
-          <p>Send me a detailed brief: who you are, core values, business goals, target audience,
-             required features, scope, timeframes and deadlines, examples of things you like —
-             and everything else you think is important.</p>
+          <div class="cd-case">
+            <span class="cd-spine">SHFZ&nbsp;PROCESS&nbsp;01°</span>
+            <div class="cd-cover"><img src="./assets/images/project-1.jpg" alt="" /><span class="cd-cover-title">Come Together</span></div>
+          </div>
+          <h3><span class="process-num">1</span> Briefing</h3>
+          <p>Send me a detailed brief with the following information: who you are, core values, business goals, target audience, what you sell, required features, scope of the project, timeframes and deadlines, examples of things you like and everything else you think is important.</p>
         </li>
         <li class="process-item">
-          <span class="process-num">2</span>
-          <h3>Evaluation</h3>
-          <p>I take a close look at your brief and assess whether the project meets the terms and
-             requirements of both parties. If there is a match, we have an online meeting to
-             discuss how to proceed.</p>
+          <div class="cd-case">
+            <span class="cd-spine">SHFZ&nbsp;PROCESS&nbsp;02°</span>
+            <div class="cd-cover dark"><img src="./assets/images/project-4.png" alt="" /><span class="cd-cover-title">With or Without You</span></div>
+          </div>
+          <h3><span class="process-num">2</span> Evaluation</h3>
+          <p>I will take a close look at your brief and assess whether the project meets the terms and requirements of both parties. If there is a match, we will have an online meeting to discuss how to proceed.</p>
         </li>
         <li class="process-item">
-          <span class="process-num">3</span>
-          <h3>KickOff</h3>
-          <p>We discuss approaches and concepts to find the perfect solution for your needs.
-             Multiple sessions can be held if necessary.</p>
+          <div class="cd-case">
+            <span class="cd-spine">SHFZ&nbsp;PROCESS&nbsp;03°</span>
+            <div class="cd-cover"><img src="./assets/images/project-3.jpg" alt="" /><span class="cd-cover-title">Start Me Up</span></div>
+          </div>
+          <h3><span class="process-num">3</span> KickOff</h3>
+          <p>We discuss approaches and concepts to find the perfect solution for your needs. Multiple sessions can be held if necessary.</p>
         </li>
         <li class="process-item">
-          <span class="process-num">4</span>
-          <h3>Design</h3>
-          <p>This is where the magic happens. Art direction, concept and design — first a moodboard
-             or 2–3 screens showing the look and feel, then the entire project once the direction
-             is approved.</p>
+          <div class="cd-case">
+            <span class="cd-spine">SHFZ&nbsp;PROCESS&nbsp;04°</span>
+            <div class="cd-cover dark"><img src="./assets/images/project-6.png" alt="" /><span class="cd-cover-title">Paint It Black</span></div>
+          </div>
+          <h3><span class="process-num">4</span> Design</h3>
+          <p>This is where the magic happens. I will work on art direction, concept and design. First a moodboard or 2–3 screens showing the look and feel, then the entire project once the direction is approved.</p>
         </li>
         <li class="process-item">
-          <span class="process-num">5</span>
-          <h3>Production</h3>
-          <p>Design becomes reality — development, editing, or campaign build. I update you
-             regularly on the status so you always have a clear insight into the progress.</p>
+          <div class="cd-case">
+            <span class="cd-spine">SHFZ&nbsp;PROCESS&nbsp;05°</span>
+            <div class="cd-cover"><img src="./assets/images/project-7.png" alt="" /><span class="cd-cover-title">Working Man</span></div>
+          </div>
+          <h3><span class="process-num">5</span> Production</h3>
+          <p>After approval of the design/mood, the respective screen design is developed, edited or produced. I will update you regularly on the status so you always have a clear insight into the progress.</p>
         </li>
         <li class="process-item">
-          <span class="process-num">6</span>
-          <h3>Quality Assurance</h3>
-          <p>My home turf. Multi-browser, multi-device testing, functional and non-functional,
-             until every bug is found, filed and fixed. After your final approval, it ships.</p>
+          <div class="cd-case">
+            <span class="cd-spine">SHFZ&nbsp;PROCESS&nbsp;06°</span>
+            <div class="cd-cover dark"><img src="./assets/images/project-8.jpg" alt="" /><span class="cd-cover-title">The Final Countdown</span></div>
+          </div>
+          <h3><span class="process-num">6</span> Quality Assurance</h3>
+          <p>My home turf. After production is complete, we continue to test on multiple browsers and devices to fix bugs — functional and non-functional, until every bug is found, filed and fixed. After your final approval, it ships.</p>
         </li>
       </ol>
     </section>
 
     <!-- ==================== FAQ ==================== -->
     <section class="faq" id="faq">
-      <header class="section-head">
-        <h2 class="section-label mono">FAQ</h2>
-      </header>
+      <h2 class="faq-title">FAQ</h2>
 
       <div class="faq-list">
         <details class="faq-item">
-          <summary><span class="mono">01.</span> Sharifuz, how much is a website / design / video? <em>(asked by clients)</em></summary>
-          <p>Let me ask you something first: how much is a car? Depends on which one you want, right?
-             Same here — costs depend on your requirements, scope and features. Your budget defines
-             what I can do for you, and I'm happy to tell you exactly what you'll get for it.</p>
+          <summary><span class="faq-num">01.</span> Sharifuz, how much is a website / design / video? <em>(asked by clients)</em></summary>
+          <p>Let me ask you something first: how much is a car? Depends on which one you want, right? Same here — costs depend on your requirements, scope and features. Your budget defines what I can do for you, and I'm happy to tell you exactly what you'll get for it.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">02.</span> How long does a project take? <em>(asked by clients)</em></summary>
-          <p>Depends on requirements and scope, but typically smaller projects take days to a couple
-             of weeks, and larger ones 1–2 months from kickoff to delivery.</p>
+          <summary><span class="faq-num">02.</span> How long does a project take? <em>(asked by clients)</em></summary>
+          <p>Depends on requirements and scope, but typically smaller projects take days to a couple of weeks, and larger ones 1–2 months from kickoff to delivery.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">03.</span> Are you a tester or a designer? <em>(asked by clients)</em></summary>
-          <p>I am both. And a video editor. And a marketer. All my design work is created from scratch
-             by myself, and all my QA work is documented to the last bug report.</p>
+          <summary><span class="faq-num">03.</span> Are you a tester or a designer? <em>(asked by clients)</em></summary>
+          <p>I am both. And a video editor. And a marketer. All my design work is created from scratch by myself, and all my QA work is documented to the last bug report.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">04.</span> Can you deal with bigger projects? <em>(asked by clients)</em></summary>
-          <p>Sure! I collaborate with a network of developers, designers and marketers, so even the
-             most challenging jobs are covered.</p>
+          <summary><span class="faq-num">04.</span> Can you deal with bigger projects? <em>(asked by clients)</em></summary>
+          <p>Sure! I collaborate with a network of developers, designers and marketers, so even the most challenging jobs are covered.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">05.</span> What trends can we expect to see in the near future? <em>(asked by designers)</em></summary>
-          <p>Rumor has it every website needs at least one giant marquee and a hidden section nobody
-             can find. Also keep an eye on the "test in production" movement — and then hire me
-             after it goes wrong.</p>
+          <summary><span class="faq-num">05.</span> What trends can we expect to see in the near future? <em>(asked by designers)</em></summary>
+          <p>Old TVs on the streets will be the next big thing, according to trusted sources. Wallpaper patterns behind FAQs are also pretty hot right now. And rumor has it that every website needs at least one huge 3D banana.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">06.</span> Is that really you in the framed picture above? <em>(asked by elderly women)</em></summary>
+          <summary><span class="faq-num">06.</span> Is that really you in the framed picture above? <em>(asked by elderly women)</em></summary>
           <p>Yes, it's me. Verified by manual and automated testing.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">07.</span> Why is your video editing skill only at 40%? <em>(asked by honest people)</em></summary>
+          <summary><span class="faq-num">07.</span> Why is your video editing skill only at 40%? <em>(asked by honest people)</em></summary>
           <p>Because I test my own claims. It's climbing fast — check back next release.</p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">08.</span> How do I become as awesome as you? <em>(asked by everybody)</em></summary>
+          <summary><span class="faq-num">08.</span> How do I become as awesome as you? <em>(asked by everybody)</em></summary>
           <p></p>
         </details>
         <details class="faq-item">
-          <summary><span class="mono">09.</span> Did you use drugs while designing this website? <em>(asked by users)</em></summary>
+          <summary><span class="faq-num">09.</span> Did you use drugs while designing this website? <em>(asked by users)</em></summary>
           <p>Nope, it's all just good old-fashioned attention to detail.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span class="faq-num">10.</span> What is the content of the infamous hidden section? <em>(asked by people without a keyboard)</em></summary>
+          <p>Just the most important message of this whole website. So probably the most important section of all. (Psst — press "H".)</p>
         </details>
       </div>
     </section>
 
-    <!-- ==================== CONTACT ==================== -->
+    <!-- ==================== CONTACT / BANANA ==================== -->
     <section class="contact" id="contact">
-      <h2 class="contact-head">We need to finish strong</h2>
-      <p class="contact-sub mono">So here comes the trendy marquee (the huge 3D banana didn't pass QA):</p>
+
+      <div class="contact-hero">
+        <h2 class="contact-head">We<br />Need<br />To&nbsp;Finish<br />Strong</h2>
+        <canvas class="banana-canvas" data-banana aria-hidden="true"></canvas>
+      </div>
+
+      <p class="contact-sub">So here comes the trendy marquee<br />with my huge 3D banana<br />in the background:</p>
 
       <a href="mailto:sharifuzofc@gmail.com" class="contact-marquee" aria-label="Contact me by email">
         <div class="contact-marquee-track">
-          <span>Contact me — Contact me — Contact me — Contact me — Contact me — Contact me — </span>
-          <span>Contact me — Contact me — Contact me — Contact me — Contact me — Contact me — </span>
+          <span>CONTACT ME — CONTACT ME — CONTACT ME — CONTACT ME — CONTACT ME — CONTACT ME — </span>
+          <span>CONTACT ME — CONTACT ME — CONTACT ME — CONTACT ME — CONTACT ME — CONTACT ME — </span>
         </div>
       </a>
 
-      <p class="contact-note">Contact me and I will create something even better for you.
-        <span class="mono">(Pro tip: don't scroll further down — it only gets worse.)</span></p>
+      <a href="mailto:sharifuzofc@gmail.com" class="contact-mail">sharifuzofc@gmail.com</a>
+
+      <p class="contact-note">
+        Contact me and I will create<br />
+        something even better for you.<br />
+        (Pro tipp: Don't scroll further<br />
+        down – it only gets worse.)
+      </p>
 
       <div class="contact-leave">
         <p class="contact-leave-big">Don't you dare leave this website!</p>
-        <p class="mono">(Come back here! I bet you haven't even found the hidden section.)</p>
-        <button class="contact-chill mono" data-chill>OK dude, chill. I won't.</button>
+        <p class="contact-leave-small">(Come back here! I bet you haven't even found the hidden section.)</p>
+        <button class="contact-chill" data-chill>OK dude, chill. I won't.</button>
       </div>
     </section>
 
@@ -378,33 +346,40 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-col">
-      <span class="mono footer-label">© — Muhammad Sharifuz. All rights reserved.</span>
+    <div class="footer-row">
+      <div class="footer-cell f-copy">
+        <span>©2026 — Muhammad Sharifuz<br />All rights reserved.</span>
+      </div>
+      <div class="footer-cell f-mail">
+        <span class="footer-label">Write me something nice:</span>
+        <a href="mailto:sharifuzofc@gmail.com" class="f-mail-link">sharifuzofc@gmail.com</a>
+      </div>
+      <div class="footer-cell f-follow">
+        <span class="footer-label">Follow me:</span>
+        <a href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="footer-cell f-studio">
+        <span class="footer-label">Studio:</span>
+        <span class="f-studio-name">Sharifuz<br />Studio</span>
+      </div>
+      <div class="footer-cell f-legal">
+        <span class="footer-label">Legal:</span>
+        <a href="mailto:sharifuzofc@gmail.com">Imprint</a>
+        <span class="f-phone">+8801919-729159<br />Dhaka, Bangladesh</span>
+      </div>
     </div>
-    <div class="footer-col">
-      <span class="mono footer-label">Write me something nice:</span>
-      <a href="mailto:sharifuzofc@gmail.com">sharifuzofc@gmail.com</a>
-      <a href="tel:+8801919729159">+8801919-729159</a>
-    </div>
-    <div class="footer-col">
-      <span class="mono footer-label">Follow me:</span>
-      <a href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <div class="footer-col">
-      <span class="mono footer-label">Location:</span>
-      <span>Dhaka, Bangladesh</span>
-      <button class="back-to-top mono" data-back-to-top>BACK TO TOP ↑</button>
-    </div>
+    <button class="back-to-top" data-back-to-top>BACK TO TOP</button>
   </footer>
 
-  <!-- hidden section, because commandment #5 -->
+  <!-- hidden section, press H -->
   <section class="hidden-section" data-hidden-section>
-    <p class="mono">You found the hidden section. As promised, it's the most important one of all:</p>
+    <p class="hidden-small">You found the hidden section. As promised, it's the most important one of all:</p>
     <p class="hidden-big">Hire me.</p>
   </section>
 
   <script src="./assets/js/script.js"></script>
+  <script type="module" src="./assets/js/banana.js"></script>
 </body>
 </html>
