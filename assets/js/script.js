@@ -1,159 +1,149 @@
-'use strict';
+"use strict";
 
+/* ============ LOADER ============ */
+const loader = document.querySelector("[data-loader]");
+const loaderCount = document.querySelector("[data-loader-count]");
 
-
-// element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
-
-// sidebar variables
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
-
-
-
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
-  });
-
-}
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
-
-
-
-// custom select variables
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-select.addEventListener("click", function () { elementToggleFunc(this); });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
+(function runLoader() {
+  let n = 0;
+  const tick = () => {
+    n = Math.min(100, n + Math.ceil(Math.random() * 9));
+    loaderCount.textContent = n;
+    if (n < 100) {
+      setTimeout(tick, 40 + Math.random() * 70);
     } else {
-      filterItems[i].classList.remove("active");
+      setTimeout(() => {
+        loader.classList.add("done");
+        document.body.style.overflow = "";
+      }, 350);
     }
+  };
+  document.body.style.overflow = "hidden";
+  tick();
+})();
 
-  }
+/* ============ TEXT SCRAMBLE (intro eyebrow) ============ */
+const scrambleEl = document.querySelector("[data-scramble]");
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▀▄░§©®#¦";
 
-}
-
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
-
-  });
-
-}
-
-
-
-// contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
-  });
-}
-
-
-
-// page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
+function scramble(el) {
+  const target = el.dataset.text || el.textContent;
+  el.dataset.text = target;
+  let frame = 0;
+  const total = 34;
+  const timer = setInterval(() => {
+    frame++;
+    const reveal = Math.floor((frame / total) * target.length);
+    let out = "";
+    for (let i = 0; i < target.length; i++) {
+      if (i < reveal || target[i] === " " || target[i] === "\u00a0") {
+        out += target[i];
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        out += GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
       }
     }
+    el.textContent = out;
+    if (frame >= total) {
+      clearInterval(timer);
+      el.textContent = target;
+    }
+  }, 45);
+}
 
+if (scrambleEl) {
+  scramble(scrambleEl);
+  setInterval(() => scramble(scrambleEl), 9000);
+}
+
+/* ============ WORK LIST HOVER PREVIEW ============ */
+const preview = document.querySelector("[data-work-preview]");
+const previewImg = document.querySelector("[data-work-preview-img]");
+const workItems = document.querySelectorAll("[data-work-item]");
+
+if (preview && matchMedia("(pointer: fine)").matches) {
+  let raf = null;
+  let mouseX = 0;
+  let mouseY = 0;
+
+  const move = () => {
+    preview.style.left = mouseX + 24 + "px";
+    preview.style.top = mouseY - preview.offsetHeight / 2 + "px";
+    raf = null;
+  };
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!raf) raf = requestAnimationFrame(move);
+  });
+
+  workItems.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      previewImg.src = item.dataset.img;
+      preview.classList.add("visible");
+    });
+    item.addEventListener("mouseleave", () => {
+      preview.classList.remove("visible");
+    });
   });
 }
+
+/* ============ NAV ACTIVE STATE ============ */
+const navLinks = document.querySelectorAll("[data-nav-link]");
+const sections = [...navLinks].map((l) =>
+  document.querySelector(l.getAttribute("href"))
+);
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach((l) =>
+        l.classList.toggle(
+          "active",
+          l.getAttribute("href") === "#" + entry.target.id
+        )
+      );
+    });
+  },
+  { rootMargin: "-40% 0px -55% 0px" }
+);
+
+sections.forEach((s) => s && sectionObserver.observe(s));
+
+/* ============ FAQ: only one open at a time ============ */
+const faqItems = document.querySelectorAll(".faq-item");
+faqItems.forEach((item) => {
+  item.addEventListener("toggle", () => {
+    if (!item.open) return;
+    faqItems.forEach((other) => {
+      if (other !== item) other.open = false;
+    });
+  });
+});
+
+/* ============ BACK TO TOP / CHILL BUTTON ============ */
+const backToTop = document.querySelector("[data-back-to-top]");
+if (backToTop) {
+  backToTop.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  );
+}
+
+const chillBtn = document.querySelector("[data-chill]");
+if (chillBtn) {
+  chillBtn.addEventListener("click", () => {
+    chillBtn.textContent = "GOOD. I'M WATCHING YOU.";
+  });
+}
+
+/* ============ HIDDEN SECTION (press "h") ============ */
+const hiddenSection = document.querySelector("[data-hidden-section]");
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "h" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+    const tag = document.activeElement.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    hiddenSection.classList.add("revealed");
+    hiddenSection.scrollIntoView({ behavior: "smooth" });
+  }
+});
