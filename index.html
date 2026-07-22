@@ -27,11 +27,19 @@
 
 <body>
 
-  <!-- LOADER -->
+  <!-- LOADER / WELCOME -->
   <div class="loader" data-loader>
-    <div class="loader-text">L&nbsp;O&nbsp;A&nbsp;D&nbsp;I&nbsp;N&nbsp;G</div>
-    <div class="loader-count" data-loader-count>0</div>
-    <div class="loader-path">/home</div>
+    <svg class="loader-lines" viewBox="0 0 1024 576" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="#f4f1ea" stroke-width="13" fill="none">
+        <path d="M 490 115 L 410 195 L 665 345 L 415 500" />
+        <path d="M 415 345 L 570 435" />
+      </g>
+    </svg>
+    <div class="loader-word" data-loader-word aria-live="polite">WELCOME</div>
+    <div class="loader-bottom">
+      <div class="loader-loading">LOADING</div>
+      <div class="loader-note">This website only uses Google Analytics. You can opt out in the Imprint section.</div>
+    </div>
   </div>
 
   <!-- NAV -->

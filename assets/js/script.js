@@ -1,25 +1,59 @@
 "use strict";
 
-/* ============ LOADER ============ */
+/* ============ LOADER / WELCOME ============ */
 const loader = document.querySelector("[data-loader]");
-const loaderCount = document.querySelector("[data-loader-count]");
+const loaderWord = document.querySelector("[data-loader-word]");
 
-(function runLoader() {
-  let n = 0;
-  const tick = () => {
-    n = Math.min(100, n + Math.ceil(Math.random() * 9));
-    loaderCount.textContent = n;
-    if (n < 100) {
-      setTimeout(tick, 35 + Math.random() * 60);
-    } else {
+(function runWelcome() {
+  const WORDS = ["WELCOME", "TO", "SHARIFUZ", "ZAMAN"];
+  const WORD_TIME = 620;   // how long each word stays
+  const FLICKER = 75;      // per-letter font flicker speed
+  let wordIdx = 0;
+  let flickerTimer = null;
+
+  document.body.style.overflow = "hidden";
+
+  const setWord = (word) => {
+    loaderWord.innerHTML = "";
+    [...word].forEach((letter) => {
+      const span = document.createElement("span");
+      span.className = "ch";
+      span.textContent = letter === " " ? "\u00a0" : letter;
+      loaderWord.appendChild(span);
+    });
+  };
+
+  // randomly flip each letter between serif / bold sans / italic
+  const flicker = () => {
+    loaderWord.querySelectorAll(".ch").forEach((span) => {
+      span.classList.remove("alt", "ital", "thin");
+      const roll = Math.random();
+      if (roll < 0.22) span.classList.add("alt");
+      else if (roll < 0.38) span.classList.add("ital");
+      else span.classList.add("thin");
+    });
+  };
+
+  const next = () => {
+    if (wordIdx >= WORDS.length) {
+      clearInterval(flickerTimer);
+      // settle on the final name, clean serif, brief pause, then reveal site
+      loaderWord.classList.add("small");
+      setWord("SHARIFUZ ZAMAN");
       setTimeout(() => {
         loader.classList.add("done");
         document.body.style.overflow = "";
-      }, 300);
+      }, 650);
+      return;
     }
+    setWord(WORDS[wordIdx]);
+    flicker();
+    wordIdx++;
+    setTimeout(next, WORD_TIME);
   };
-  document.body.style.overflow = "hidden";
-  tick();
+
+  flickerTimer = setInterval(flicker, FLICKER);
+  next();
 })();
 
 /* ============ WORK: TV SCREEN HOVER ============ */
