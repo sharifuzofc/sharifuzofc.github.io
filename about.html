@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="YX6t-_fqW6P0uBzF7qk8kandtDpxl9VAuAgq4Vjpoew" />
-  <title>Sharifuz Zaman | Web developer &amp; SQA tester</title>
-  <meta name="description" content="Sharifuz Zaman — web developer, SQA tester, graphics designer, video editor and digital marketer from Dhaka, Bangladesh." />
+  <title>About Sharifuz Zaman — Web developer &amp; SQA tester</title>
+  <meta name="description" content="About Sharifuz Zaman — web developer, SQA tester, graphics designer, video editor and digital marketer from Dhaka, Bangladesh." />
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQM31CXY13"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -28,7 +26,7 @@
   <header class="site-header">
     <a href="./index.html" class="logo" aria-label="Sharifuz Zaman — home">SZ</a>
     <nav class="main-nav" data-nav>
-      <a href="./about.html">about</a>
+      <a href="./about.html" class="current">about</a>
       <a href="./portfolio.html">portfolio</a>
       <a href="./contact.html">contact</a>
     </nav>
@@ -48,59 +46,105 @@
 
   <main>
 
-    <!-- ============ SPLIT HERO ============ -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-side hero-left">
-          <h1>designer</h1>
-          <p>Graphics designer &amp; video editor crafting bold visuals, brands and stories.</p>
+    <!-- ============ PAGE HERO ============ -->
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-hero-copy">
+          <h1>about.</h1>
+          <p class="lead">I'm a web developer &amp; SQA tester based in Dhaka, Bangladesh.</p>
+          <p>
+            Since starting my Computer Science &amp; Engineering journey at Sonargaon
+            University, I've enjoyed building websites, breaking them on purpose to make
+            them stronger, and dressing them up with great design. When I'm not coding
+            or testing, you'll find me editing videos, designing graphics or running
+            digital marketing campaigns.
+          </p>
+        </div>
+        <figure class="page-hero-photo">
+          <img src="./assets/images/my-avatar.png" alt="Sharifuz Zaman" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ PART DESIGNER / PART CODER ============ -->
+    <section class="split-skills">
+      <div class="split-skills-inner">
+        <div class="split-col">
+          <h2>Part designer</h2>
+          <ul>
+            <li>Graphics design</li>
+            <li>Logo &amp; brand identity</li>
+            <li>Video editing</li>
+            <li>Motion graphics</li>
+            <li>"Making it pop"</li>
+          </ul>
         </div>
 
-        <div class="hero-portrait">
-          <div class="code-bg" aria-hidden="true">
-            <span>&lt;html&gt;</span>
-            <span>height:184px;}</span>
-            <span>&lt;div class="jedi"&gt;</span>
-            <span class="big">CSS3 <em>HTML5</em></span>
-            <span>color:#000;</span>
-            <span>expect(bug).toBe(fixed);</span>
-          </div>
-          <img src="./assets/images/hero-split.png" alt="Sharifuz Zaman — half painted illustration, half photo" />
+        <div class="pie-wrap" aria-hidden="true">
+          <div class="pie"></div>
+          <span class="pie-label pie-left">Designer</span>
+          <span class="pie-label pie-right">Coder</span>
         </div>
 
-        <div class="hero-side hero-right">
-          <h1 class="mono">&lt;coder&gt;</h1>
-          <p>Web developer &amp; SQA tester who writes clean, elegant and well-tested code.</p>
+        <div class="split-col">
+          <h2>Part coder</h2>
+          <ul>
+            <li>Web development</li>
+            <li>HTML / CSS / JavaScript</li>
+            <li>SQA &amp; automation testing</li>
+            <li>API testing (Postman)</li>
+            <li>Swearing at my computer</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- ============ LATEST WORK ============ -->
-    <section class="latest">
-      <h3 class="section-kicker">Some of my latest work</h3>
-      <ul class="card-grid cols-3">
-        <li class="card reveal">
-          <a href="./portfolio.html">
-            <figure><img src="./assets/images/project-1.jpg" alt="Finance web app" loading="lazy" /></figure>
-            <h4>Finance web app</h4>
-            <p>Web development</p>
-          </a>
-        </li>
-        <li class="card reveal">
-          <a href="./portfolio.html">
-            <figure><img src="./assets/images/project-6.png" alt="MetaSpark brand design" loading="lazy" /></figure>
-            <h4>MetaSpark brand design</h4>
-            <p>Graphics design</p>
-          </a>
-        </li>
-        <li class="card reveal">
-          <a href="./portfolio.html">
-            <figure><img src="./assets/images/project-4.png" alt="Brawlhalla app testing" loading="lazy" /></figure>
-            <h4>Brawlhalla app testing</h4>
-            <p>SQA testing</p>
-          </a>
-        </li>
-      </ul>
+    <!-- ============ RANDOM FACTS ============ -->
+    <section class="facts">
+      <div class="facts-inner">
+        <figure class="facts-img reveal">
+          <img src="./assets/images/painting.png" alt="Colorful painting" loading="lazy" />
+        </figure>
+        <div class="facts-copy">
+          <h2>Random facts</h2>
+          <ul>
+            <li>I'm a CSE student at Sonargaon University</li>
+            <li>I test software for fun — bugs fear me</li>
+            <li>I edit videos late at night</li>
+            <li>I'm slightly addicted to social media</li>
+            <li>I love clean code and clean design</li>
+            <li>Digital marketing is my side quest</li>
+            <li>I enjoy creating things from scratch</li>
+            <li>I drink a lot of tea</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MY SKILLS ============ -->
+    <section class="skills-chart">
+      <h2 class="chart-title">My skills</h2>
+      <div class="chart" role="img" aria-label="Skill levels: Web development 90%, SQA testing 85%, Graphics design 80%, Video editing 85%, Digital marketing 70%">
+        <div class="chart-rows" aria-hidden="true">
+          <span>Jedi</span><span>Ninja</span><span>Geek</span><span>Newbie</span>
+        </div>
+        <ul class="bars" aria-hidden="true">
+          <li class="bar" style="--h:90%;--c:#5fcf80"><strong>90<i>%</i></strong><em>Web dev</em></li>
+          <li class="bar" style="--h:85%;--c:#f2b134"><strong>85<i>%</i></strong><em>SQA testing</em></li>
+          <li class="bar" style="--h:80%;--c:#e56399"><strong>80<i>%</i></strong><em>Graphics</em></li>
+          <li class="bar" style="--h:85%;--c:#4ea1d3"><strong>85<i>%</i></strong><em>Video editing</em></li>
+          <li class="bar" style="--h:70%;--c:#e15554"><strong>70<i>%</i></strong><em>Marketing</em></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CTA ROW ============ -->
+    <section class="about-cta">
+      <div class="about-cta-inner reveal">
+        <h2>Want to see what I've built?</h2>
+        <p>From web apps and test automation to brand design and video — check out some of my latest projects.</p>
+        <a class="btn" href="./portfolio.html">View my portfolio</a>
+      </div>
     </section>
 
   </main>

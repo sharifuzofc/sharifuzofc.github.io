@@ -4,34 +4,9 @@
 const burger = document.querySelector("[data-burger]");
 const nav = document.querySelector("[data-nav]");
 
-if (burger) {
+if (burger && nav) {
   burger.addEventListener("click", () => nav.classList.toggle("open"));
-  nav.querySelectorAll("a").forEach((a) =>
-    a.addEventListener("click", () => nav.classList.remove("open"))
-  );
 }
-
-/* ============ ACTIVE NAV LINK ============ */
-const navLinks = document.querySelectorAll("[data-nav-link]");
-const sections = [...navLinks]
-  .map((l) => document.querySelector(l.getAttribute("href")))
-  .filter(Boolean);
-
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach((l) =>
-        l.classList.toggle(
-          "active",
-          l.getAttribute("href") === "#" + entry.target.id
-        )
-      );
-    });
-  },
-  { rootMargin: "-40% 0px -55% 0px" }
-);
-sections.forEach((s) => sectionObserver.observe(s));
 
 /* ============ REVEAL ON SCROLL ============ */
 const revealObserver = new IntersectionObserver(
@@ -48,9 +23,24 @@ const revealObserver = new IntersectionObserver(
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
 /* ============ BACK TO TOP ============ */
-const backToTop = document.querySelector("[data-back-to-top]");
-if (backToTop) {
-  backToTop.addEventListener("click", () =>
+document.querySelectorAll("[data-back-to-top]").forEach((btn) =>
+  btn.addEventListener("click", () =>
     window.scrollTo({ top: 0, behavior: "smooth" })
-  );
+  )
+);
+
+/* ============ CONTACT FORM (mailto) ============ */
+const mailForm = document.querySelector("[data-mail-form]");
+if (mailForm) {
+  mailForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(mailForm);
+    const subject = `Portfolio contact from ${data.get("name")}`;
+    const body = `${data.get("message")}\n\n— ${data.get("name")} (${data.get("email")})`;
+    window.location.href =
+      "mailto:sharifuzofc@gmail.com?subject=" +
+      encodeURIComponent(subject) +
+      "&body=" +
+      encodeURIComponent(body);
+  });
 }
