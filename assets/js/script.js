@@ -10,6 +10,43 @@ if (burger && navLinks) {
   );
 }
 
+/* ============ HERO LETTER SPLIT ============ */
+const heroName = document.querySelector("[data-hero-name]");
+if (heroName) {
+  const text = heroName.textContent.trim();
+  heroName.setAttribute("aria-label", text.replace(/\u00a0/g, " "));
+  heroName.textContent = "";
+  [...text].forEach((ch, i) => {
+    const span = document.createElement("span");
+    span.className = "char" + (ch === " " || ch === "\u00a0" ? " space" : "");
+    span.style.setProperty("--i", String(i));
+    span.textContent = ch === " " ? "\u00a0" : ch;
+    heroName.appendChild(span);
+  });
+}
+
+/* ============ ROLE ROTATOR ============ */
+const rolesWrap = document.querySelector("[data-roles]");
+if (rolesWrap) {
+  const roles = [...rolesWrap.querySelectorAll(".role")];
+  let index = 0;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion && roles.length > 1) {
+    setInterval(() => {
+      const current = roles[index];
+      current.classList.remove("is-active");
+      current.classList.add("is-leave");
+      index = (index + 1) % roles.length;
+      const next = roles[index];
+      next.classList.remove("is-leave");
+      // force reflow so enter animation replays
+      void next.offsetWidth;
+      next.classList.add("is-active");
+      setTimeout(() => current.classList.remove("is-leave"), 500);
+    }, 2600);
+  }
+}
+
 /* ============ REVEAL ON SCROLL ============ */
 const revealObserver = new IntersectionObserver(
   (entries) => {

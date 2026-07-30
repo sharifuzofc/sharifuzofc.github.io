@@ -57,8 +57,8 @@ img { display: block; max-width: 100%; }
 }
 .nav-logo {
   font-family: var(--mono);
-  font-weight: 600;
-  font-size: 1.05rem;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
   color: var(--mint);
   text-decoration: none;
   letter-spacing: 0.01em;
@@ -69,14 +69,14 @@ img { display: block; max-width: 100%; }
 }
 .nav-links a {
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
   color: var(--mint);
   text-decoration: none;
   opacity: 0.9;
   transition: color 0.2s, opacity 0.2s;
 }
 .nav-links a:hover { color: var(--cyan); opacity: 1; }
-.nav-links sup { font-size: 0.55rem; color: var(--mint-dim); margin-right: 0.15rem; }
+.nav-links sup { font-size: 0.6rem; color: var(--mint-dim); margin-right: 0.15rem; }
 .nav-burger { display: none; }
 
 /* ============ HERO ============ */
@@ -93,12 +93,18 @@ img { display: block; max-width: 100%; }
 }
 .hero-bg {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
   object-fit: cover;
-  opacity: 0.9;
+  opacity: 0.92;
   z-index: 0;
+  animation: heroDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes heroDrift {
+  from { transform: scale(1.02) translate3d(-1.2%, -0.8%, 0); }
+  to   { transform: scale(1.08) translate3d(1.4%, 1%, 0); }
 }
 .hero::after {
   content: "";
@@ -107,29 +113,94 @@ img { display: block; max-width: 100%; }
   background: radial-gradient(ellipse 90% 70% at 50% 45%, transparent 40%, rgba(12, 20, 20, 0.72));
   z-index: 1;
 }
-.hero-content { position: relative; z-index: 2; }
+.hero-content { position: relative; z-index: 2; max-width: 100%; padding: 0 0.4rem; }
+.hero-kicker {
+  font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.85rem;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.7s 0.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
 .hero-name {
   font-family: var(--head);
-  font-weight: 800;
-  font-size: clamp(1.9rem, 8.8vw, 7.4rem);
-  letter-spacing: 0.02em;
-  line-height: 1.02;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 12vw, 9.5rem);
+  letter-spacing: 0.01em;
+  line-height: 0.95;
   color: #ddf3e6;
-  text-shadow: 0 8px 60px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 10px 70px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.02em;
+}
+.hero-name .char {
+  display: inline-block;
   opacity: 0;
-  transform: translateY(26px);
-  animation: fadeUp 1s 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(1.1em) rotateX(-60deg);
+  transform-origin: bottom;
+  animation: charIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(0.12s + var(--i) * 0.045s);
+}
+.hero-name .char.space { width: 0.28em; }
+@keyframes charIn {
+  to { opacity: 1; transform: none; }
 }
 .hero-sub {
-  margin-top: 1.2rem;
+  margin-top: 1.5rem;
   font-family: var(--mono);
   font-weight: 500;
-  font-size: clamp(0.72rem, 1.7vw, 1rem);
-  letter-spacing: 0.28em;
+  font-size: clamp(0.95rem, 2.4vw, 1.45rem);
+  letter-spacing: 0.04em;
   color: var(--mint);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem 0.7rem;
+  min-height: 2.2em;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 1s 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeUp 0.9s 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-static { color: var(--mint-dim); text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.78em; }
+.hero-roles {
+  position: relative;
+  display: inline-grid;
+  min-width: min(100%, 18ch);
+  text-align: left;
+}
+.hero-roles .role {
+  grid-area: 1 / 1;
+  font-weight: 600;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(120%);
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+.hero-roles .role.is-active {
+  opacity: 1;
+  transform: none;
+}
+.hero-roles .role.is-leave {
+  opacity: 0;
+  transform: translateY(-120%);
+}
+.hero-line {
+  margin-top: 1rem;
+  font-size: clamp(0.72rem, 1.4vw, 0.95rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(213, 242, 227, 0.45);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.9s 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 @keyframes fadeUp { to { opacity: 1; transform: none; } }
 
@@ -142,7 +213,7 @@ img { display: block; max-width: 100%; }
 }
 .strip-label {
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
   letter-spacing: 0.4em;
   color: rgba(213, 242, 227, 0.4);
   margin-bottom: 1rem;
@@ -156,7 +227,7 @@ img { display: block; max-width: 100%; }
 }
 .featured-strip li {
   font-family: var(--mono);
-  font-size: 0.85rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
   color: rgba(213, 242, 227, 0.45);
   transition: color 0.3s;
 }
@@ -188,11 +259,11 @@ img { display: block; max-width: 100%; }
 /* ============ SECTION TITLES ============ */
 .big-title {
   font-family: var(--head);
-  font-weight: 700;
-  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 8vw, 5.2rem);
   text-align: center;
   color: #ddf3e6;
-  line-height: 1.12;
+  line-height: 1.08;
 }
 .big-title.left { text-align: left; }
 
@@ -608,8 +679,15 @@ img { display: block; max-width: 100%; }
   .nav-burger span { width: 22px; height: 2px; background: var(--mint); }
 }
 
+@media (max-width: 520px) {
+  .hero-name { font-size: clamp(2.1rem, 13vw, 3.4rem); }
+  .hero-roles .role { white-space: normal; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-name, .hero-sub, .featured-strip { animation: none; opacity: 1; transform: none; }
+  .hero-bg { animation: none; }
+  .hero-kicker, .hero-sub, .hero-line, .featured-strip { animation: none; opacity: 1; transform: none; }
+  .hero-name .char { animation: none; opacity: 1; transform: none; }
   .scroll-pill span, .blink { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
