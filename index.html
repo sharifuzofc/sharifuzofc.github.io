@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="YX6t-_fqW6P0uBzF7qk8kandtDpxl9VAuAgq4Vjpoew" />
   <title>Sharifuz Zaman | Web-App Developer, SQA Engineer &amp; Designer</title>
-  <meta name="description" content="Sharifuz Zaman — web-app developer, SQA engineer, graphics designer and video editor from Dhaka, Bangladesh." />
+  <meta name="description" content="Sharifuz Zaman — web-app developer, SQA engineer, graphics designer and video editor from Dhaka, Bangladesh. AZAdemy Studio." />
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQM31CXY13"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -21,6 +20,8 @@
 </head>
 
 <body>
+
+  <div class="noise" aria-hidden="true"></div>
 
   <!-- ============ NAV ============ -->
   <header class="nav" data-nav>
@@ -40,7 +41,9 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
       <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-content">
+        <div class="section-chip mono">01 — Home · Dhaka, BD</div>
         <p class="hero-kicker mono">Hi, I am</p>
         <h1 class="hero-name" data-hero-name>SHARIFUZ&nbsp;ZAMAN</h1>
         <p class="hero-sub">
@@ -53,6 +56,15 @@
           </span>
         </p>
         <p class="hero-line mono">Building · Testing · Designing · Editing</p>
+        <div class="hero-cta">
+          <a class="btn-sky" href="#work">See the work</a>
+          <a class="btn-ghost" href="#contact">Start a project</a>
+        </div>
+        <ul class="hero-badges mono" aria-label="Highlights">
+          <li><strong>4</strong> Disciplines</li>
+          <li><strong>09</strong> Featured works</li>
+          <li><strong>3D</strong> Live studio</li>
+        </ul>
       </div>
 
       <div class="featured-strip" aria-label="Tools I work with">
@@ -69,121 +81,132 @@
       <a class="scroll-pill" href="#expertise" aria-label="Scroll down"><span></span></a>
     </section>
 
-    <!-- ============ 3D MODELS ============ -->
-    <section class="models" id="models" aria-label="Animated 3D models">
-      <h2 class="big-title">3D Studio</h2>
-      <p class="mono" style="text-align:center;margin-top:1rem;color:var(--muted)">
-        Live animated models — Graphics Design &amp; Video Editing
-      </p>
-      <div class="models-grid">
-        <article class="model-card reveal">
-          <canvas id="graphics-canvas" aria-label="Graphics design 3D model"></canvas>
-          <div class="model-meta">
-            <h3>Graphics Design Model</h3>
-            <p>Layers · palette · brand frames — animated in real time</p>
-          </div>
-        </article>
-        <article class="model-card reveal">
-          <canvas id="video-canvas" aria-label="Video editing 3D model"></canvas>
-          <div class="model-meta">
-            <h3>Video Edit Model</h3>
-            <p>Film reel · timeline · play mark — cinematic motion</p>
-          </div>
-        </article>
+    <!-- marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Web Apps</span><span>SQA</span><span>Graphics</span><span>Video</span>
+        <span>AZAdemy Studio</span><span>Dhaka</span><span>3D Design</span><span>Freelance</span>
+        <span>Web Apps</span><span>SQA</span><span>Graphics</span><span>Video</span>
+        <span>AZAdemy Studio</span><span>Dhaka</span><span>3D Design</span><span>Freelance</span>
       </div>
-    </section>
+    </div>
 
-    <!-- ============ EXPERTISE ============ -->
+    <!-- ============ EXPERTISE + CONNECTED 3D ============ -->
     <section class="expertise" id="expertise">
-      <h2 class="big-title">My Expertise</h2>
-
-      <div class="exp-grid">
-        <article class="exp-card reveal">
-          <header>
-            <span class="exp-icon">🖥</span>
-            <h3><span class="u u-pink">Web-App</span><br />Development</h3>
-          </header>
-          <div class="exp-body">
-            <span class="tag">&lt;h3&gt;</span>
-            <p>Responsive websites &amp; web apps with clean HTML, CSS, JavaScript and REST APIs. Also comfortable in C, C++, Java and Python.</p>
-            <span class="tag">&lt;/h3&gt;</span>
-          </div>
-        </article>
-
-        <article class="exp-card reveal">
-          <header>
-            <span class="exp-icon">🛡</span>
-            <h3><span class="u u-blue">SQA Engineer</span><br />Manual, Automation</h3>
-          </header>
-          <div class="exp-body">
-            <span class="tag">&lt;h3&gt;</span>
-            <p>Functional, regression, API &amp; performance testing with Selenium, Cypress, JMeter, Postman — plus airtight bug reports in JIRA.</p>
-            <span class="tag">&lt;/h3&gt;</span>
-          </div>
-        </article>
-
-        <article class="exp-card reveal">
-          <header>
-            <span class="exp-icon">🎨</span>
-            <h3><span class="u u-orange">Graphics Design</span><br />Brand, Social</h3>
-          </header>
-          <div class="exp-body">
-            <span class="tag">&lt;h3&gt;</span>
-            <p>Logos, brand identity, thumbnails, posters and UI graphics in Photoshop, Illustrator, Figma and InDesign.</p>
-            <span class="tag">&lt;/h3&gt;</span>
-          </div>
-        </article>
-
-        <article class="exp-card reveal">
-          <header>
-            <span class="exp-icon">🎬</span>
-            <h3><span class="u u-purple">Video Editing</span><br />Ads, Reels, Motion</h3>
-          </header>
-          <div class="exp-body">
-            <span class="tag">&lt;h3&gt;</span>
-            <p>Cinematic edits with motion graphics, subtitles and color grading in Premiere Pro, After Effects and DaVinci Resolve.</p>
-            <span class="tag">&lt;/h3&gt;</span>
-          </div>
-        </article>
+      <div class="section-head">
+        <div class="section-chip mono">02 — Expertise</div>
+        <h2 class="big-title">My Expertise</h2>
+        <p class="section-lead mono">One pipeline: build → test → design → edit. Live 3D models connect each craft below.</p>
       </div>
 
-      <pre class="code-deco" aria-hidden="true">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;What do I do?&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!-- I build it. I test it. I design it. I edit it. --&gt;
-    &lt;h1&gt;One person. Full pipeline.&lt;/h1&gt;
-    &lt;p&gt;Oops, almost forgot to say "Hello World!"&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre>
+      <div class="exp-layout">
+        <div class="exp-grid">
+          <article class="exp-card glass reveal">
+            <header>
+              <span class="exp-icon">🖥</span>
+              <h3><span class="u u-pink">Web-App</span><br />Development</h3>
+            </header>
+            <div class="exp-body">
+              <span class="tag">&lt;h3&gt;</span>
+              <p>Responsive websites &amp; web apps with clean HTML, CSS, JavaScript and REST APIs. Also comfortable in C, C++, Java and Python.</p>
+              <span class="tag">&lt;/h3&gt;</span>
+            </div>
+            <ul class="exp-tags mono">
+              <li>HTML/CSS</li><li>JS</li><li>REST</li>
+            </ul>
+          </article>
+
+          <article class="exp-card glass reveal">
+            <header>
+              <span class="exp-icon">🛡</span>
+              <h3><span class="u u-blue">SQA Engineer</span><br />Manual, Automation</h3>
+            </header>
+            <div class="exp-body">
+              <span class="tag">&lt;h3&gt;</span>
+              <p>Functional, regression, API &amp; performance testing with Selenium, Cypress, JMeter, Postman — plus airtight bug reports in JIRA.</p>
+              <span class="tag">&lt;/h3&gt;</span>
+            </div>
+            <ul class="exp-tags mono">
+              <li>Selenium</li><li>Cypress</li><li>JIRA</li>
+            </ul>
+          </article>
+
+          <article class="exp-card glass reveal linked-3d">
+            <header>
+              <span class="exp-icon">🎨</span>
+              <h3><span class="u u-orange">Graphics Design</span><br />Brand, Social</h3>
+            </header>
+            <div class="exp-body">
+              <span class="tag">&lt;h3&gt;</span>
+              <p>Logos, brand identity, thumbnails, posters and UI graphics in Photoshop, Illustrator, Figma and InDesign.</p>
+              <span class="tag">&lt;/h3&gt;</span>
+            </div>
+            <div class="mini-3d">
+              <canvas id="graphics-canvas" aria-label="Graphics design 3D model"></canvas>
+              <span class="mini-3d-label mono">Live 3D · Design layers</span>
+            </div>
+          </article>
+
+          <article class="exp-card glass reveal linked-3d">
+            <header>
+              <span class="exp-icon">🎬</span>
+              <h3><span class="u u-purple">Video Editing</span><br />Ads, Reels, Motion</h3>
+            </header>
+            <div class="exp-body">
+              <span class="tag">&lt;h3&gt;</span>
+              <p>Cinematic edits with motion graphics, subtitles and color grading in Premiere Pro, After Effects and DaVinci Resolve.</p>
+              <span class="tag">&lt;/h3&gt;</span>
+            </div>
+            <div class="mini-3d">
+              <canvas id="video-canvas" aria-label="Video editing 3D model"></canvas>
+              <span class="mini-3d-label mono">Live 3D · Film reel</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="stats-row reveal">
+        <div class="stat glass"><strong data-count="4">0</strong><span>Core skills</span></div>
+        <div class="stat glass"><strong data-count="9">0</strong><span>Projects shown</span></div>
+        <div class="stat glass"><strong data-count="3">0</strong><span>Years freelancing</span></div>
+        <div class="stat glass"><strong>∞</strong><span>Ideas shipping</span></div>
+      </div>
     </section>
 
     <!-- ============ WORK ============ -->
     <section class="work" id="work">
       <div class="work-head">
         <div class="work-intro">
+          <div class="section-chip mono">03 — Selected Work</div>
           <h2 class="big-title left">My<br />Work</h2>
           <p class="mono">
             Built and tested web apps, designed brands and edited videos —
             delivering complete digital products end-to-end.
             Collaborated with clients as a web-app developer, SQA engineer,
-            graphics designer and video editor. One person, full pipeline.
+            graphics designer and video editor.
           </p>
+          <div class="work-3d-panel glass reveal">
+            <canvas id="work-canvas" aria-label="Work section 3D accent"></canvas>
+            <div class="work-3d-copy">
+              <p class="mono">Connected studio</p>
+              <h3>Interactive 3D preview</h3>
+              <p>Hover the reel — design &amp; code meet motion.</p>
+            </div>
+          </div>
         </div>
 
         <div class="featured-project reveal">
-          <figure><img src="./assets/images/project-1.jpg" alt="Finance web app — featured project" /></figure>
+          <div class="fp-frame">
+            <figure><img src="./assets/images/project-1.jpg" alt="Finance web app — featured project" /></figure>
+            <span class="fp-badge mono">Featured</span>
+          </div>
           <svg class="fp-arrow" viewBox="0 0 80 60" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
             <path d="M6 52 C 20 20, 48 12, 66 16" />
             <path d="M56 8 L 68 15 L 60 27" />
           </svg>
           <p class="fp-label">Featured Project</p>
           <h3 class="fp-name">Finance Web App</h3>
-          <a class="btn-purple" href="https://github.com/sharifuzofc" target="_blank" rel="noopener">View Project</a>
+          <a class="btn-sky" href="https://github.com/sharifuzofc" target="_blank" rel="noopener">View Project</a>
         </div>
       </div>
 
@@ -294,45 +317,66 @@
 
     <!-- ============ EXPERIENCE ============ -->
     <section class="experience" id="experience">
-      <h2 class="big-title">Professional<br />Experience</h2>
+      <div class="section-head">
+        <div class="section-chip mono">04 — Experience</div>
+        <h2 class="big-title">Professional<br />Experience</h2>
+      </div>
 
-      <ul class="xp-list">
-        <li class="xp" data-xp>
-          <button class="xp-head" aria-expanded="false">
-            <span>Freelance Web-App Developer &amp; Designer</span>
-            <span class="xp-when">2022 – Present</span>
-            <span class="xp-plus" aria-hidden="true">+</span>
-          </button>
-          <div class="xp-body">
-            <p>Delivering websites, brand identities, edited videos and campaigns end-to-end for clients — one point of contact from idea to launch. Every deliverable passes my own QA before it ships.</p>
+      <div class="xp-layout">
+        <ul class="xp-list">
+          <li class="xp" data-xp>
+            <button class="xp-head" aria-expanded="false">
+              <span>Freelance Web-App Developer &amp; Designer</span>
+              <span class="xp-when">2022 – Present</span>
+              <span class="xp-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="xp-body">
+              <p>Delivering websites, brand identities, edited videos and campaigns end-to-end for clients — one point of contact from idea to launch. Every deliverable passes my own QA before it ships.</p>
+            </div>
+          </li>
+          <li class="xp" data-xp>
+            <button class="xp-head" aria-expanded="false">
+              <span>SQA Engineer — Independent Projects</span>
+              <span class="xp-when">2024 – Present</span>
+              <span class="xp-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="xp-body">
+              <p>Manual and automated testing of web &amp; mobile apps: functional, regression, API, performance and security testing with Selenium, Cypress, JMeter and Postman. Bug tracking in JIRA and Bugzilla.</p>
+            </div>
+          </li>
+          <li class="xp" data-xp>
+            <button class="xp-head" aria-expanded="false">
+              <span>B.Sc. CSE @ Sonargaon University, Dhaka</span>
+              <span class="xp-when">2023 – Present</span>
+              <span class="xp-plus" aria-hidden="true">+</span>
+            </button>
+            <div class="xp-body">
+              <p>Computer Science &amp; Engineering undergraduate. Earlier: HSC (Science) at Govt. Hazi Abdul Aziz Khan Degree College, Netrakona (2021–2023); SSC (Science), 2015–2020.</p>
+            </div>
+          </li>
+        </ul>
+
+        <aside class="xp-aside glass reveal">
+          <canvas id="xp-canvas" aria-hidden="true"></canvas>
+          <div class="xp-aside-copy">
+            <p class="mono">Pipeline</p>
+            <h3>Build · Test · Design · Edit</h3>
+            <p>Every role feeds the next — quality locked in before launch.</p>
+            <ul class="mono">
+              <li>01 Web apps</li>
+              <li>02 SQA / automation</li>
+              <li>03 Brand &amp; UI</li>
+              <li>04 Motion &amp; video</li>
+            </ul>
           </div>
-        </li>
-        <li class="xp" data-xp>
-          <button class="xp-head" aria-expanded="false">
-            <span>SQA Engineer — Independent Projects</span>
-            <span class="xp-when">2024 – Present</span>
-            <span class="xp-plus" aria-hidden="true">+</span>
-          </button>
-          <div class="xp-body">
-            <p>Manual and automated testing of web &amp; mobile apps: functional, regression, API, performance and security testing with Selenium, Cypress, JMeter and Postman. Bug tracking in JIRA and Bugzilla.</p>
-          </div>
-        </li>
-        <li class="xp" data-xp>
-          <button class="xp-head" aria-expanded="false">
-            <span>B.Sc. CSE @ Sonargaon University, Dhaka</span>
-            <span class="xp-when">2023 – Present</span>
-            <span class="xp-plus" aria-hidden="true">+</span>
-          </button>
-          <div class="xp-body">
-            <p>Computer Science &amp; Engineering undergraduate. Earlier: HSC (Science) at Govt. Hazi Abdul Aziz Khan Degree College, Netrakona (2021–2023); SSC (Science), 2015–2020.</p>
-          </div>
-        </li>
-      </ul>
+        </aside>
+      </div>
     </section>
 
     <!-- ============ CONTACT + TESTIMONIALS ============ -->
     <section class="contact" id="contact">
       <div class="contact-left">
+        <div class="section-chip mono">05 — Contact</div>
         <h2>Available for select freelance opportunities</h2>
         <p class="mono">
           Have an exciting project you need help with?<br />
@@ -353,7 +397,7 @@
         <blockquote class="t-card t-violet tall">
           <span class="t-quote" aria-hidden="true">❝</span>
           <img src="./assets/images/avatar-1.png" alt="" loading="lazy" />
-          <p>Sharifuz handled our whole launch — the site, the visuals and the ad campaign. Even while working remotely he stayed responsive, organized and strategic. He also ran a full QA pass before release, so we shipped with zero critical bugs. A highly valued and impactful contributor to our team.</p>
+          <p>Sharifuz handled our whole launch — the site, the visuals and the ad campaign. Even while working remotely he stayed responsive, organized and strategic. He also ran a full QA pass before release, so we shipped with zero critical bugs.</p>
           <footer>– Daniel Lewis<br /><span>Startup Founder</span></footer>
         </blockquote>
         <blockquote class="t-card t-blue">
@@ -365,7 +409,7 @@
         <blockquote class="t-card t-purple">
           <span class="t-quote" aria-hidden="true">❝</span>
           <img src="./assets/images/avatar-3.png" alt="" loading="lazy" />
-          <p>One of the best professionals we have known in web development and design. With his skills you get good communication and accuracy with the planning in complex projects.</p>
+          <p>One of the best professionals we have known in web development and design. Good communication and accuracy with planning in complex projects.</p>
           <footer>– Henry William<br /><span>Content Creator</span></footer>
         </blockquote>
       </div>
@@ -373,8 +417,55 @@
 
   </main>
 
-  <footer class="site-footer">
-    <p class="mono">© 2026 AZAdemy Studio — Dhaka, Bangladesh</p>
+  <!-- ============ PREMIUM FOOTER ============ -->
+  <footer class="premium-footer" id="footer">
+    <canvas id="footer-canvas" aria-hidden="true"></canvas>
+    <div class="footer-inner">
+      <div class="footer-cta">
+        <p class="mono footer-kicker">AZAdemy Studio · Open for work</p>
+        <h2 class="footer-title">Let’s build something<br /><em>sky-level</em> together.</h2>
+        <div class="footer-cta-row">
+          <a class="btn-sky" href="mailto:sharifuzofc@gmail.com">Email me</a>
+          <a class="btn-ghost" href="https://github.com/sharifuzofc" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="footer-cols">
+        <div>
+          <h4 class="mono">Navigate</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mono">Services</h4>
+          <ul>
+            <li>Web-App Dev</li>
+            <li>SQA Engineering</li>
+            <li>Graphics Design</li>
+            <li>Video Editing</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mono">Connect</h4>
+          <ul>
+            <li><a href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://github.com/sharifuzofc" target="_blank" rel="noopener">Github</a></li>
+            <li><a href="tel:+8801919729159">+880 1919-729159</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <p class="mono">© 2026 AZAdemy Studio — Dhaka, Bangladesh</p>
+      <p class="mono footer-brand">Sharifuz Zaman · Full pipeline creative</p>
+    </div>
   </footer>
 
   <button class="to-top" data-back-to-top aria-label="Back to top">↑</button>

@@ -98,6 +98,31 @@ document.querySelectorAll("[data-xp]").forEach((xp) => {
   });
 });
 
+/* ============ STATS COUNT-UP ============ */
+const stats = document.querySelectorAll("[data-count]");
+if (stats.length) {
+  const countObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.dataset.count) || 0;
+        const start = performance.now();
+        const dur = 1100;
+        const step = (now) => {
+          const p = Math.min(1, (now - start) / dur);
+          el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        countObserver.unobserve(el);
+      });
+    },
+    { threshold: 0.4 }
+  );
+  stats.forEach((el) => countObserver.observe(el));
+}
+
 /* ============ BACK TO TOP ============ */
 const toTop = document.querySelector("[data-back-to-top]");
 if (toTop) {

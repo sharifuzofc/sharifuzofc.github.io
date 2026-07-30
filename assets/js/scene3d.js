@@ -341,10 +341,188 @@
     tick();
   }
 
+  /* ---------- WORK: floating torus knot accent ---------- */
+  function initWork() {
+    const canvas = document.getElementById("work-canvas");
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 40);
+    camera.position.set(0, 0.2, 4.2);
+    const renderer = makeRenderer(canvas);
+    const root = new THREE.Group();
+    scene.add(root);
+
+    scene.add(new THREE.AmbientLight(0xbde0fe, 0.7));
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(2, 3, 4);
+    scene.add(light);
+    const p = new THREE.PointLight(sky, 1.2, 10);
+    p.position.set(-2, 1, 2);
+    scene.add(p);
+
+    const knot = new THREE.Mesh(
+      new THREE.TorusKnotGeometry(0.7, 0.22, 120, 16),
+      new THREE.MeshStandardMaterial({
+        color: 0x38bdf8,
+        metalness: 0.65,
+        roughness: 0.25,
+        emissive: deep,
+        emissiveIntensity: 0.2,
+      })
+    );
+    root.add(knot);
+
+    for (let i = 0; i < 8; i++) {
+      const s = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(0.1 + Math.random() * 0.08, 0),
+        new THREE.MeshStandardMaterial({ color: i % 2 ? skySoft : ice, metalness: 0.4, roughness: 0.35 })
+      );
+      const a = (i / 8) * Math.PI * 2;
+      s.position.set(Math.cos(a) * 1.5, Math.sin(a * 1.3) * 0.6, Math.sin(a) * 1.2);
+      s.userData = { a, r: 1.4 + (i % 3) * 0.15 };
+      root.add(s);
+    }
+
+    function onResize() {
+      sizeTo(renderer, camera, canvas);
+    }
+    onResize();
+    addEventListener("resize", onResize);
+
+    const clock = new THREE.Clock();
+    function tick() {
+      const t = clock.getElapsedTime();
+      knot.rotation.x = t * 0.35;
+      knot.rotation.y = t * 0.55;
+      root.children.forEach((c) => {
+        if (c.userData.a == null) return;
+        c.position.x = Math.cos(t * 0.6 + c.userData.a) * c.userData.r;
+        c.position.z = Math.sin(t * 0.6 + c.userData.a) * c.userData.r;
+        c.rotation.y += 0.02;
+      });
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  /* ---------- EXPERIENCE: stacked pipeline cubes ---------- */
+  function initXp() {
+    const canvas = document.getElementById("xp-canvas");
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 40);
+    camera.position.set(0, 0.5, 5);
+    const renderer = makeRenderer(canvas);
+    const root = new THREE.Group();
+    scene.add(root);
+
+    scene.add(new THREE.AmbientLight(0xbde0fe, 0.65));
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(3, 4, 2);
+    scene.add(light);
+
+    const colors = [0x0ea5e9, 0x38bdf8, 0x7dd3fc, 0xffffff];
+    const blocks = [];
+    colors.forEach((c, i) => {
+      const m = new THREE.Mesh(
+        new THREE.BoxGeometry(1.6 - i * 0.15, 0.35, 1.1),
+        new THREE.MeshStandardMaterial({ color: c, metalness: 0.4, roughness: 0.35 })
+      );
+      m.position.y = -0.7 + i * 0.42;
+      m.rotation.y = -0.35 + i * 0.08;
+      root.add(m);
+      blocks.push(m);
+    });
+
+    function onResize() {
+      sizeTo(renderer, camera, canvas);
+    }
+    onResize();
+    addEventListener("resize", onResize);
+
+    const clock = new THREE.Clock();
+    function tick() {
+      const t = clock.getElapsedTime();
+      root.rotation.y = Math.sin(t * 0.4) * 0.35;
+      blocks.forEach((b, i) => {
+        b.position.y = -0.7 + i * 0.42 + Math.sin(t * 1.5 + i) * 0.05;
+      });
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  /* ---------- FOOTER: soft orbiting orbs ---------- */
+  function initFooter() {
+    const canvas = document.getElementById("footer-canvas");
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 50);
+    camera.position.set(0, 0, 8);
+    const renderer = makeRenderer(canvas);
+    const root = new THREE.Group();
+    scene.add(root);
+
+    scene.add(new THREE.AmbientLight(0x8ecae6, 0.5));
+    const p = new THREE.PointLight(sky, 1.5, 20);
+    p.position.set(0, 1, 3);
+    scene.add(p);
+
+    const orbs = [];
+    for (let i = 0; i < 12; i++) {
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.12 + Math.random() * 0.18, 20, 20),
+        new THREE.MeshStandardMaterial({
+          color: i % 3 === 0 ? sky : i % 3 === 1 ? skySoft : 0x0284c7,
+          metalness: 0.5,
+          roughness: 0.3,
+          emissive: deep,
+          emissiveIntensity: 0.15,
+        })
+      );
+      mesh.userData = {
+        r: 1.5 + Math.random() * 3.5,
+        speed: 0.2 + Math.random() * 0.5,
+        phase: Math.random() * Math.PI * 2,
+        y: (Math.random() - 0.5) * 2.2,
+      };
+      root.add(mesh);
+      orbs.push(mesh);
+    }
+
+    function onResize() {
+      sizeTo(renderer, camera, canvas);
+    }
+    onResize();
+    addEventListener("resize", onResize);
+
+    const clock = new THREE.Clock();
+    function tick() {
+      const t = clock.getElapsedTime();
+      orbs.forEach((o) => {
+        const u = o.userData;
+        o.position.x = Math.cos(t * u.speed + u.phase) * u.r;
+        o.position.z = Math.sin(t * u.speed + u.phase) * u.r * 0.55;
+        o.position.y = u.y + Math.sin(t * u.speed * 1.4 + u.phase) * 0.35;
+      });
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
   function boot() {
     initHero();
     initGraphics();
     initVideo();
+    initWork();
+    initXp();
+    initFooter();
   }
 
   if (document.readyState === "loading") {
