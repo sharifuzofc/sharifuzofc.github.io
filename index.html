@@ -17,9 +17,6 @@
   </script>
 
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
@@ -42,7 +39,7 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
-      <img class="hero-bg" src="./assets/images/hero-cubes.png" alt="" aria-hidden="true" />
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-content">
         <p class="hero-kicker mono">Hi, I am</p>
         <h1 class="hero-name" data-hero-name>SHARIFUZ&nbsp;ZAMAN</h1>
@@ -70,6 +67,30 @@
       </div>
 
       <a class="scroll-pill" href="#expertise" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ 3D MODELS ============ -->
+    <section class="models" id="models" aria-label="Animated 3D models">
+      <h2 class="big-title">3D Studio</h2>
+      <p class="mono" style="text-align:center;margin-top:1rem;color:var(--muted)">
+        Live animated models — Graphics Design &amp; Video Editing
+      </p>
+      <div class="models-grid">
+        <article class="model-card reveal">
+          <canvas id="graphics-canvas" aria-label="Graphics design 3D model"></canvas>
+          <div class="model-meta">
+            <h3>Graphics Design Model</h3>
+            <p>Layers · palette · brand frames — animated in real time</p>
+          </div>
+        </article>
+        <article class="model-card reveal">
+          <canvas id="video-canvas" aria-label="Video editing 3D model"></canvas>
+          <div class="model-meta">
+            <h3>Video Edit Model</h3>
+            <p>Film reel · timeline · play mark — cinematic motion</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- ============ EXPERTISE ============ -->
@@ -358,6 +379,8 @@
 
   <button class="to-top" data-back-to-top aria-label="Back to top">↑</button>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="./assets/js/scene3d.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
