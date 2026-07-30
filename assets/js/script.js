@@ -146,6 +146,22 @@ if (cursor && matchMedia("(hover: hover)").matches) {
   });
 }
 
+/* ============ CONTACT FORM (mailto) ============ */
+const mailForm = document.querySelector("[data-mail-form]");
+if (mailForm) {
+  mailForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(mailForm);
+    const subject = `Project inquiry from ${data.get("name")}`;
+    const body = `${data.get("message")}\n\n— ${data.get("name")} (${data.get("email")})`;
+    window.location.href =
+      "mailto:sharifuzofc@gmail.com?subject=" +
+      encodeURIComponent(subject) +
+      "&body=" +
+      encodeURIComponent(body);
+  });
+}
+
 /* ============ BACK TO TOP ============ */
 document.querySelectorAll("[data-back-to-top]").forEach((btn) =>
   btn.addEventListener("click", () =>
