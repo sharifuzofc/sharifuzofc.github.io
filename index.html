@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="YX6t-_fqW6P0uBzF7qk8kandtDpxl9VAuAgq4Vjpoew" />
+  <title>Sharifuz Zaman | Web-App Developer, SQA Engineer &amp; Designer</title>
+  <meta name="description" content="Sharifuz Zaman — web-app developer, SQA engineer, graphics designer and video editor from Dhaka, Bangladesh. AZAdemy Studio." />
+  <link rel="canonical" href="https://sharifuzofc.github.io/" />
+  <meta property="og:title" content="Sharifuz Zaman | Web-App Developer, SQA Engineer &amp; Designer" />
+  <meta property="og:description" content="Web-app developer, SQA engineer, graphics designer and video editor from Dhaka, Bangladesh. One pipeline: build → test → design → edit." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sharifuzofc.github.io/" />
+  <meta property="og:image" content="https://sharifuzofc.github.io/assets/images/logo.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sharifuz Zaman | Web-App Developer, SQA Engineer &amp; Designer" />
+  <meta name="twitter:description" content="Web-app developer, SQA engineer, graphics designer and video editor from Dhaka, Bangladesh." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sharifuz Zaman",
+    "url": "https://sharifuzofc.github.io/",
+    "email": "sharifuzofc@gmail.com",
+    "telephone": "+8801919729159",
+    "jobTitle": ["Web-App Developer", "SQA Engineer", "Graphics Designer", "Video Editor"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dhaka",
+      "addressCountry": "BD"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/sharifuzofc/",
+      "https://github.com/sharifuzofc"
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQM31CXY13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EQM31CXY13');
+  </script>
+
+  <link rel="shortcut icon" href="/assets/images/logo.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/assets/images/logo.svg" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Intro: if seen → NEVER insert #intro. Else insert solid shell before paint. -->
+  <style>
+    html.awaiting-intro, html.awaiting-intro body { overflow: hidden !important; }
+  </style>
+  <!-- Failsafe OUTSIDE the loader module — unlocks even if every external script 404s -->
+  <script>
+    (function () {
+      var FAILSAFE_MS = 4000;
+      window.__introFailsafe = setTimeout(function () {
+        var root = document.documentElement;
+        var intro = document.getElementById("intro");
+        if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+        root.classList.add("intro-done");
+        root.classList.remove("awaiting-intro");
+        try {
+          document.body.style.overflow = "";
+          root.style.overflow = "";
+        } catch (e) {}
+        try {
+          sessionStorage.setItem("introSeen", "1");
+        } catch (e) {}
+      }, FAILSAFE_MS);
+    })();
+  </script>
+  <script type="module" crossorigin src="/assets/main-CTuN9znK.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/footer-fx-BKdZXHhG.js">
+  <link rel="stylesheet" crossorigin href="/assets/footer-fx-C1fssvkd.css">
+  <link rel="stylesheet" crossorigin href="/assets/main-J9sIavGx.css">
+</head>
+
+<body>
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem("introSeen")) {
+          document.documentElement.classList.add("intro-skip", "intro-done");
+          return; /* NEVER insert #intro */
+        }
+      } catch (e) {
+        document.documentElement.classList.add("intro-skip", "intro-done");
+        return;
+      }
+      document.documentElement.classList.add("awaiting-intro");
+      var intro = document.createElement("div");
+      intro.id = "intro";
+      intro.setAttribute("role", "status");
+      intro.setAttribute("aria-live", "polite");
+      intro.setAttribute("aria-label", "Loading portfolio");
+      /* Solid paint only — no backdrop-filter (haze source) */
+      intro.style.cssText =
+        "position:fixed;inset:0;z-index:9999;background:#070b14;" +
+        "display:flex;align-items:center;justify-content:center;" +
+        "padding:1.25rem;color:#e8eefb;opacity:1";
+      intro.innerHTML =
+        '<div class="boot-intro__panel">' +
+          '<div class="boot-intro__window">' +
+            '<div class="boot-intro__chrome" aria-hidden="true">' +
+              '<span class="boot-intro__traffic">' +
+                '<i class="boot-intro__dot boot-intro__dot--red"></i>' +
+                '<i class="boot-intro__dot boot-intro__dot--yellow"></i>' +
+                '<i class="boot-intro__dot boot-intro__dot--green"></i>' +
+              "</span>" +
+              '<span class="boot-intro__chrome-title">sharifuz.dev — compile</span>' +
+            "</div>" +
+            '<div class="boot-intro__scroll"><div class="boot-intro__term" data-boot-term></div></div>' +
+          "</div>" +
+          '<div class="boot-intro__bar-wrap"><div class="boot-intro__bar" data-boot-bar></div></div>' +
+          '<div class="boot-intro__pct" data-boot-pct>0%</div>' +
+        "</div>";
+      document.body.appendChild(intro);
+    })();
+  </script>
+
+  <!-- Liquid Glass edge refraction (optional; CSS omits filter for 60fps — SVG kept for HIG parity) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="lg-refract" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============
+    In-flow children only (single 76px row): glass-overlay | logo | desktop-nav | avail | hire | burger
+    Mobile drawer is a SIBLING — position:fixed, never in header flow.
+  -->
+  <header class="nav" data-nav>
+    <div class="nav-glass liquid-glass liquid-glass--bar" aria-hidden="true">
+      <span class="lg-shine"></span>
+    </div>
+    <a
+      href="#home"
+      class="nav-logo"
+      data-nav-logo
+      aria-label="Sharifuz Zaman — web developer, SQA engineer, graphics designer, video editor"
+    >
+      <span class="nav-logo-avatar" aria-hidden="true">
+        <span class="nav-logo-ring" data-logo-ring></span>
+        <img
+          src="/assets/profile.jpg"
+          alt=""
+          width="46"
+          height="46"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </span>
+      <span class="nav-logo-copy">
+        <span class="nav-logo-name">Sharifuz Zaman<span class="nav-logo-cursor">_</span></span>
+        <span class="nav-logo-role" data-logo-role aria-hidden="true">
+          <span class="nav-logo-role-stage" data-logo-role-stage></span>
+          <span class="nav-logo-playhead" data-logo-playhead hidden></span>
+        </span>
+        <span class="nav-logo-role-static" data-logo-role-static hidden>web · sqa · design · video</span>
+      </span>
+    </a>
+    <nav class="nav-desktop" aria-label="Primary" data-nav-desktop>
+      <span class="nav-pill liquid-glass" data-nav-pill aria-hidden="true">
+        <span class="lg-shine"></span>
+      </span>
+      <a href="#home" data-nav-link data-section="home"><sup>01</sup> <span class="c-cyan">//</span> home</a>
+      <a href="#services" data-nav-link data-section="services"><sup>02</sup> <span class="c-cyan">//</span> services</a>
+      <a href="#work" data-nav-link data-section="work"><sup>03</sup> <span class="c-cyan">//</span> work</a>
+      <a href="#process" data-nav-link data-section="process"><sup>04</sup> <span class="c-cyan">//</span> process</a>
+      <a href="#about" data-nav-link data-section="about"><sup>05</sup> <span class="c-cyan">//</span> about</a>
+      <a href="#contact" data-nav-link data-section="contact"><sup>06</sup> <span class="c-cyan">//</span> contact</a>
+    </nav>
+    <span class="nav-avail liquid-glass liquid-glass--green mono" aria-label="Availability status">
+      <span class="lg-shine"></span>
+      <span class="avail-dot" aria-hidden="true"></span>
+      Available for projects
+    </span>
+    <a class="nav-hire liquid-glass liquid-glass--cyan" href="#contact">
+      <span class="lg-shine"></span>
+      Hire me <span aria-hidden="true">→</span>
+    </a>
+    <button class="nav-burger" type="button" data-burger aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="nav-drawer" id="nav-drawer" data-nav-drawer aria-label="Mobile">
+    <a href="#home"><sup>01</sup> <span class="c-cyan">//</span> home</a>
+    <a href="#services"><sup>02</sup> <span class="c-cyan">//</span> services</a>
+    <a href="#work"><sup>03</sup> <span class="c-cyan">//</span> work</a>
+    <a href="#process"><sup>04</sup> <span class="c-cyan">//</span> process</a>
+    <a href="#about"><sup>05</sup> <span class="c-cyan">//</span> about</a>
+    <a href="#contact"><sup>06</sup> <span class="c-cyan">//</span> contact</a>
+  </nav>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="section-chip mono">01 — Home · Dhaka, BD</div>
+        <h1 class="hero-name" data-hero-name>SHARIFUZ&nbsp;ZAMAN</h1>
+
+        <div class="hero-identity" data-hero-switcher>
+          <div
+            class="hero-switcher-track liquid-glass"
+            role="tablist"
+            aria-label="Disciplines"
+            data-active="web"
+          >
+            <span class="hero-switcher-pill" data-switcher-pill data-discipline="web" aria-hidden="true"></span>
+
+            <button
+              type="button"
+              class="hero-switcher-seg"
+              role="tab"
+              id="hero-tab-web"
+              data-discipline="web"
+              aria-selected="true"
+              aria-controls="hero-tagline-web"
+              tabindex="0"
+            >
+              <svg class="hero-switcher-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M5.2 3.2 2.4 8l2.8 4.8M10.8 3.2 13.6 8l-2.8 4.8M9.2 3.5 6.8 12.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Web Dev</span>
+            </button>
+
+            <button
+              type="button"
+              class="hero-switcher-seg"
+              role="tab"
+              id="hero-tab-sqa"
+              data-discipline="sqa"
+              aria-selected="false"
+              aria-controls="hero-tagline-sqa"
+              tabindex="-1"
+            >
+              <svg class="hero-switcher-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M8 1.6 13.2 3.6v3.4c0 3.3-2.1 5.5-5.2 6.4C4.9 12.5 2.8 10.3 2.8 7V3.6L8 1.6z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+                <path d="M5.6 7.6 7.2 9.1l3.2-3.3" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>SQA</span>
+            </button>
+
+            <button
+              type="button"
+              class="hero-switcher-seg"
+              role="tab"
+              id="hero-tab-design"
+              data-discipline="design"
+              aria-selected="false"
+              aria-controls="hero-tagline-design"
+              tabindex="-1"
+            >
+              <svg class="hero-switcher-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M8 2.2 13.2 8 8 13.8 2.8 8z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+              </svg>
+              <span>Design</span>
+            </button>
+
+            <button
+              type="button"
+              class="hero-switcher-seg"
+              role="tab"
+              id="hero-tab-video"
+              data-discipline="video"
+              aria-selected="false"
+              aria-controls="hero-tagline-video"
+              tabindex="-1"
+            >
+              <svg class="hero-switcher-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M5.2 3.4v9.2L12.4 8z" fill="currentColor"/>
+              </svg>
+              <span>Video</span>
+            </button>
+          </div>
+
+          <p class="hero-tagline" aria-live="polite">
+            <span class="hero-tagline-line is-active" id="hero-tagline-web" data-tagline="web" role="tabpanel" aria-labelledby="hero-tab-web" aria-hidden="false">I ship fast sites that stay fast.</span>
+            <span class="hero-tagline-line" id="hero-tagline-sqa" data-tagline="sqa" role="tabpanel" aria-labelledby="hero-tab-sqa" aria-hidden="true" hidden>I break software before your users do.</span>
+            <span class="hero-tagline-line" id="hero-tagline-design" data-tagline="design" role="tabpanel" aria-labelledby="hero-tab-design" aria-hidden="true" hidden>Brands that don't blend in.</span>
+            <span class="hero-tagline-line" id="hero-tagline-video" data-tagline="video" role="tabpanel" aria-labelledby="hero-tab-video" aria-hidden="true" hidden>Edits built to hold attention.</span>
+          </p>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn-primary" href="#contact">Start a project</a>
+          <a class="btn-secondary" href="#work">See the work</a>
+        </div>
+
+        <ul class="hero-stats" aria-label="Highlights">
+          <li class="stat-tile liquid-glass liquid-glass--tile">
+            <span class="lg-shine"></span>
+            <span class="stat-tile-value">4</span>
+            <span class="stat-tile-label">Disciplines</span>
+          </li>
+          <li class="stat-tile liquid-glass liquid-glass--tile">
+            <span class="lg-shine"></span>
+            <span class="stat-tile-value">12</span>
+            <span class="stat-tile-label">Featured works</span>
+          </li>
+          <li class="stat-tile liquid-glass liquid-glass--tile">
+            <span class="lg-shine"></span>
+            <span class="stat-tile-value stat-tile-value--icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </span>
+            <span class="stat-tile-label">QA'd before delivery</span>
+          </li>
+        </ul>
+      </div>
+
+      <a class="scroll-pill" href="#services" aria-label="Scroll down to services"><span></span></a>
+    </section>
+
+    <!-- marquee — 2 identical halves for seamless -50% loop -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-seq">
+          <span class="mq-term mq-start mq-cyan"><i class="mq-d" aria-hidden="true">◆</i>REACT</span>
+          <span class="mq-term">REST API</span>
+          <span class="mq-term">RESPONSIVE UI</span>
+          <span class="mq-term">CORE WEB VITALS</span>
+          <span class="mq-term">90+ LIGHTHOUSE</span>
+          <span class="mq-term">AUTH FLOWS</span>
+          <span class="mq-term mq-start mq-green"><i class="mq-d" aria-hidden="true">◆</i>SELENIUM</span>
+          <span class="mq-term">CYPRESS</span>
+          <span class="mq-term">POSTMAN</span>
+          <span class="mq-term">JMETER</span>
+          <span class="mq-term">0 P1 ESCAPES</span>
+          <span class="mq-term">TEST AUTOMATION</span>
+          <span class="mq-term mq-start mq-violet"><i class="mq-d" aria-hidden="true">◆</i>BRAND IDENTITY</span>
+          <span class="mq-term">FIGMA</span>
+          <span class="mq-term">UI GRAPHICS</span>
+          <span class="mq-term">MOTION DESIGN</span>
+          <span class="mq-term">THUMBNAILS THAT CLICK</span>
+          <span class="mq-term mq-start mq-orange"><i class="mq-d" aria-hidden="true">◆</i>PREMIERE PRO</span>
+          <span class="mq-term">AFTER EFFECTS</span>
+          <span class="mq-term">RETENTION CUTS</span>
+          <span class="mq-term">4K DELIVERY</span>
+          <span class="mq-term">SOUND DESIGN</span>
+          <span class="mq-term mq-start mq-neutral"><i class="mq-d" aria-hidden="true">◆</i>DHAKA</span>
+          <span class="mq-term">AVAILABLE WORLDWIDE</span>
+        </div>
+        <div class="marquee-seq">
+          <span class="mq-term mq-start mq-cyan"><i class="mq-d" aria-hidden="true">◆</i>REACT</span>
+          <span class="mq-term">REST API</span>
+          <span class="mq-term">RESPONSIVE UI</span>
+          <span class="mq-term">CORE WEB VITALS</span>
+          <span class="mq-term">90+ LIGHTHOUSE</span>
+          <span class="mq-term">AUTH FLOWS</span>
+          <span class="mq-term mq-start mq-green"><i class="mq-d" aria-hidden="true">◆</i>SELENIUM</span>
+          <span class="mq-term">CYPRESS</span>
+          <span class="mq-term">POSTMAN</span>
+          <span class="mq-term">JMETER</span>
+          <span class="mq-term">0 P1 ESCAPES</span>
+          <span class="mq-term">TEST AUTOMATION</span>
+          <span class="mq-term mq-start mq-violet"><i class="mq-d" aria-hidden="true">◆</i>BRAND IDENTITY</span>
+          <span class="mq-term">FIGMA</span>
+          <span class="mq-term">UI GRAPHICS</span>
+          <span class="mq-term">MOTION DESIGN</span>
+          <span class="mq-term">THUMBNAILS THAT CLICK</span>
+          <span class="mq-term mq-start mq-orange"><i class="mq-d" aria-hidden="true">◆</i>PREMIERE PRO</span>
+          <span class="mq-term">AFTER EFFECTS</span>
+          <span class="mq-term">RETENTION CUTS</span>
+          <span class="mq-term">4K DELIVERY</span>
+          <span class="mq-term">SOUND DESIGN</span>
+          <span class="mq-term mq-start mq-neutral"><i class="mq-d" aria-hidden="true">◆</i>DHAKA</span>
+          <span class="mq-term">AVAILABLE WORLDWIDE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ EXPERTISE / SERVICES ============
+      Marketplace research (Fiverr Pro, Upwork Project Catalog, Dribbble Hire, Behance, Awwwards agencies):
+      1. Outcome-first cover art — buyers convert when they can "see" the deliverable before reading.
+      2. "What you get" checklists — concrete deliverables beat vague skill blurbs for trust.
+      3. Trust / scope chips (turnaround, quality bar, risk reduction) lower uncertainty before the CTA.
+      4. Stack/tool tags let buyers self-qualify in seconds without a sales call.
+      5. One primary CTA per card — competing buttons kill conversion on catalog-style tiles.
+      6. A short differentiator line ("why this gig") sits near the CTA like a marketplace edge note.
+    -->
+    <section class="expertise" id="services">
+      <div class="section-head">
+        <div class="section-chip mono">02 — Services</div>
+        <h2 class="big-title">What I take on</h2>
+        <p class="section-lead mono">One pipeline: build → test → design → edit.</p>
+      </div>
+
+      <div class="exp-layout">
+        <div class="exp-grid" data-svc-grid>
+
+          <article class="svc-card svc-web liquid-glass liquid-glass--card" id="svc-web">
+            <div class="svc-poster" aria-hidden="true">
+              <div class="svc-poster-grid"></div>
+              <div class="svc-layer svc-l1">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g class="svc-anim svc-anim-phone">
+                    <rect x="28" y="36" width="70" height="110" rx="10" stroke="rgba(34,211,238,0.45)" stroke-width="1.5" fill="rgba(7,21,37,0.55)"/>
+                    <rect x="38" y="50" width="50" height="78" rx="4" fill="rgba(34,211,238,0.12)" stroke="rgba(34,211,238,0.35)"/>
+                    <circle cx="63" cy="138" r="4" fill="rgba(34,211,238,0.5)"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="svc-layer svc-l2">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g class="svc-anim svc-anim-browser">
+                    <rect x="70" y="28" width="180" height="112" rx="10" fill="rgba(11,31,56,0.75)" stroke="rgba(34,211,238,0.55)" stroke-width="1.5"/>
+                    <rect x="70" y="28" width="180" height="18" rx="10" fill="rgba(34,211,238,0.12)"/>
+                    <circle class="svc-anim svc-anim-dot" style="--svc-stagger:0ms" cx="84" cy="37" r="3" fill="#f472b6"/>
+                    <circle class="svc-anim svc-anim-dot" style="--svc-stagger:180ms" cx="94" cy="37" r="3" fill="#fb923c"/>
+                    <circle class="svc-anim svc-anim-dot" style="--svc-stagger:360ms" cx="104" cy="37" r="3" fill="#34d399"/>
+                    <rect x="84" y="58" width="54" height="8" rx="2" fill="rgba(34,211,238,0.35)"/>
+                    <rect x="84" y="74" width="72" height="6" rx="2" fill="rgba(125,211,252,0.25)"/>
+                    <rect x="84" y="88" width="40" height="6" rx="2" fill="rgba(125,211,252,0.18)"/>
+                    <g class="svc-anim svc-anim-chart-wrap">
+                      <path class="svc-anim svc-anim-chart" d="M170 120 L182 98 L196 108 L210 82 L230 92" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
+                      <circle class="svc-anim svc-anim-chart-dot" cx="230" cy="92" r="3.5" fill="#22d3ee"/>
+                    </g>
+                    <rect x="170" y="58" width="60" height="36" rx="4" fill="rgba(34,211,238,0.08)" stroke="rgba(34,211,238,0.3)"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="svc-body">
+              <h3><span class="u u-web">Web-App</span><br />Development</h3>
+              <div class="exp-body">
+                <p>Building fast, responsive web apps end-to-end with React, JavaScript and REST APIs — from pixel-perfect UI to auth flows and deployment. Focused on performance (Core Web Vitals), clean Git workflows and maintainable code. Also grounded in C, C++, Java and Python.</p>
+              </div>
+              <p class="svc-get mono">What you get</p>
+              <ul class="exp-deliver mono" aria-label="What I deliver">
+                <li>Business sites, dashboards &amp; admin panels</li>
+                <li>API integration, auth &amp; form flows</li>
+                <li>Mobile-first responsive layouts</li>
+                <li>Performance &amp; SEO optimization (90+ Lighthouse)</li>
+                <li>Deploy &amp; maintain on live production</li>
+              </ul>
+              <ul class="exp-tags mono">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript (ES6+)</li>
+                <li>React</li>
+                <li>Tailwind</li>
+                <li>REST API</li>
+                <li>Git/GitHub</li>
+                <li>Responsive</li>
+                <li>Performance</li>
+              </ul>
+              <div class="svc-trust mono" aria-label="Trust signals">
+                <span>90+ Lighthouse</span>
+                <span>Production-ready</span>
+              </div>
+              <p class="svc-edge mono">// leveling up: TypeScript &amp; Next.js</p>
+              <a class="svc-cta" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="svc-card svc-sqa liquid-glass liquid-glass--card" id="svc-sqa">
+            <div class="svc-poster" aria-hidden="true">
+              <div class="svc-poster-grid"></div>
+              <div class="svc-layer svc-l1">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="214" cy="78" r="36" stroke="rgba(52,211,153,0.35)" stroke-width="6" fill="none"/>
+                  <circle class="svc-anim svc-anim-gauge" cx="214" cy="78" r="36" stroke="#34d399" stroke-width="6" stroke-linecap="round" pathLength="100" transform="rotate(-90 214 78)"/>
+                  <g class="svc-anim-gauge-label">
+                    <text class="svc-gauge-pct" data-gauge-pct x="214" y="74" text-anchor="middle" fill="#bbf7d0" font-size="14" font-family="monospace" font-weight="700">98%</text>
+                    <text x="214" y="90" text-anchor="middle" fill="rgba(187,247,208,0.7)" font-size="7" font-family="monospace">PASS</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="svc-layer svc-l2">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="28" y="30" width="150" height="100" rx="8" fill="rgba(6,30,18,0.85)" stroke="rgba(52,211,153,0.5)" stroke-width="1.5"/>
+                  <rect x="28" y="30" width="150" height="16" rx="8" fill="rgba(52,211,153,0.12)"/>
+                  <circle cx="40" cy="38" r="2.5" fill="#f87171"/><circle cx="50" cy="38" r="2.5" fill="#fbbf24"/><circle cx="60" cy="38" r="2.5" fill="#34d399"/>
+                  <g class="svc-anim svc-anim-term">
+                    <text class="svc-anim svc-anim-term-line" x="40" y="62" fill="#86efac" font-size="8" font-family="monospace">✓ auth.spec.js</text>
+                    <text class="svc-anim svc-anim-term-line" x="40" y="76" fill="#86efac" font-size="8" font-family="monospace">✓ api.regression</text>
+                    <text class="svc-anim svc-anim-term-line" x="40" y="90" fill="#86efac" font-size="8" font-family="monospace">✓ checkout.e2e</text>
+                    <text class="svc-anim svc-anim-term-cmd" x="40" y="104" fill="rgba(134,239,172,0.55)" font-size="8" font-family="monospace">$ npx cypress run</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="svc-body">
+              <h3><span class="u u-sqa">SQA Engineer</span><br />Manual, Automation</h3>
+              <div class="exp-body">
+                <p>End-to-end testing — functional, regression, API and performance — with Selenium, Cypress, Postman and JMeter. Automation scripts in Python/Java, SQL data validation, and airtight bug reports in JIRA with clear repro steps.</p>
+              </div>
+              <p class="svc-get mono">What you get</p>
+              <ul class="exp-deliver mono" aria-label="What I deliver">
+                <li>Test plans, cases &amp; execution reports</li>
+                <li>Automated regression suites</li>
+                <li>API testing &amp; validation (Postman)</li>
+                <li>Performance &amp; load testing (JMeter)</li>
+                <li>Detailed bug reports with repro steps</li>
+              </ul>
+              <ul class="exp-tags mono">
+                <li>Selenium</li>
+                <li>Cypress</li>
+                <li>Postman</li>
+                <li>JMeter</li>
+                <li>SQL</li>
+                <li>JIRA</li>
+                <li>TestRail</li>
+              </ul>
+              <div class="svc-trust mono" aria-label="Trust signals">
+                <span>Zero P1 escapes</span>
+                <span>5★ delivery mindset</span>
+              </div>
+              <p class="svc-edge mono">// focus: catching bugs before users ever see them</p>
+              <a class="svc-cta" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="svc-card svc-design liquid-glass liquid-glass--card" id="svc-design">
+            <div class="svc-poster" aria-hidden="true">
+              <div class="svc-poster-grid"></div>
+              <div class="svc-layer svc-l1">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="160" y="40" width="88" height="88" rx="8" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.45)" stroke-width="1.5"/>
+                  <text class="svc-anim svc-anim-aa svc-anim-aa--reg" x="204" y="96" text-anchor="middle" fill="#e9d5ff" font-size="36" font-family="system-ui,sans-serif" font-weight="400">Aa</text>
+                  <text class="svc-anim svc-anim-aa svc-anim-aa--bold" x="204" y="96" text-anchor="middle" fill="#e9d5ff" font-size="36" font-family="system-ui,sans-serif" font-weight="700">Aa</text>
+                </svg>
+              </div>
+              <div class="svc-layer svc-l2">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="svcDesignRing" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#a78bfa"/>
+                      <stop offset="45%" stop-color="#22d3ee"/>
+                      <stop offset="100%" stop-color="#f472b6"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="78" cy="72" r="34" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.35)" stroke-width="1.5"/>
+                  <circle class="svc-anim svc-anim-logo-ring" cx="78" cy="72" r="34" fill="none" stroke="url(#svcDesignRing)" stroke-width="2.25" stroke-dasharray="52 40" stroke-linecap="round"/>
+                  <circle cx="78" cy="72" r="14" fill="#a78bfa"/>
+                  <text x="78" y="77" text-anchor="middle" fill="#1e1b4b" font-size="12" font-family="system-ui,sans-serif" font-weight="800">S</text>
+                  <rect class="svc-anim svc-anim-swatch" style="--svc-stagger:0ms" x="40" y="118" width="18" height="18" rx="3" fill="#22d3ee"/>
+                  <rect class="svc-anim svc-anim-swatch" style="--svc-stagger:80ms" x="62" y="118" width="18" height="18" rx="3" fill="#a78bfa"/>
+                  <rect class="svc-anim svc-anim-swatch" style="--svc-stagger:160ms" x="84" y="118" width="18" height="18" rx="3" fill="#f472b6"/>
+                  <rect class="svc-anim svc-anim-swatch" style="--svc-stagger:240ms" x="106" y="118" width="18" height="18" rx="3" fill="#fb923c"/>
+                  <rect class="svc-anim svc-anim-swatch" style="--svc-stagger:320ms" x="128" y="118" width="18" height="18" rx="3" fill="#34d399"/>
+                  <rect x="148" y="48" width="52" height="40" rx="5" fill="rgba(11,31,56,0.7)" stroke="rgba(167,139,250,0.4)"/>
+                  <rect x="154" y="54" width="40" height="22" rx="2" fill="rgba(167,139,250,0.2)"/>
+                  <rect x="154" y="80" width="24" height="3" rx="1" fill="rgba(233,213,255,0.4)"/>
+                </svg>
+              </div>
+            </div>
+            <div class="svc-body">
+              <h3><span class="u u-design">Graphics Design</span><br />Brand, Social</h3>
+              <div class="exp-body">
+                <p>Complete brand identities — logos, color systems, typography — plus social creatives, thumbnails and UI graphics. Working in Photoshop, Illustrator and Figma, with AI-augmented workflows (Firefly, Midjourney) and motion touches from After Effects.</p>
+              </div>
+              <p class="svc-get mono">What you get</p>
+              <ul class="exp-deliver mono" aria-label="What I deliver">
+                <li>Logo &amp; full brand identity kits</li>
+                <li>Social media ads, posts &amp; YouTube thumbnails</li>
+                <li>UI graphics &amp; web assets (Figma)</li>
+                <li>Posters, flyers &amp; print-ready design</li>
+                <li>Animated social creatives (design + motion)</li>
+              </ul>
+              <ul class="exp-tags mono">
+                <li>Photoshop</li>
+                <li>Illustrator</li>
+                <li>Figma</li>
+                <li>InDesign</li>
+                <li>Brand Identity</li>
+                <li>AI Workflows</li>
+                <li>Motion Graphics</li>
+              </ul>
+              <div class="svc-trust mono" aria-label="Trust signals">
+                <span>Brand systems</span>
+                <span>Fast turnaround</span>
+              </div>
+              <p class="svc-edge mono">// edge: design that moves — static brands turned into motion</p>
+              <a class="svc-cta" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="svc-card svc-video liquid-glass liquid-glass--card" id="svc-video">
+            <div class="svc-poster" aria-hidden="true">
+              <div class="svc-poster-grid"></div>
+              <div class="svc-layer svc-l1">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="36" y="108" width="208" height="36" rx="6" fill="rgba(11,31,56,0.8)" stroke="rgba(251,146,60,0.4)"/>
+                  <rect x="44" y="116" width="120" height="8" rx="2" fill="rgba(251,146,60,0.18)"/>
+                  <rect class="svc-anim svc-anim-progress" x="44" y="116" width="120" height="8" rx="2" fill="rgba(251,146,60,0.55)"/>
+                  <rect x="44" y="128" width="120" height="6" rx="2" fill="rgba(251,146,60,0.25)"/>
+                  <path class="svc-anim svc-anim-wave" d="M180 118 Q186 112 192 118 Q198 124 204 118 Q210 112 216 118 Q222 124 228 118" stroke="#fb923c" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+              <div class="svc-layer svc-l2">
+                <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="56" y="24" width="168" height="78" rx="10" fill="rgba(11,31,56,0.75)" stroke="rgba(251,146,60,0.55)" stroke-width="1.5"/>
+                  <rect x="66" y="34" width="148" height="58" rx="4" fill="rgba(251,146,60,0.1)"/>
+                  <g class="svc-anim svc-anim-play">
+                    <circle cx="140" cy="63" r="14" fill="rgba(251,146,60,0.25)" stroke="#fb923c" stroke-width="1.5"/>
+                    <path d="M136 55 L150 63 L136 71 Z" fill="#fb923c"/>
+                  </g>
+                  <g class="svc-anim svc-anim-rec">
+                    <rect x="200" y="30" width="28" height="12" rx="3" fill="rgba(239,68,68,0.85)"/>
+                    <circle class="svc-anim svc-anim-rec-dot" cx="208" cy="36" r="2.5" fill="#fff"/>
+                    <text x="214" y="39" fill="#fff" font-size="7" font-family="monospace" font-weight="700">REC</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="svc-body">
+              <h3><span class="u u-video">Video Editing</span><br />Ads, Reels, Motion</h3>
+              <div class="exp-body">
+                <p>Retention-first edits for Reels, Shorts and ads — sharp hooks, tight pacing, styled captions and motion graphics. Cinematic color grading and sound design in Premiere Pro, After Effects and DaVinci Resolve.</p>
+              </div>
+              <p class="svc-get mono">What you get</p>
+              <ul class="exp-deliver mono" aria-label="What I deliver">
+                <li>Reels, Shorts &amp; TikTok edits (retention-cut)</li>
+                <li>Ad creatives &amp; promo videos</li>
+                <li>Styled captions &amp; animated subtitles</li>
+                <li>Motion graphics, intros &amp; lower-thirds</li>
+                <li>Cinematic color grading &amp; audio polish</li>
+              </ul>
+              <ul class="exp-tags mono">
+                <li>Premiere Pro</li>
+                <li>After Effects</li>
+                <li>DaVinci Resolve</li>
+                <li>CapCut</li>
+                <li>Motion Graphics</li>
+                <li>Color Grading</li>
+                <li>Sound Design</li>
+              </ul>
+              <div class="svc-trust mono" aria-label="Trust signals">
+                <span>Retention-first</span>
+                <span>Fast turnaround</span>
+              </div>
+              <p class="svc-edge mono">// edge: hooks in 3 seconds — edits built to hold attention</p>
+              <a class="svc-cta" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="stats-row reveal">
+        <div class="stats-circuit" aria-hidden="true"></div>
+
+        <div class="stat">
+          <span class="stat-shine" aria-hidden="true"></span>
+          <span class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"/><path d="M6 12h12"/><path d="M8 16h8"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+          </span>
+          <strong class="stat-value">
+            <span class="stat-glow" aria-hidden="true"></span>
+            <span class="stat-num" data-count="4" data-suffix="+">0</span>
+          </strong>
+          <span class="stat-label">Core skills</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-shine" aria-hidden="true"></span>
+          <span class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1"/><path d="M3 12h18"/></svg>
+          </span>
+          <strong class="stat-value">
+            <span class="stat-glow" aria-hidden="true"></span>
+            <span class="stat-num" data-count="60" data-suffix="+">0</span>
+          </strong>
+          <span class="stat-label">Projects completed</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-shine" aria-hidden="true"></span>
+          <span class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </span>
+          <strong class="stat-value">
+            <span class="stat-glow" aria-hidden="true"></span>
+            <span class="stat-num" data-count="3" data-suffix="+">0</span>
+          </strong>
+          <span class="stat-label">Years freelancing</span>
+        </div>
+
+        <div class="stat is-inf">
+          <span class="stat-shine" aria-hidden="true"></span>
+          <span class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a5 5 0 0 1 5 5c0 2.2-1.2 3.6-2.4 4.7-.8.7-1.6 1.5-1.6 2.3h-2c0-1.3.9-2.2 1.8-3 .9-.8 2.2-2 2.2-4a3 3 0 1 0-6 0"/><path d="M9.5 10.5A3.5 3.5 0 0 1 12 7"/></svg>
+          </span>
+          <strong class="stat-value">
+            <span class="stat-glow" aria-hidden="true"></span>
+            <span class="stat-num" data-count="inf">∞</span>
+          </strong>
+          <span class="stat-label">Ideas shipping</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="work" id="work">
+      <div class="work-band">
+        <div class="work-head">
+          <div class="section-chip mono">03 — Selected Work</div>
+          <div class="work-title-row">
+            <h2 class="big-title left">Selected work</h2>
+            <div class="filter-bar" data-filter-bar>
+              <div class="filter-track">
+                <button type="button" class="f-btn active" data-filter="all">All<sup>11</sup></button>
+                <span class="f-sep" aria-hidden="true">/</span>
+                <button type="button" class="f-btn" data-filter="web">Web Development<sup>05</sup></button>
+                <span class="f-sep" aria-hidden="true">/</span>
+                <button type="button" class="f-btn" data-filter="sqa">SQA Testing<sup>03</sup></button>
+                <span class="f-sep" aria-hidden="true">/</span>
+                <button type="button" class="f-btn" data-filter="design">Design &amp; Video<sup>04</sup></button>
+                <span class="filter-ink" data-filter-ink aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+          <p class="work-lead mono">12 projects — built, tested, branded, and edited end-to-end.</p>
+        </div>
+
+        <article class="flagship reveal liquid-glass liquid-glass--card" data-flagship>
+          <div class="flagship-media">
+            <div class="flagship-float">
+              <div class="flagship-chrome" aria-hidden="true">
+                <div class="flagship-chrome-bar">
+                  <span class="flagship-dot flagship-dot--r"></span>
+                  <span class="flagship-dot flagship-dot--y"></span>
+                  <span class="flagship-dot flagship-dot--g"></span>
+                  <span class="flagship-chrome-url mono">finance.app / dashboard</span>
+                </div>
+                <figure class="flagship-poster">
+                  <div class="dash-poster">
+                    <svg viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="360" height="220" rx="0" fill="#071525"/>
+                      <rect x="14" y="14" width="332" height="192" rx="10" fill="rgba(11,31,56,0.9)" stroke="rgba(34,211,238,0.4)"/>
+                      <rect x="14" y="14" width="332" height="28" rx="10" fill="rgba(34,211,238,0.1)"/>
+                      <circle cx="30" cy="28" r="4" fill="#f472b6"/><circle cx="44" cy="28" r="4" fill="#fb923c"/><circle cx="58" cy="28" r="4" fill="#34d399"/>
+                      <text x="78" y="32" fill="#7dd3fc" font-size="9" font-family="monospace">finance.app / dashboard</text>
+                      <rect x="28" y="56" width="88" height="56" rx="8" fill="rgba(34,211,238,0.08)" stroke="rgba(34,211,238,0.35)"/>
+                      <text x="38" y="76" fill="#94a3b8" font-size="8" font-family="monospace">BALANCE</text>
+                      <text x="38" y="98" fill="#e0f2fe" font-size="16" font-family="system-ui,sans-serif" font-weight="700">$24.8k</text>
+                      <rect x="128" y="56" width="88" height="56" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.35)"/>
+                      <text x="138" y="76" fill="#94a3b8" font-size="8" font-family="monospace">INCOME</text>
+                      <text x="138" y="98" fill="#bbf7d0" font-size="16" font-family="system-ui,sans-serif" font-weight="700">+12%</text>
+                      <rect x="228" y="56" width="100" height="56" rx="8" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.35)"/>
+                      <text x="238" y="76" fill="#94a3b8" font-size="8" font-family="monospace">TRANSFERS</text>
+                      <text x="238" y="98" fill="#e9d5ff" font-size="16" font-family="system-ui,sans-serif" font-weight="700">148</text>
+                      <rect x="28" y="126" width="200" height="64" rx="8" fill="rgba(7,21,37,0.7)" stroke="rgba(34,211,238,0.28)"/>
+                      <path d="M44 170 L70 155 L96 160 L122 140 L148 148 L174 128 L200 136" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="200" cy="136" r="3.5" fill="#22d3ee"/>
+                      <rect x="240" y="126" width="88" height="64" rx="8" fill="rgba(7,21,37,0.7)" stroke="rgba(34,211,238,0.28)"/>
+                      <rect x="254" y="168" width="10" height="12" rx="2" fill="rgba(34,211,238,0.55)"/>
+                      <rect x="268" y="158" width="10" height="22" rx="2" fill="rgba(34,211,238,0.75)"/>
+                      <rect x="282" y="148" width="10" height="32" rx="2" fill="#22d3ee"/>
+                      <rect x="296" y="154" width="10" height="26" rx="2" fill="rgba(125,211,252,0.7)"/>
+                    </svg>
+                  </div>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <div class="flagship-body">
+            <span class="flagship-chip mono">Featured</span>
+            <h3 class="flagship-title">Finance — Fintech Web App</h3>
+            <!-- EDIT-ME: replace with your real outcome metric when you have client-approved numbers -->
+            <p class="flagship-outcome mono">90+ Lighthouse · responsive UI + REST integration shipped</p>
+            <ul class="flagship-tags mono" aria-label="Tools">
+              <li>React</li>
+              <li>Tailwind</li>
+              <li>REST API</li>
+            </ul>
+            <a class="flagship-cta liquid-glass liquid-glass--cyan" href="/work/finance.html">View case study <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+
+      <ul class="project-grid" data-projects>
+        <li class="proj is-highlight" data-cat="web">
+          <!-- EDIT-ME: refine Pulse title / outcome / tags when client copy is final -->
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/pulse.html">
+            <figure class="proj-thumb proj-thumb--poster">
+              <div class="dash-poster" aria-hidden="true">
+                <svg viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="360" height="220" rx="12" fill="#071525"/>
+                  <rect x="12" y="12" width="336" height="196" rx="10" fill="rgba(11,31,56,0.92)" stroke="rgba(34,211,238,0.35)"/>
+                  <rect x="12" y="12" width="336" height="26" rx="10" fill="rgba(129,140,248,0.12)"/>
+                  <circle cx="28" cy="25" r="3.5" fill="#f472b6"/><circle cx="40" cy="25" r="3.5" fill="#fb923c"/><circle cx="52" cy="25" r="3.5" fill="#34d399"/>
+                  <text x="70" y="29" fill="#c4b5fd" font-size="9" font-family="monospace">pulse.app / analytics</text>
+                  <!-- Donut (left) — layout differs from finance KPI strip -->
+                  <circle cx="88" cy="108" r="42" stroke="rgba(129,140,248,0.22)" stroke-width="10" fill="none"/>
+                  <circle cx="88" cy="108" r="42" stroke="#818cf8" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="176 88" transform="rotate(-90 88 108)"/>
+                  <circle cx="88" cy="108" r="42" stroke="#22d3ee" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="55 209" stroke-dashoffset="-176" transform="rotate(-90 88 108)"/>
+                  <text x="88" y="104" text-anchor="middle" fill="#e0e7ff" font-size="14" font-family="system-ui,sans-serif" font-weight="700">68%</text>
+                  <text x="88" y="118" text-anchor="middle" fill="#94a3b8" font-size="7" font-family="monospace">LIVE</text>
+                  <!-- Two KPI tiles (right) -->
+                  <rect x="150" y="52" width="84" height="58" rx="8" fill="rgba(34,211,238,0.08)" stroke="rgba(34,211,238,0.4)"/>
+                  <text x="160" y="72" fill="#94a3b8" font-size="8" font-family="monospace">ACTIVE</text>
+                  <text x="160" y="94" fill="#e0f2fe" font-size="16" font-family="system-ui,sans-serif" font-weight="700">1.2k</text>
+                  <rect x="246" y="52" width="86" height="58" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)"/>
+                  <text x="256" y="72" fill="#94a3b8" font-size="8" font-family="monospace">UPTIME</text>
+                  <text x="256" y="94" fill="#bbf7d0" font-size="16" font-family="system-ui,sans-serif" font-weight="700">99.9%</text>
+                  <!-- Horizontal bar row -->
+                  <rect x="150" y="124" width="182" height="64" rx="8" fill="rgba(7,21,37,0.75)" stroke="rgba(129,140,248,0.3)"/>
+                  <rect x="162" y="136" width="128" height="8" rx="3" fill="rgba(34,211,238,0.75)"/>
+                  <rect x="162" y="150" width="96" height="8" rx="3" fill="rgba(129,140,248,0.7)"/>
+                  <rect x="162" y="164" width="148" height="8" rx="3" fill="rgba(251,146,60,0.65)"/>
+                  <text x="300" y="143" fill="#64748b" font-size="7" font-family="monospace">API</text>
+                  <text x="300" y="157" fill="#64748b" font-size="7" font-family="monospace">UI</text>
+                  <text x="300" y="171" fill="#64748b" font-size="7" font-family="monospace">QA</text>
+                </svg>
+              </div>
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-web mono">Web Dev</span>
+            </figure>
+            <div class="proj-body">
+              <!-- EDIT-ME: Pulse — Analytics Dashboard -->
+              <h4>Pulse — Analytics Dashboard</h4>
+              <div class="proj-details">
+                <!-- EDIT-ME: outcome line -->
+                <p class="proj-outcome mono">Built real-time charts UI with role-based views</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <!-- EDIT-ME: tool tags -->
+                  <li>React</li>
+                  <li>Chart.js</li>
+                  <li>REST API</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="web">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/orizon.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-2-DDwFyST8.png" alt="Orizon travel platform" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-web mono">Web Dev</span>
+            </figure>
+            <div class="proj-body">
+              <h4>Orizon — Travel Platform</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Shipped booking UI with live analytics views</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>React</li>
+                  <li>JavaScript</li>
+                  <li>REST API</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="design">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/fundo.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-3-DOnh0-9D.jpg" alt="Fundo brand design" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-design mono">Design</span>
+            </figure>
+            <div class="proj-body">
+              <h4>Fundo — Brand Design</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Crafted brand identity + web visual system</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Photoshop</li>
+                  <li>Illustrator</li>
+                  <li>Figma</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="sqa">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/brawlhalla.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-4-suEw-RMy.png" alt="Brawlhalla mobile app QA" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-sqa mono">SQA</span>
+              <span class="proj-qa-pass mono" aria-hidden="true">✓ 98% pass rate</span>
+            </figure>
+            <div class="proj-body">
+              <h4>Brawlhalla — Mobile App QA</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Automated 120+ regression cases in Cypress</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Cypress</li>
+                  <li>Selenium</li>
+                  <li>JIRA</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="design">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/dsm.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-5-BFIaaPbS.png" alt="DSM product branding" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-design mono">Design</span>
+            </figure>
+            <div class="proj-body">
+              <h4>DSM. — Product Branding</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Designed product brand system for launch kits</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Figma</li>
+                  <li>Illustrator</li>
+                  <li>Brand</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="design">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/metaspark.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-6-BD3srOKc.png" alt="MetaSpark visuals and video" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-video mono">Video</span>
+            </figure>
+            <div class="proj-body">
+              <h4>MetaSpark — Visuals &amp; Video</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Edited motion creatives + campaign visuals</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Premiere</li>
+                  <li>After Effects</li>
+                  <li>Photoshop</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="web">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/summary.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-7-D8vX5QMX.png" alt="Summary SaaS app" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-web mono">Web Dev</span>
+            </figure>
+            <div class="proj-body">
+              <h4>Summary — SaaS App</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Built SaaS UI with performance-first layout</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>JavaScript</li>
+                  <li>CSS3</li>
+                  <li>SEO</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="sqa">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/taskflow.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-8-WOKVcr7N.jpg" alt="TaskFlow API testing" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-sqa mono">SQA</span>
+              <span class="proj-qa-term mono" aria-hidden="true"><i></i> POST /api/tasks → 200 OK</span>
+            </figure>
+            <div class="proj-body">
+              <h4>TaskFlow — API Testing</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Validated 80+ API flows with Postman &amp; JMeter</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Postman</li>
+                  <li>JMeter</li>
+                  <li>TestRail</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="web">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/arrival.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-9-CumrYCEW.png" alt="Arrival campaign site" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-web mono">Web Dev</span>
+            </figure>
+            <div class="proj-body">
+              <h4>Arrival — Campaign Site</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Coded campaign site with scroll-driven motion</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>JavaScript</li>
+                  <li>CSS3</li>
+                  <li>Performance</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="sqa">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/shoplane.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-4-suEw-RMy.png" alt="ShopLane checkout QA" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-sqa mono">SQA</span>
+              <span class="proj-qa-pass mono" aria-hidden="true">✓ 96% pass rate</span>
+            </figure>
+            <div class="proj-body">
+              <h4>ShopLane — Checkout QA</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Ran end-to-end checkout smoke across devices</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Selenium</li>
+                  <li>TestRail</li>
+                  <li>JIRA</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="proj" data-cat="design">
+          <a class="proj-card liquid-glass liquid-glass--card" href="/work/lumen.html">
+            <figure class="proj-thumb">
+              <img src="/assets/project-5-BFIaaPbS.png" alt="Lumen social brand kit" loading="lazy" decoding="async" />
+              <span class="proj-shade" aria-hidden="true"></span>
+              <span class="proj-badge badge-design mono">Design</span>
+            </figure>
+            <div class="proj-body">
+              <h4>Lumen — Social Brand Kit</h4>
+              <div class="proj-details">
+                <p class="proj-outcome mono">Designed social kit + thumbnail system for launch</p>
+                <ul class="proj-tags mono" aria-label="Tools">
+                  <li>Photoshop</li>
+                  <li>Figma</li>
+                  <li>Illustrator</li>
+                </ul>
+                <span class="show-proj">View case →</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ PROCESS / HOW I WORK ============
+      Marketplace research (Fiverr Pro, Upwork top-rated, Contra, Awwwards freelancers):
+      1. Process beats resume — buyers hire for predictability; a clear Discover→Deliver rail reduces “will they ghost?” anxiety.
+      2. Proof strip with editable metrics — honest numbers (projects, tests, Lighthouse, on-time) convert better than job titles.
+      3. Engagement models (project / retainer / hourly) help clients self-select without a price wall.
+      4. Availability + response-time signal next to a mid-page CTA lifts conversion on solo portfolios.
+      5. Differentiator in the process — for me: build AND QA in one person (step 3 is the trust spike).
+    -->
+    <section class="process" id="process">
+      <div class="section-head">
+        <div class="section-chip mono">04 — Process</div>
+        <h2 class="big-title">From brief<br />to launch.</h2>
+        <p class="section-lead mono">One accountable person — I build it, then I QA it before you ever see it.</p>
+      </div>
+
+      <div class="process-rail" data-process-rail>
+        <svg class="process-line" viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true">
+          <line class="process-line-track" pathLength="100" x1="0" y1="2" x2="100" y2="2" />
+          <line class="process-line-draw" pathLength="100" x1="0" y1="2" x2="100" y2="2" />
+        </svg>
+
+        <article class="process-step step-web liquid-glass liquid-glass--card">
+          <span class="process-num mono">01</span>
+          <span class="process-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M8 11h6M11 8v6"/></svg>
+          </span>
+          <h3>Discover</h3>
+          <p class="mono">Scope, goals, and constraints — so we ship the right thing.</p>
+        </article>
+
+        <article class="process-step step-design liquid-glass liquid-glass--card">
+          <span class="process-num mono">02</span>
+          <span class="process-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/><path d="M7 9h4M7 12h6"/></svg>
+          </span>
+          <h3>Build</h3>
+          <p class="mono">UI, code, brand, or edit — executed in focused milestones.</p>
+        </article>
+
+        <article class="process-step step-sqa is-qa liquid-glass liquid-glass--card">
+          <span class="process-num mono">03</span>
+          <span class="process-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <h3>Test</h3>
+          <p class="mono">I QA my own work — no handoff gaps before delivery.</p>
+          <div class="process-qa-chip mono" aria-hidden="true">
+            <span class="qa-gauge"><i></i></span>
+            ✓ pass gate
+          </div>
+        </article>
+
+        <article class="process-step step-video liquid-glass liquid-glass--card">
+          <span class="process-num mono">04</span>
+          <span class="process-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h12"/><path d="M12 6l6 6-6 6"/><path d="M4 7v10"/></svg>
+          </span>
+          <h3>Deliver</h3>
+          <p class="mono">Handoff, docs, and a clean launch — ready for production.</p>
+        </article>
+      </div>
+
+      <!-- EDIT-ME: update these proof numbers anytime — keep them honest -->
+      <ul class="proof-strip" data-proof-strip aria-label="Proof metrics">
+        <li class="proof-chip stat-tile liquid-glass liquid-glass--tile">
+          <span class="lg-shine"></span>
+          <strong class="stat-tile-value"><span data-proof-count="15" data-proof-suffix="+">0</span></strong>
+          <span class="stat-tile-label">projects shipped</span>
+        </li>
+        <li class="proof-chip stat-tile liquid-glass liquid-glass--tile">
+          <span class="lg-shine"></span>
+          <strong class="stat-tile-value"><span data-proof-count="400" data-proof-suffix="+">0</span></strong>
+          <span class="stat-tile-label">test cases written</span>
+        </li>
+        <li class="proof-chip stat-tile liquid-glass liquid-glass--tile">
+          <span class="lg-shine"></span>
+          <strong class="stat-tile-value"><span data-proof-count="90" data-proof-suffix="+">0</span></strong>
+          <span class="stat-tile-label">Lighthouse scores</span>
+        </li>
+        <li class="proof-chip stat-tile liquid-glass liquid-glass--tile">
+          <span class="lg-shine"></span>
+          <strong class="stat-tile-value"><span data-proof-count="100" data-proof-suffix="%">0</span></strong>
+          <span class="stat-tile-label">on-time delivery</span>
+        </li>
+      </ul>
+
+      <div class="engage-row" data-engage-row>
+        <article class="engage-card liquid-glass liquid-glass--card">
+          <span class="lg-shine"></span>
+          <h3 class="mono">Single project</h3>
+          <p>Fixed scope — launch a site, brand kit, test suite, or edit package.</p>
+          <!-- EDIT-ME: fill real range or remove this line -->
+          <p class="engage-price mono">from $X · scope-based</p>
+        </article>
+        <article class="engage-card liquid-glass liquid-glass--card">
+          <span class="lg-shine"></span>
+          <h3 class="mono">Ongoing retainer</h3>
+          <p>Monthly support for shipping, QA, design, and content cadence.</p>
+          <!-- EDIT-ME: fill real range or remove this line -->
+          <p class="engage-price mono">from $X · monthly</p>
+        </article>
+        <article class="engage-card liquid-glass liquid-glass--card">
+          <span class="lg-shine"></span>
+          <h3 class="mono">Hourly</h3>
+          <p>Flexible help for spikes, audits, or short consulting sessions.</p>
+          <!-- EDIT-ME: fill real rate or remove this line -->
+          <p class="engage-price mono">from $X · hourly</p>
+        </article>
+      </div>
+
+      <div class="process-cta liquid-glass liquid-glass--card glass">
+        <div class="process-cta-glow" aria-hidden="true"></div>
+        <div class="process-cta-copy">
+          <p class="avail mono"><span class="avail-dot" aria-hidden="true"></span> Available for new work</p>
+          <h3>Have a project in mind? Let’s scope it in 24 hours.</h3>
+        </div>
+        <a class="svc-cta" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <div class="section-head">
+        <div class="section-chip mono">05 — About</div>
+        <h2 class="big-title">About</h2>
+      </div>
+      <article class="about-card liquid-glass liquid-glass--card glass reveal">
+        <div class="about-photo">
+          <span class="about-photo-glow" aria-hidden="true"></span>
+          <span class="about-photo-ring" aria-hidden="true"></span>
+          <img
+            src="/assets/profile.jpg"
+            alt="Sharifuz Zaman — web developer, SQA engineer, graphics designer and video editor based in Dhaka"
+            width="120"
+            height="120"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="about-copy">
+          <p>
+            I’m a full-stack freelancer covering web development, SQA (manual + automation),
+            brand/graphics design, and video editing — one accountable person from build to launch.
+            Clients get a single pipeline instead of juggling four vendors.
+          </p>
+          <p class="about-edu mono">
+            <span class="about-edu-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 6l7-3 7 3-7 3-7-3z"/><path d="M4 7.5v3.5c0 1 2.5 2 4 2s4-1 4-2V7.5"/><path d="M14 6.5V11"/></svg>
+            </span>
+            B.Sc. CSE — Sonargaon University, Dhaka (2023–Present)
+          </p>
+        </div>
+      </article>
+      <div class="featured-strip about-stack" aria-label="Tools I work with">
+        <p class="strip-label">Daily tools</p>
+        <ul>
+          <li>&lt;/&gt; JavaScript</li>
+          <li>⚙ Selenium</li>
+          <li>◮ Photoshop</li>
+          <li>▶ Premiere Pro</li>
+          <li>◈ Figma</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact">
+      <div class="contact-left">
+        <div class="section-chip mono">06 — Contact</div>
+        <h2>Let’s scope your project in 24 hours.</h2>
+        <p class="contact-lead">
+          Tell me what you’re building — I’ll reply with a scope, timeline, and honest feasibility check.
+        </p>
+
+        <ul class="contact-takeon" aria-label="What I take on">
+          <li><span class="contact-dot contact-dot--web" aria-hidden="true"></span>Web apps &amp; dashboards</li>
+          <li><span class="contact-dot contact-dot--sqa" aria-hidden="true"></span>QA passes &amp; test automation</li>
+          <li><span class="contact-dot contact-dot--design" aria-hidden="true"></span>Brand kits &amp; thumbnails</li>
+          <li><span class="contact-dot contact-dot--video" aria-hidden="true"></span>Reels, ads &amp; long-form edits</li>
+        </ul>
+
+        <div class="contact-chips" aria-label="Direct contact">
+          <button
+            type="button"
+            class="contact-chip liquid-glass"
+            data-copy="sharifuzofc@gmail.com"
+            aria-label="Copy email address sharifuzofc@gmail.com"
+          >
+            <span class="lg-shine"></span>
+            <span data-copy-label>sharifuzofc@gmail.com</span>
+            <span class="sr-only" aria-live="polite" data-copy-live></span>
+          </button>
+          <a class="contact-chip liquid-glass" href="tel:+8801919729159">
+            <span class="lg-shine"></span>+880 1919-729159
+          </a>
+          <span class="contact-chip contact-chip--static liquid-glass">
+            <span class="lg-shine"></span>Dhaka · works worldwide
+          </span>
+        </div>
+
+        <p class="contact-reply mono">
+          <span class="avail-dot" aria-hidden="true"></span>
+          Replies within 24 hours
+        </p>
+      </div>
+
+      <aside class="contact-card liquid-glass liquid-glass--card" aria-label="Start a project form">
+        <h3>Start a project</h3>
+
+        <!-- EDIT-ME: form endpoint — set data-endpoint to your Formspree URL, e.g. https://formspree.io/f/xxxxxx -->
+        <form
+          class="contact-form"
+          data-contact-form
+          data-endpoint=""
+          data-mailto="sharifuzofc@gmail.com"
+          novalidate
+        >
+          <div class="contact-field">
+            <label for="contact-name">Name</label>
+            <input
+              class="contact-input"
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              aria-describedby="contact-name-error"
+            />
+            <p class="contact-error" id="contact-name-error" role="alert" hidden></p>
+          </div>
+
+          <div class="contact-field">
+            <label for="contact-email">Email</label>
+            <input
+              class="contact-input"
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              required
+              aria-describedby="contact-email-error"
+            />
+            <p class="contact-error" id="contact-email-error" role="alert" hidden></p>
+          </div>
+
+          <div class="contact-field">
+            <label for="contact-message">What are you building?</label>
+            <textarea
+              class="contact-input contact-textarea"
+              id="contact-message"
+              name="message"
+              rows="4"
+              required
+              aria-describedby="contact-message-error"
+            ></textarea>
+            <p class="contact-error" id="contact-message-error" role="alert" hidden></p>
+          </div>
+
+          <fieldset class="contact-type">
+            <legend id="contact-type-label">Project type</legend>
+            <div class="contact-type-row" role="radiogroup" aria-labelledby="contact-type-label">
+              <button type="button" class="contact-type-pill contact-type-pill--web" data-type="web" aria-pressed="false">Web</button>
+              <button type="button" class="contact-type-pill contact-type-pill--sqa" data-type="sqa" aria-pressed="false">SQA</button>
+              <button type="button" class="contact-type-pill contact-type-pill--design" data-type="design" aria-pressed="false">Design</button>
+              <button type="button" class="contact-type-pill contact-type-pill--video" data-type="video" aria-pressed="false">Video</button>
+              <button type="button" class="contact-type-pill contact-type-pill--mixed" data-type="mixed" aria-pressed="false">Mixed</button>
+            </div>
+            <input type="hidden" name="project_type" id="contact-type" value="" />
+            <p class="contact-error" id="contact-type-error" role="alert" hidden></p>
+          </fieldset>
+
+          <button type="submit" class="contact-submit liquid-glass liquid-glass--cyan">
+            <span class="lg-shine"></span>
+            Send it <span aria-hidden="true">→</span>
+          </button>
+
+          <div class="contact-toast" data-contact-toast role="status" aria-live="polite" hidden></div>
+        </form>
+      </aside>
+    </section>
+
+  </main>
+
+  <!-- ============ PREMIUM FOOTER ============ -->
+  <footer class="premium-footer" id="footer">
+    <div class="footer-aurora" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <div class="footer-cta">
+        <p class="mono footer-kicker">● OPEN FOR NEW PROJECTS — DHAKA · WORLDWIDE</p>
+        <h2 class="footer-title">
+          <span class="footer-title-line">Let’s build something</span>
+          <span class="footer-title-line"><em>sky-level</em> together.</span>
+        </h2>
+        <div class="footer-cta-row">
+          <a class="footer-cta-primary liquid-glass liquid-glass--cyan" href="#contact">
+            <span class="lg-shine"></span>
+            Start a project <span aria-hidden="true">→</span>
+          </a>
+          <button
+            type="button"
+            class="footer-copy-chip liquid-glass"
+            data-copy="sharifuzofc@gmail.com"
+            aria-label="Copy email address sharifuzofc@gmail.com"
+          >
+            <span class="lg-shine"></span>
+            <span data-copy-label>sharifuzofc@gmail.com</span>
+            <span class="sr-only" aria-live="polite" data-copy-live></span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="footer-cols" aria-label="Footer">
+        <div>
+          <h4 class="mono">Navigate</h4>
+          <ul>
+            <li><a class="footer-link" href="#home">Home</a></li>
+            <li><a class="footer-link" href="#services">Services</a></li>
+            <li><a class="footer-link" href="#work">Work</a></li>
+            <li><a class="footer-link" href="#process">Process</a></li>
+            <li><a class="footer-link" href="#about">About</a></li>
+            <li><a class="footer-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mono">Services</h4>
+          <ul>
+            <li>
+              <a class="footer-link footer-svc" href="#svc-web">
+                <span class="footer-svc-dot" style="--svc:#22d3ee" aria-hidden="true"></span>Web-App Dev
+              </a>
+            </li>
+            <li>
+              <a class="footer-link footer-svc" href="#svc-sqa">
+                <span class="footer-svc-dot" style="--svc:#34d399" aria-hidden="true"></span>SQA Engineering
+              </a>
+            </li>
+            <li>
+              <a class="footer-link footer-svc" href="#svc-design">
+                <span class="footer-svc-dot" style="--svc:#a78bfa" aria-hidden="true"></span>Graphics Design
+              </a>
+            </li>
+            <li>
+              <a class="footer-link footer-svc" href="#svc-video">
+                <span class="footer-svc-dot" style="--svc:#fb923c" aria-hidden="true"></span>Video Editing
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="mono">Connect</h4>
+          <div class="footer-connect">
+            <a
+              class="footer-social liquid-glass"
+              href="https://www.linkedin.com/in/sharifuzofc/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="lg-shine"></span>
+              <svg class="footer-social-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bar">
+      <p class="mono footer-copy">
+        <span class="footer-copy-brand">© 2026 AZAdemy Studio</span>
+        <span class="footer-copy-sep" aria-hidden="true">·</span>
+        <span class="footer-oma">ONE MAN ARMY</span>
+      </p>
+      <a class="footer-top-chip liquid-glass" href="#home" data-footer-top>
+        <span class="lg-shine"></span>Back to top ↑
+      </a>
+    </div>
+  </footer>
+
+  <aside
+    class="scroll-xp liquid-glass"
+    data-scroll-xp
+    aria-label="Scroll journey progress"
+    hidden
+  >
+    <span class="lg-shine"></span>
+    <div class="scroll-xp-panel" data-scroll-xp-panel>
+      <div class="scroll-xp-row">
+        <span class="scroll-xp-lv" data-scroll-xp-lv>LV1</span>
+        <span class="scroll-xp-name" data-scroll-xp-name>Visitor</span>
+        <span class="scroll-xp-count mono" data-scroll-xp-count>0 XP</span>
+      </div>
+      <div class="scroll-xp-bar" aria-hidden="true">
+        <span class="scroll-xp-fill" data-scroll-xp-fill></span>
+      </div>
+      <p class="scroll-xp-meta mono" data-scroll-xp-meta>25 XP to Explorer · 1 🏅</p>
+    </div>
+    <button
+      type="button"
+      class="scroll-xp-chip"
+      data-scroll-xp-chip
+      aria-label="Scroll journey — expand"
+    >
+      <span class="scroll-xp-chip-lv" data-scroll-xp-chip-lv>LV1</span>
+      <span class="scroll-xp-chip-pct" data-scroll-xp-chip-pct>0%</span>
+    </button>
+    <div class="scroll-xp-toast mono" data-scroll-xp-toast hidden role="status" aria-live="polite"></div>
+  </aside>
+  <script>
+    /* No flash after a completed session — strip widget before module boot */
+    try {
+      if (sessionStorage.getItem("scrollGameDone")) {
+        document.querySelector("[data-scroll-xp]")?.remove();
+      }
+    } catch (_) {}
+  </script>
+
+  <!-- Three.js stays on CDN — scene3d.js expects global THREE -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
