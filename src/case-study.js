@@ -1,10 +1,11 @@
 import "./styles/tokens.css";
+import "../assets/css/nav-mobile.css";
 import "../assets/css/style.css";
 import "../assets/css/liquid-glass.css";
 import "../assets/css/cursor.css";
 import "./styles/case-study.css";
 import "../assets/js/cursor.js";
-import "../assets/js/logo-roles.js";
+import "../assets/js/srf-mark.js";
 import "../assets/js/footer-fx.js";
 
 /* Case pages: no boot intro — ever */
@@ -20,17 +21,86 @@ document.documentElement.classList.add("intro-done", "intro-skip");
   const links = desktop ? [...desktop.querySelectorAll("[data-nav-link]")] : [];
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const PILL_BASE = 100;
+  let menuOpen = false;
+  let openTimer = 0;
+
+  const closeBtn = drawer?.querySelector("[data-menu-close]");
+
+  const focusables = () => {
+    if (!drawer) return [];
+    return [
+      ...drawer.querySelectorAll(
+        'a[href], button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])'
+      ),
+    ].filter((el) => el.offsetParent !== null);
+  };
+
+  const setOpen = (open) => {
+    if (!burger || !drawer || open === menuOpen) return;
+    menuOpen = open;
+    clearTimeout(openTimer);
+    burger.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", "Menu");
+    document.documentElement.classList.toggle("menu-open", open);
+    if (open) {
+      drawer.hidden = false;
+      void drawer.offsetWidth;
+      drawer.classList.add("is-open");
+      if (!reduceMotion) {
+        burger.classList.add("is-opening");
+        openTimer = window.setTimeout(() => burger.classList.remove("is-opening"), 380);
+      }
+      window.setTimeout(() => {
+        const target = closeBtn || focusables()[0];
+        target?.focus({ preventScroll: true, focusVisible: false });
+      }, reduceMotion ? 0 : 80);
+    } else {
+      drawer.classList.remove("is-open");
+      burger.classList.remove("is-opening");
+      const hide = () => {
+        if (!menuOpen) drawer.hidden = true;
+      };
+      if (reduceMotion) hide();
+      else openTimer = window.setTimeout(hide, 380);
+      burger.focus({ preventScroll: true });
+    }
+  };
 
   if (burger && drawer) {
-    const setOpen = (open) => {
-      drawer.classList.toggle("is-open", open);
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    };
-    burger.addEventListener("click", () => setOpen(!drawer.classList.contains("is-open")));
-    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    let pressTimer = 0;
+    burger.addEventListener("click", () => {
+      const willOpen = !menuOpen;
+      if (reduceMotion) {
+        setOpen(willOpen);
+        return;
+      }
+      clearTimeout(pressTimer);
+      burger.classList.add("is-pressing");
+      if (willOpen) burger.classList.add("is-rim-flash");
+      pressTimer = window.setTimeout(() => {
+        burger.classList.remove("is-pressing");
+        setOpen(willOpen);
+        if (willOpen) {
+          window.setTimeout(() => burger.classList.remove("is-rim-flash"), 400);
+        }
+      }, 90);
+    });
+    drawer.querySelectorAll("[data-drawer-close]").forEach((el) =>
+      el.addEventListener("click", () => setOpen(false))
+    );
+    drawer.querySelectorAll("[data-drawer-link]").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false))
+    );
     addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setOpen(false);
+      if (!menuOpen) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+    matchMedia("(min-width: 900px)").addEventListener?.("change", (e) => {
+      if (e.matches) setOpen(false);
     });
   }
 

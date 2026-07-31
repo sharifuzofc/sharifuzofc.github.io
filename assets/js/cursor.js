@@ -1,13 +1,16 @@
 "use strict";
 
 /**
- * Premium two-layer custom cursor
- * — fine pointer only; disabled on touch / coarse pointers
+ * Premium two-layer custom cursor + foam bubble trail
+ * — fine pointer only; disabled on touch / coarse pointers / reduced-motion
  */
 (function initCustomCursor() {
+  const canHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!canHover) return;
+
   const fineMq = matchMedia("(hover: hover) and (pointer: fine)");
   const noHoverMq = matchMedia("(hover: none)");
-  if (!fineMq.matches || noHoverMq.matches) return;
+  const coarseMq = matchMedia("(pointer: coarse)");
 
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const root = document.documentElement;
@@ -28,11 +31,11 @@
   const ring = cursor.querySelector(".c-cursor__ring");
   const ripple = cursor.querySelector(".c-cursor__ripple");
 
-  const trail = document.createElement("canvas");
-  trail.className = "c-cursor-trail";
-  trail.setAttribute("aria-hidden", "true");
-  document.body.appendChild(trail);
-  const tctx = trail.getContext("2d");
+  /* Bubble layer — under header (z:100), under cursor (z:10000) */
+  const bubbleLayer = document.createElement("div");
+  bubbleLayer.className = "c-bubbles";
+  bubbleLayer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bubbleLayer);
 
   /* ---------- State ---------- */
   const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
@@ -40,14 +43,11 @@
   let mode = "default"; // default | hover | view | invert | rotate
   let visible = false;
   let clicking = false;
-  let inHero = false;
   let rafId = 0;
   let magneticEl = null;
   const labelEl = cursor.querySelector(".c-cursor__label");
 
   const RING_LERP = reduceMotion ? 1 : 0.15;
-  const TRAIL_MAX = 14;
-  const trailPts = [];
 
   const hoverSel =
     "a, button, .btn-sky, .btn-ghost, .f-btn, .nav-hire, .nav-burger, .contact-chip, .contact-submit, .contact-type-pill, summary, [role='button']";
@@ -57,7 +57,15 @@
     ".hero-name, .big-title, .footer-title, .contact-left > h2";
   const rotateSel = ".mini-3d.is-interactive-3d, .mini-3d.is-interactive-3d canvas";
   const magneticSel =
-    "a.btn-sky, a.btn-ghost, a.btn-primary, a.btn-secondary, a.nav-hire, button, .f-btn, .nav-desktop a, .nav-drawer a, .nav-logo, .contact-chip, .contact-submit, .footer-top-chip";
+    "a.btn-sky, a.btn-ghost, a.btn-primary, a.btn-secondary, a.nav-hire, button, .f-btn, .nav-desktop a, .nav-drawer a, .srf-mark, .contact-chip, .contact-submit, .footer-top-chip";
+  /* Pause foam over interactive UI (incl. discipline switcher) */
+  const bubblePauseSel =
+    hoverSel +
+    ", " +
+    viewSel +
+    ", " +
+    rotateSel +
+    ", [data-hero-switcher], .hero-switcher-track, .hero-switcher-seg, [role='tab'], [data-marquee]";
 
   function closest(el, sel) {
     return el && el.closest ? el.closest(sel) : null;
@@ -101,7 +109,6 @@
     else if (closest(el, hoverSel)) setMode("hover");
     else setMode("default");
 
-    // Magnetic pull on buttons / links (not project VIEW cards / 3D canvases)
     const mag = closest(el, magneticSel);
     if (mag !== magneticEl) {
       if (magneticEl) clearMagnetic(magneticEl);
@@ -138,40 +145,184 @@
       `translate3d(${mx.toFixed(2)}px, ${my.toFixed(2)}px, 0)`;
   }
 
-  /* ---------- Trail (hero only) ---------- */
-  function sizeTrail() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    trail.width = Math.floor(innerWidth * dpr);
-    trail.height = Math.floor(innerHeight * dpr);
-    trail.style.width = innerWidth + "px";
-    trail.style.height = innerHeight + "px";
-    tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  /* ============================================================
+     Foam bubble trail — pooled nodes, WAAPI only, sleeps when idle
+     ============================================================ */
+  const POOL_SIZE = 18;
+  const VEL_MIN = 36; /* px/s — still cursor emits nothing */
+  const VEL_FAST = 1300; /* px/s → max emission */
+  const RATE_MIN = 2.5; /* bubbles/sec slow drag */
+  const RATE_MAX = 11; /* bubbles/sec fast sweep */
+  const TINTS = ["green", "violet", "orange"];
+
+  const pool = [];
+  const free = [];
+  let liveCount = 0;
+  let emitAcc = 0;
+  let lastSampleX = mouse.x;
+  let lastSampleY = mouse.y;
+  let lastSampleT = 0;
+  let bubblesArmed = false;
+  let bubblesPaused = false;
+
+  if (!reduceMotion) {
+    for (let i = 0; i < POOL_SIZE; i++) {
+      const el = document.createElement("div");
+      el.className = "c-bubble";
+      el.style.opacity = "0";
+      bubbleLayer.appendChild(el);
+      const item = { el, anim: null, busy: false };
+      pool.push(item);
+      free.push(item);
+    }
   }
 
-  function drawTrail() {
-    if (reduceMotion || !tctx) return;
-    tctx.clearRect(0, 0, innerWidth, innerHeight);
-    if (!inHero || trailPts.length < 2) {
-      trail.classList.toggle("is-on", false);
+  function introCleared() {
+    return (
+      root.classList.contains("intro-done") ||
+      root.classList.contains("intro-skip") ||
+      !document.getElementById("intro")
+    );
+  }
+
+  function armBubbles() {
+    bubblesArmed = !reduceMotion && introCleared();
+  }
+
+  armBubbles();
+  if (!bubblesArmed && !reduceMotion) {
+    document.addEventListener(
+      "intro:done",
+      () => {
+        armBubbles();
+      },
+      { once: true }
+    );
+  }
+
+  function releaseBubble(item) {
+    if (!item.busy) return;
+    item.busy = false;
+    const anim = item.anim;
+    item.anim = null;
+    if (anim) {
+      anim.onfinish = null;
+      anim.oncancel = null;
+      try {
+        anim.cancel();
+      } catch (_) {
+        /* already finished */
+      }
+    }
+    item.el.style.opacity = "0";
+    item.el.style.transform = "translate3d(-100px,-100px,0)";
+    free.push(item);
+    liveCount = Math.max(0, liveCount - 1);
+  }
+
+  function clearBubbles() {
+    emitAcc = 0;
+    for (let i = 0; i < pool.length; i++) {
+      const item = pool[i];
+      if (item.busy) releaseBubble(item);
+    }
+    liveCount = 0;
+    free.length = 0;
+    for (let i = 0; i < pool.length; i++) free.push(pool[i]);
+  }
+
+  function spawnBubble() {
+    if (!free.length || liveCount >= POOL_SIZE) return;
+    const item = free.pop();
+    item.busy = true;
+    liveCount++;
+
+    const el = item.el;
+    const size = 3 + Math.random() * 4; /* 3–7px */
+    const ox = mouse.x + (Math.random() - 0.5) * 12; /* ±6px */
+    const oy = mouse.y + (Math.random() - 0.5) * 12;
+    const half = size * 0.5;
+    const drift = 14 + Math.random() * 12; /* 14–26px up */
+    const sway = (Math.random() < 0.5 ? -1 : 1) * (3 + Math.random() * 5);
+    const dur = 700 + Math.random() * 400; /* 700–1100ms */
+    const tint = Math.random() < 0.15 ? TINTS[(Math.random() * TINTS.length) | 0] : "cyan";
+
+    el.className = `c-bubble c-bubble--${tint}`;
+    el.style.width = `${size}px`;
+    el.style.height = `${size}px`;
+
+    const x0 = ox - half;
+    const y0 = oy - half;
+
+    /* Soft sin-ish sway via 4 keyframes — transform + opacity only */
+    item.anim = el.animate(
+      [
+        {
+          transform: `translate3d(${x0}px, ${y0}px, 0) scale(1)`,
+          opacity: 0.72,
+        },
+        {
+          transform: `translate3d(${x0 + sway}px, ${y0 - drift * 0.35}px, 0) scale(1.12)`,
+          opacity: 0.55,
+          offset: 0.32,
+        },
+        {
+          transform: `translate3d(${x0 - sway * 0.55}px, ${y0 - drift * 0.7}px, 0) scale(1.22)`,
+          opacity: 0.28,
+          offset: 0.68,
+        },
+        {
+          transform: `translate3d(${x0 + sway * 0.25}px, ${y0 - drift}px, 0) scale(1.3)`,
+          opacity: 0,
+        },
+      ],
+      {
+        duration: dur,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards",
+      }
+    );
+
+    item.anim.onfinish = () => releaseBubble(item);
+    item.anim.oncancel = () => {
+      /* releaseBubble handles cancel path */
+    };
+  }
+
+  function tickBubbles(dt, speed, overInteractive) {
+    if (
+      !bubblesArmed ||
+      reduceMotion ||
+      bubblesPaused ||
+      document.hidden ||
+      overInteractive ||
+      mode === "hover" ||
+      mode === "view" ||
+      mode === "rotate"
+    ) {
+      emitAcc = 0;
       return;
     }
-    trail.classList.add("is-on");
-    for (let i = 0; i < trailPts.length; i++) {
-      const p = trailPts[i];
-      const t = i / (trailPts.length - 1 || 1);
-      const alpha = t * 0.22;
-      const r = 2 + t * 10;
-      tctx.beginPath();
-      tctx.fillStyle = `rgba(56, 189, 248, ${alpha.toFixed(3)})`;
-      tctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-      tctx.fill();
+
+    if (speed < VEL_MIN) {
+      emitAcc = 0;
+      return;
     }
+
+    const t = Math.min(1, (speed - VEL_MIN) / (VEL_FAST - VEL_MIN));
+    const rate = RATE_MIN + t * (RATE_MAX - RATE_MIN);
+    emitAcc += rate * dt;
+
+    while (emitAcc >= 1 && liveCount < POOL_SIZE) {
+      emitAcc -= 1;
+      spawnBubble();
+    }
+    if (emitAcc > 2) emitAcc = 2; /* avoid burst after lag */
   }
 
   /* ---------- Events ---------- */
   let moveRaf = 0;
   let lastTarget = null;
-  const heroEl = document.getElementById("home");
 
   addEventListener(
     "pointermove",
@@ -188,26 +339,17 @@
       if (moveRaf) return;
       moveRaf = requestAnimationFrame(() => {
         moveRaf = 0;
+        const now = performance.now();
+        const dt = lastSampleT ? Math.min(0.05, (now - lastSampleT) / 1000) : 0.016;
+        const dist = Math.hypot(mouse.x - lastSampleX, mouse.y - lastSampleY);
+        const speed = dt > 0 ? dist / dt : 0;
+        lastSampleX = mouse.x;
+        lastSampleY = mouse.y;
+        lastSampleT = now;
+
         resolveTarget(lastTarget);
-
-        if (heroEl) {
-          const r = heroEl.getBoundingClientRect();
-          inHero =
-            mouse.y >= r.top &&
-            mouse.y <= r.bottom &&
-            mouse.x >= r.left &&
-            mouse.x <= r.right;
-        } else {
-          inHero = false;
-        }
-
-        if (inHero && !reduceMotion) {
-          trailPts.push({ x: mouse.x, y: mouse.y });
-          if (trailPts.length > TRAIL_MAX) trailPts.shift();
-        } else if (trailPts.length) {
-          trailPts.length = 0;
-        }
-
+        const overInteractive = !!closest(lastTarget, bubblePauseSel);
+        tickBubbles(dt, speed, overInteractive);
         updateMagnetic();
       });
     },
@@ -220,7 +362,6 @@
     cursor.classList.add("is-click");
     if (!reduceMotion && ripple) {
       ripple.classList.remove("is-on");
-      // reflow to restart animation
       void ripple.offsetWidth;
       ripple.style.setProperty("--px", mouse.x + "px");
       ripple.style.setProperty("--py", mouse.y + "px");
@@ -241,7 +382,8 @@
       clearMagnetic(magneticEl);
       magneticEl = null;
     }
-    trailPts.length = 0;
+    emitAcc = 0;
+    lastSampleT = 0;
   });
 
   document.documentElement.addEventListener("mouseenter", () => {
@@ -249,11 +391,19 @@
     cursor.classList.add("is-visible");
   });
 
-  addEventListener("resize", sizeTrail);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      bubblesPaused = true;
+      clearBubbles();
+      lastSampleT = 0;
+    } else {
+      bubblesPaused = false;
+      armBubbles();
+    }
+  });
 
-  /* ---------- RAF loop ---------- */
+  /* ---------- RAF loop (dot/ring only — no bubble work when idle) ---------- */
   function tick() {
-    // Instant inner dot
     const dotScale = clicking ? 0.4 : mode === "hover" ? 0.55 : mode === "view" ? 0.4 : 1;
     const ringScale = clicking ? 0.82 : 1;
 
@@ -270,25 +420,33 @@
     ring.style.transform =
       `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) scale(${ringScale})`;
 
-    drawTrail();
     rafId = requestAnimationFrame(tick);
   }
 
-  sizeTrail();
   rafId = requestAnimationFrame(tick);
 
-  // Safety: if coarse / touch pointer appears later (tablet hybrid), tear down
-  const onChange = () => {
-    if (!fineMq.matches || noHoverMq.matches) {
-      cancelAnimationFrame(rafId);
-      if (moveRaf) cancelAnimationFrame(moveRaf);
-      root.classList.remove("has-custom-cursor", "is-reduced-cursor");
-      cursor.remove();
-      trail.remove();
-      fineMq.removeEventListener("change", onChange);
-      noHoverMq.removeEventListener("change", onChange);
+  const teardown = () => {
+    cancelAnimationFrame(rafId);
+    if (moveRaf) cancelAnimationFrame(moveRaf);
+    clearBubbles();
+    if (magneticEl) {
+      clearMagnetic(magneticEl);
+      magneticEl = null;
     }
+    root.classList.remove("has-custom-cursor", "is-reduced-cursor");
+    cursor.remove();
+    bubbleLayer.remove();
+    fineMq.removeEventListener("change", onCapabilityChange);
+    noHoverMq.removeEventListener("change", onCapabilityChange);
+    coarseMq.removeEventListener("change", onCapabilityChange);
   };
-  fineMq.addEventListener("change", onChange);
-  noHoverMq.addEventListener("change", onChange);
+
+  const onCapabilityChange = () => {
+    const stillOk =
+      fineMq.matches && !noHoverMq.matches && !coarseMq.matches;
+    if (!stillOk) teardown();
+  };
+  fineMq.addEventListener("change", onCapabilityChange);
+  noHoverMq.addEventListener("change", onCapabilityChange);
+  coarseMq.addEventListener("change", onCapabilityChange);
 })();

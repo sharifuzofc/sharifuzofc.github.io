@@ -924,8 +924,8 @@
       /* Recompute no-spawn from live content rect (badge→stats + 60px) */
       updateExclusionBox();
 
-      /* ~600ms settle for active-discipline emissive boost */
-      const boostEase = 1 - Math.exp(-dt * 5);
+      /* ~400ms settle for active-discipline emissive boost */
+      const boostEase = 1 - Math.exp(-dt * 7.5);
 
       stars.forEach((s) => {
         const u = s.userData;

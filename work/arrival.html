@@ -61,20 +61,47 @@
       <span class="lg-shine"></span><span class="avail-dot" aria-hidden="true"></span> Available for projects
     </span>
     <a class="nav-hire liquid-glass liquid-glass--cyan" href="/#contact"><span class="lg-shine"></span>Hire me <span aria-hidden="true">→</span></a>
-    <button class="nav-burger" type="button" data-burger aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-      <span></span><span></span><span></span>
+    <button class="nav-dots liquid-glass" type="button" data-burger data-nav-dots aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer" style="--lg-radius: 16px">
+      <span class="lg-shine"></span>
+      <span class="nav-dots__scene" aria-hidden="true">
+        <span class="nav-dots__dot" data-dot="0"></span>
+        <span class="nav-dots__dot" data-dot="1"></span>
+        <span class="nav-dots__dot" data-dot="2"></span>
+      </span>
     </button>
   </header>
-  <nav class="nav-drawer" id="nav-drawer" data-nav-drawer aria-label="Mobile">
-    <a href="/#home"><sup>01</sup> <span class="c-cyan">//</span> home</a>
-    <a href="/#services"><sup>02</sup> <span class="c-cyan">//</span> services</a>
-    <a href="/#work"><sup>03</sup> <span class="c-cyan">//</span> work</a>
-    <a href="/#process"><sup>04</sup> <span class="c-cyan">//</span> process</a>
-    <a href="/#about"><sup>05</sup> <span class="c-cyan">//</span> about</a>
-    <a href="/#contact"><sup>06</sup> <span class="c-cyan">//</span> contact</a>
-  </nav>
-
-  <main class="cs-page" id="top">
+  <div class="nav-drawer" id="nav-drawer" data-nav-drawer role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <button type="button" class="nav-drawer__backdrop" data-drawer-close tabindex="-1" aria-label="Close menu"></button>
+    <button type="button" class="nav-dots menu-close liquid-glass" data-menu-close data-drawer-close aria-label="Close menu" style="--lg-radius: 16px">
+      <span class="lg-shine"></span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <nav class="nav-drawer__panel" data-drawer-panel>
+      <div class="nav-drawer__links">
+        <a href="/#home" data-drawer-link><sup>I</sup> <span class="c-cyan">//</span> home</a>
+        <a href="/#services" data-drawer-link><sup>II</sup> <span class="c-cyan">//</span> services</a>
+        <a href="/#work" data-drawer-link><sup>III</sup> <span class="c-cyan">//</span> work</a>
+        <a href="/#process" data-drawer-link><sup>IV</sup> <span class="c-cyan">//</span> process</a>
+        <a href="/#about" data-drawer-link><sup>V</sup> <span class="c-cyan">//</span> about</a>
+        <a href="/#contact" data-drawer-link><sup>VI</sup> <span class="c-cyan">//</span> contact</a>
+      </div>
+      <div class="nav-drawer__divider" aria-hidden="true"></div>
+      <div class="nav-drawer__foot">
+        <span class="nav-drawer__avail liquid-glass liquid-glass--green mono">
+          <span class="lg-shine"></span>
+          <span class="avail-dot" aria-hidden="true"></span>
+          Available for projects
+        </span>
+        <a class="nav-drawer__hire liquid-glass liquid-glass--cyan" href="/#contact" data-drawer-link>
+          <span class="lg-shine"></span>
+          Hire me <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+<main class="cs-page" id="top">
     <div class="cs-wrap">
       <nav class="cs-breadcrumb mono" aria-label="Breadcrumb">
         <a href="/#work">Work</a>
@@ -96,7 +123,24 @@
 
       <figure class="cs-visual liquid-glass liquid-glass--card cs-reveal" data-accent="web">
         <span class="lg-shine"></span>
-        <img src="/assets/images/project-9.png" alt="Arrival — Campaign Site" width="1200" height="750" decoding="async" />
+        <div class="cs-art-svg" aria-hidden="true">
+      <svg viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="360" height="220" rx="12" fill="#071525"/>
+                  <rect x="12" y="12" width="336" height="196" rx="10" fill="rgba(11,31,56,0.92)" stroke="rgba(34,211,238,0.35)"/>
+                  <rect x="12" y="12" width="336" height="26" rx="10" fill="rgba(34,211,238,0.1)"/>
+                  <circle cx="28" cy="25" r="3.5" fill="#f472b6"/><circle cx="40" cy="25" r="3.5" fill="#fb923c"/><circle cx="52" cy="25" r="3.5" fill="#34d399"/>
+                  <text x="70" y="29" fill="#7dd3fc" font-size="9" font-family="monospace">arrival.site / campaign</text>
+                  <rect x="40" y="54" width="280" height="100" rx="10" fill="rgba(34,211,238,0.08)" stroke="rgba(34,211,238,0.35)"/>
+                  <rect x="56" y="72" width="120" height="10" rx="3" fill="rgba(224,242,254,0.55)"/>
+                  <rect x="56" y="92" width="180" height="8" rx="2" fill="rgba(148,163,184,0.35)"/>
+                  <rect x="56" y="108" width="88" height="24" rx="12" fill="#22d3ee"/>
+                  <text x="74" y="124" fill="#071525" font-size="9" font-family="monospace" font-weight="700">LAUNCH</text>
+                  <rect x="160" y="164" width="40" height="28" rx="14" fill="none" stroke="#22d3ee" stroke-width="2"/>
+                  <circle cx="180" cy="174" r="3" fill="#22d3ee"/>
+                  <path d="M180 186 L180 198" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+                  <text x="212" y="184" fill="#67e8f9" font-size="9" font-family="monospace">scroll</text>
+                </svg>
+    </div>
       </figure>
 
       <section class="cs-overview cs-reveal" data-draft="true">
@@ -285,11 +329,7 @@
       </nav>
     </div>
     <div class="footer-bar">
-      <p class="mono footer-copy">
-        <span class="footer-copy-brand">© 2026 AZAdemy Studio</span>
-        <span class="footer-copy-sep" aria-hidden="true">·</span>
-        <span class="footer-oma">ONE MAN ARMY</span>
-      </p>
+      <p class="footer-copy">© 2026 AZAdemy Studio</p>
       <a class="footer-top-chip liquid-glass" href="#top" data-footer-top>
         <span class="lg-shine"></span>Back to top ↑
       </a>

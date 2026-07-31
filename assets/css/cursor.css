@@ -211,20 +211,71 @@ html.has-custom-cursor [contenteditable="true"] {
   }
 }
 
-/* Hero glow trail */
-.c-cursor-trail {
+/* Foam bubble trail — under header (100), under custom cursor (10000) */
+.c-bubbles {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 99;
   pointer-events: none;
-  z-index: 9990;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  overflow: hidden;
+  contain: layout style size;
 }
 
-.c-cursor-trail.is-on {
-  opacity: 1;
+.c-bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  box-sizing: border-box;
+}
+
+/* Liquid-glass micro-bubble: highlight → tinted rim → transparent */
+.c-bubble--cyan {
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(56, 189, 248, 0.35) 42%,
+    rgba(56, 189, 248, 0.08) 68%,
+    transparent 78%
+  );
+  box-shadow: inset 0 0 0 1px rgba(186, 230, 253, 0.45);
+}
+
+.c-bubble--green {
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(52, 211, 153, 0.38) 42%,
+    rgba(52, 211, 153, 0.08) 68%,
+    transparent 78%
+  );
+  box-shadow: inset 0 0 0 1px rgba(167, 243, 208, 0.45);
+}
+
+.c-bubble--violet {
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(167, 139, 250, 0.38) 42%,
+    rgba(167, 139, 250, 0.08) 68%,
+    transparent 78%
+  );
+  box-shadow: inset 0 0 0 1px rgba(221, 214, 254, 0.45);
+}
+
+.c-bubble--orange {
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(251, 146, 60, 0.38) 42%,
+    rgba(251, 146, 60, 0.08) 68%,
+    transparent 78%
+  );
+  box-shadow: inset 0 0 0 1px rgba(254, 215, 170, 0.45);
 }
 
 /* Magnetic targets — transform applied inline by cursor.js */
@@ -237,10 +288,47 @@ html.has-custom-cursor .c-magnetic.is-pulled {
   transition: transform 0.1s ease-out;
 }
 
-/* Reduced motion: hide lagging ring & trail */
+/* Reduced motion: hide lagging ring & foam bubbles */
 html.has-custom-cursor.is-reduced-cursor .c-cursor__ring,
 html.has-custom-cursor.is-reduced-cursor .c-cursor__label,
 html.has-custom-cursor.is-reduced-cursor .c-cursor__ripple,
-html.has-custom-cursor.is-reduced-cursor .c-cursor-trail {
+html.has-custom-cursor.is-reduced-cursor .c-bubbles {
   display: none !important;
+}
+
+/* Touch / coarse pointers — no custom cursor, restore native cursor */
+@media (hover: none), (pointer: coarse) {
+  .c-cursor,
+  .c-cursor__dot,
+  .c-cursor__ring,
+  .c-cursor__label,
+  .c-cursor__ripple,
+  .c-bubbles,
+  .c-bubble {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor [role="button"],
+  html.has-custom-cursor label,
+  html.has-custom-cursor .proj,
+  html.has-custom-cursor .f-btn,
+  html.has-custom-cursor .nav-hire,
+  html.has-custom-cursor summary,
+  html.has-custom-cursor .mini-3d.is-interactive-3d canvas {
+    cursor: auto !important;
+  }
+
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor select,
+  html.has-custom-cursor [contenteditable="true"] {
+    cursor: text !important;
+  }
 }

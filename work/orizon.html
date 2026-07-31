@@ -61,20 +61,47 @@
       <span class="lg-shine"></span><span class="avail-dot" aria-hidden="true"></span> Available for projects
     </span>
     <a class="nav-hire liquid-glass liquid-glass--cyan" href="/#contact"><span class="lg-shine"></span>Hire me <span aria-hidden="true">→</span></a>
-    <button class="nav-burger" type="button" data-burger aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-      <span></span><span></span><span></span>
+    <button class="nav-dots liquid-glass" type="button" data-burger data-nav-dots aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer" style="--lg-radius: 16px">
+      <span class="lg-shine"></span>
+      <span class="nav-dots__scene" aria-hidden="true">
+        <span class="nav-dots__dot" data-dot="0"></span>
+        <span class="nav-dots__dot" data-dot="1"></span>
+        <span class="nav-dots__dot" data-dot="2"></span>
+      </span>
     </button>
   </header>
-  <nav class="nav-drawer" id="nav-drawer" data-nav-drawer aria-label="Mobile">
-    <a href="/#home"><sup>01</sup> <span class="c-cyan">//</span> home</a>
-    <a href="/#services"><sup>02</sup> <span class="c-cyan">//</span> services</a>
-    <a href="/#work"><sup>03</sup> <span class="c-cyan">//</span> work</a>
-    <a href="/#process"><sup>04</sup> <span class="c-cyan">//</span> process</a>
-    <a href="/#about"><sup>05</sup> <span class="c-cyan">//</span> about</a>
-    <a href="/#contact"><sup>06</sup> <span class="c-cyan">//</span> contact</a>
-  </nav>
-
-  <main class="cs-page" id="top">
+  <div class="nav-drawer" id="nav-drawer" data-nav-drawer role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <button type="button" class="nav-drawer__backdrop" data-drawer-close tabindex="-1" aria-label="Close menu"></button>
+    <button type="button" class="nav-dots menu-close liquid-glass" data-menu-close data-drawer-close aria-label="Close menu" style="--lg-radius: 16px">
+      <span class="lg-shine"></span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <nav class="nav-drawer__panel" data-drawer-panel>
+      <div class="nav-drawer__links">
+        <a href="/#home" data-drawer-link><sup>I</sup> <span class="c-cyan">//</span> home</a>
+        <a href="/#services" data-drawer-link><sup>II</sup> <span class="c-cyan">//</span> services</a>
+        <a href="/#work" data-drawer-link><sup>III</sup> <span class="c-cyan">//</span> work</a>
+        <a href="/#process" data-drawer-link><sup>IV</sup> <span class="c-cyan">//</span> process</a>
+        <a href="/#about" data-drawer-link><sup>V</sup> <span class="c-cyan">//</span> about</a>
+        <a href="/#contact" data-drawer-link><sup>VI</sup> <span class="c-cyan">//</span> contact</a>
+      </div>
+      <div class="nav-drawer__divider" aria-hidden="true"></div>
+      <div class="nav-drawer__foot">
+        <span class="nav-drawer__avail liquid-glass liquid-glass--green mono">
+          <span class="lg-shine"></span>
+          <span class="avail-dot" aria-hidden="true"></span>
+          Available for projects
+        </span>
+        <a class="nav-drawer__hire liquid-glass liquid-glass--cyan" href="/#contact" data-drawer-link>
+          <span class="lg-shine"></span>
+          Hire me <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+<main class="cs-page" id="top">
     <div class="cs-wrap">
       <nav class="cs-breadcrumb mono" aria-label="Breadcrumb">
         <a href="/#work">Work</a>
@@ -96,7 +123,28 @@
 
       <figure class="cs-visual liquid-glass liquid-glass--card cs-reveal" data-accent="web">
         <span class="lg-shine"></span>
-        <img src="/assets/images/project-2.png" alt="Orizon — Travel Platform" width="1200" height="750" decoding="async" />
+        <div class="cs-art-svg" aria-hidden="true">
+      <svg viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="360" height="220" rx="12" fill="#071525"/>
+                  <rect x="12" y="12" width="336" height="196" rx="10" fill="rgba(11,31,56,0.92)" stroke="rgba(34,211,238,0.35)"/>
+                  <rect x="12" y="12" width="336" height="26" rx="10" fill="rgba(34,211,238,0.1)"/>
+                  <circle cx="28" cy="25" r="3.5" fill="#f472b6"/><circle cx="40" cy="25" r="3.5" fill="#fb923c"/><circle cx="52" cy="25" r="3.5" fill="#34d399"/>
+                  <text x="70" y="29" fill="#7dd3fc" font-size="9" font-family="monospace">orizon.app / travel</text>
+                  <circle cx="78" cy="118" r="28" fill="rgba(34,211,238,0.12)" stroke="#22d3ee" stroke-width="2"/>
+                  <path d="M78 98 C68 98 60 106 60 116 C60 132 78 148 78 148 C78 148 96 132 96 116 C96 106 88 98 78 98Z" fill="#22d3ee" opacity="0.85"/>
+                  <circle cx="78" cy="114" r="6" fill="#071525"/>
+                  <rect x="128" y="58" width="196" height="120" rx="10" fill="rgba(7,21,37,0.8)" stroke="rgba(34,211,238,0.35)"/>
+                  <text x="142" y="82" fill="#94a3b8" font-size="8" font-family="monospace">BOOKING</text>
+                  <text x="142" y="104" fill="#e0f2fe" font-size="14" font-family="system-ui,sans-serif" font-weight="700">Tokyo → Seoul</text>
+                  <text x="142" y="124" fill="#67e8f9" font-size="11" font-family="monospace">12–18 Apr</text>
+                  <rect x="142" y="138" width="52" height="22" rx="11" fill="rgba(34,211,238,0.18)" stroke="rgba(34,211,238,0.45)"/>
+                  <text x="152" y="153" fill="#a5f3fc" font-size="9" font-family="monospace">$428</text>
+                  <rect x="202" y="138" width="52" height="22" rx="11" fill="rgba(167,139,250,0.16)" stroke="rgba(167,139,250,0.4)"/>
+                  <text x="214" y="153" fill="#ddd6fe" font-size="9" font-family="monospace">Biz</text>
+                  <rect x="262" y="138" width="46" height="22" rx="11" fill="rgba(52,211,153,0.14)" stroke="rgba(52,211,153,0.4)"/>
+                  <text x="272" y="153" fill="#bbf7d0" font-size="9" font-family="monospace">OK</text>
+                </svg>
+    </div>
       </figure>
 
       <section class="cs-overview cs-reveal" data-draft="true">
@@ -285,11 +333,7 @@
       </nav>
     </div>
     <div class="footer-bar">
-      <p class="mono footer-copy">
-        <span class="footer-copy-brand">© 2026 AZAdemy Studio</span>
-        <span class="footer-copy-sep" aria-hidden="true">·</span>
-        <span class="footer-oma">ONE MAN ARMY</span>
-      </p>
+      <p class="footer-copy">© 2026 AZAdemy Studio</p>
       <a class="footer-top-chip liquid-glass" href="#top" data-footer-top>
         <span class="lg-shine"></span>Back to top ↑
       </a>

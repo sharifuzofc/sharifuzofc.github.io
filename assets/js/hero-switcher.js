@@ -169,9 +169,31 @@
     placePill(activeSeg(), false);
   }
 
+  /** Suppress the synthetic click that follows a pointerdown activation */
+  let pointerArmedUntil = 0;
+
   segs.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      setActive(btn.dataset.discipline, { fromClick: true, animate: true });
+    /* Instant tactile response — move on press, not release */
+    btn.addEventListener("pointerdown", (e) => {
+      if (e.button != null && e.button !== 0) return;
+      const id = btn.dataset.discipline;
+      if (!id) return;
+      pointerArmedUntil = Date.now() + 450;
+      if (id !== active) {
+        setActive(id, { fromClick: true, animate: !reduceMotion });
+      }
+      btn.focus({ preventScroll: true });
+    });
+
+    /* Keyboard / assistive click only (pointer path already handled above) */
+    btn.addEventListener("click", (e) => {
+      if (Date.now() < pointerArmedUntil) {
+        e.preventDefault();
+        return;
+      }
+      const id = btn.dataset.discipline;
+      if (!id || id === active) return;
+      setActive(id, { fromClick: true, animate: !reduceMotion });
       btn.focus({ preventScroll: true });
     });
 
@@ -193,7 +215,7 @@
       e.preventDefault();
       const target = segs.find((s) => s.dataset.discipline === ORDER[next]);
       if (!target) return;
-      setActive(ORDER[next], { fromClick: true, animate: true });
+      setActive(ORDER[next], { fromClick: true, animate: !reduceMotion });
       target.focus({ preventScroll: true });
     });
   });

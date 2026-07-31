@@ -1,6 +1,6 @@
 "use strict";
 
-/* ============ NAV (drawer + Liquid Glass scroll + macOS pill) ============ */
+/* ============ NAV (3D CSS-dot menu + Liquid Glass scroll + macOS pill) ============ */
 (function initNav() {
   const nav = document.querySelector("[data-nav]");
   const burger = document.querySelector("[data-burger]");
@@ -12,20 +12,107 @@
     : [];
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const PILL_BASE = 100;
+  let menuOpen = false;
+  let openTimer = 0;
+
+  const closeBtn = drawer?.querySelector("[data-menu-close]");
+
+  const focusables = () => {
+    if (!drawer) return [];
+    return [
+      ...drawer.querySelectorAll(
+        'a[href], button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])'
+      ),
+    ].filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+  };
+
+  const setOpen = (open) => {
+    if (!burger || !drawer) return;
+    if (open === menuOpen) return;
+    menuOpen = open;
+
+    clearTimeout(openTimer);
+    burger.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", "Menu");
+    document.documentElement.classList.toggle("menu-open", open);
+
+    if (open) {
+      drawer.hidden = false;
+      // force reflow so open transition plays
+      void drawer.offsetWidth;
+      drawer.classList.add("is-open");
+      if (!reduceMotion) {
+        burger.classList.add("is-opening");
+        openTimer = window.setTimeout(() => burger.classList.remove("is-opening"), 380);
+      }
+      window.setTimeout(() => {
+        const target = closeBtn || focusables()[0];
+        target?.focus({ preventScroll: true, focusVisible: false });
+      }, reduceMotion ? 0 : 80);
+    } else {
+      drawer.classList.remove("is-open");
+      burger.classList.remove("is-opening");
+      const hide = () => {
+        if (!menuOpen) drawer.hidden = true;
+      };
+      if (reduceMotion) hide();
+      else openTimer = window.setTimeout(hide, 380);
+      burger.focus({ preventScroll: true });
+    }
+  };
 
   if (burger && drawer) {
-    const setOpen = (open) => {
-      drawer.classList.toggle("is-open", open);
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    };
-    burger.addEventListener("click", () => setOpen(!drawer.classList.contains("is-open")));
-    drawer.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => setOpen(false))
-    );
-    addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setOpen(false);
+    let pressTimer = 0;
+    burger.addEventListener("click", () => {
+      const willOpen = !menuOpen;
+      if (reduceMotion) {
+        setOpen(willOpen);
+        return;
+      }
+      clearTimeout(pressTimer);
+      burger.classList.add("is-pressing");
+      if (willOpen) burger.classList.add("is-rim-flash");
+      pressTimer = window.setTimeout(() => {
+        burger.classList.remove("is-pressing");
+        setOpen(willOpen);
+        if (willOpen) {
+          window.setTimeout(() => burger.classList.remove("is-rim-flash"), 400);
+        }
+      }, 90);
     });
+    drawer.querySelectorAll("[data-drawer-close]").forEach((el) => {
+      el.addEventListener("click", () => setOpen(false));
+    });
+    drawer.querySelectorAll("[data-drawer-link]").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+    addEventListener("keydown", (e) => {
+      if (!menuOpen) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+    // Close if resized up to desktop
+    const mq = matchMedia("(min-width: 900px)");
+    const onBp = () => {
+      if (mq.matches) setOpen(false);
+    };
+    mq.addEventListener?.("change", onBp);
   }
 
   if (!nav) return;
@@ -90,9 +177,15 @@
     })
     .filter(Boolean);
 
+  const navOffset = () => {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue("--nav-h");
+    const h = parseFloat(raw);
+    return (Number.isFinite(h) ? h : 104) + 16;
+  };
+
   const syncSpy = () => {
     if (!sections.length) return;
-    const marker = window.scrollY + 120;
+    const marker = window.scrollY + navOffset();
     let current = sections[0];
     for (const item of sections) {
       if (item.el.offsetTop <= marker) current = item;
@@ -292,10 +385,72 @@ if (heroName) {
     const suffix = el.dataset.suffix || "";
     if (raw === "inf") {
       el.textContent = "∞";
+      el.classList.add("is-ready");
       el.closest(".stat")?.classList.add("is-ready");
     } else {
       el.textContent = String(Number(raw) || 0) + suffix;
     }
+  }
+
+  // Settle hero entrance animations — clears transform so glass tiles scroll with the hero
+  document.querySelectorAll(".hero-identity, .hero-cta, .hero-stats").forEach((el) => {
+    const settle = () => el.classList.add("is-in");
+    if (reduceMotion) {
+      settle();
+      return;
+    }
+    el.addEventListener("animationend", settle, { once: true });
+    // Fallback if animation already finished before listener attached
+    window.setTimeout(settle, 2400);
+  });
+
+  // Hero stats: count-up after CTA cascade (or static if reduced-motion)
+  const heroCountEls = [...document.querySelectorAll("[data-hero-stats] [data-count]")];
+  const COUNT_DUR = 1500;
+  const COUNT_STAGGER = 150;
+  // After intro reveal: CTA cascade delay is 1.05s; strip follows at 1.15s
+  const COUNT_AFTER_CTA_MS = 1150;
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+  function runHeroCount(el, delay) {
+    const raw = el.dataset.count;
+    const suffix = el.dataset.suffix || "";
+
+    if (raw === "inf") {
+      window.setTimeout(() => {
+        el.textContent = "∞";
+        el.classList.add("is-ready");
+      }, delay);
+      return;
+    }
+
+    const target = Number(raw) || 0;
+    window.setTimeout(() => {
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min(1, (now - start) / COUNT_DUR);
+        el.textContent = String(Math.round(target * easeOut(p))) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  function startHeroCounts() {
+    if (!heroCountEls.length) return;
+    if (reduceMotion) {
+      heroCountEls.forEach(finalizeStat);
+      return;
+    }
+    heroCountEls.forEach((el, i) => runHeroCount(el, COUNT_AFTER_CTA_MS + i * COUNT_STAGGER));
+  }
+
+  function scheduleHeroCounts() {
+    if (document.documentElement.classList.contains("intro-done")) {
+      startHeroCounts();
+      return;
+    }
+    document.addEventListener("intro:done", startHeroCounts, { once: true });
   }
 
   if (reduceMotion) {
@@ -313,71 +468,11 @@ if (heroName) {
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
     animated.forEach((el) => revealObserver.observe(el));
-
-    // Stats: count-up once when the row enters view (staggered)
-    const statsRow = document.querySelector(".stats-row");
-    const countEls = [...document.querySelectorAll(".stats-row [data-count]")];
-    const DUR = 1500;
-    const STAGGER = 150;
-    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-
-    function runCount(el, delay) {
-      const raw = el.dataset.count;
-      const suffix = el.dataset.suffix || "";
-      const card = el.closest(".stat");
-
-      if (raw === "inf") {
-        window.setTimeout(() => {
-          el.textContent = "∞";
-          card?.classList.add("is-ready");
-        }, delay);
-        return;
-      }
-
-      const target = Number(raw) || 0;
-      window.setTimeout(() => {
-        const start = performance.now();
-        const step = (now) => {
-          const p = Math.min(1, (now - start) / DUR);
-          el.textContent = String(Math.round(target * easeOut(p))) + suffix;
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      }, delay);
-    }
-
-    if (statsRow && countEls.length) {
-      const countObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            countEls.forEach((el, i) => runCount(el, i * STAGGER));
-            countObserver.disconnect();
-          });
-        },
-        { threshold: 0.35 }
-      );
-      countObserver.observe(statsRow);
-    }
+    scheduleHeroCounts();
   }
-
-  // Cursor-follow radial wash inside each stat card
-  document.querySelectorAll(".stats-row .stat").forEach((card) => {
-    card.addEventListener(
-      "pointermove",
-      (e) => {
-        const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / Math.max(r.width, 1)) * 100;
-        const y = ((e.clientY - r.top) / Math.max(r.height, 1)) * 100;
-        card.style.setProperty("--stat-mx", x.toFixed(2) + "%");
-        card.style.setProperty("--stat-my", y.toFixed(2) + "%");
-      },
-      { passive: true }
-    );
-  });
 })();
 
-/* ============ PROJECT FILTER + CARD REVEAL ============ */
+/* ============ PROJECT FILTER + CARD REVEAL + MOBILE LOAD-MORE ============ */
 (function initProjectGrid() {
   const filterBar = document.querySelector("[data-filter-bar]");
   const grid = document.querySelector("[data-projects]");
@@ -387,9 +482,18 @@ if (heroName) {
   const projects = [...grid.querySelectorAll(".proj")];
   const track = filterBar.querySelector(".filter-track");
   const ink = filterBar.querySelector("[data-filter-ink]");
+  const moreWrap = document.querySelector("[data-work-more]");
+  const moreBtn = document.querySelector("[data-work-more-btn]");
+  const moreCount = document.querySelector("[data-work-more-count]");
+  const moreDone = document.querySelector("[data-work-more-done]");
+  const moreTotalEls = document.querySelectorAll("[data-work-more-total]");
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mqMobile = matchMedia("(max-width: 767px)");
+  const PAGE = 3;
   let busy = false;
   let entered = false;
+  let activeFilter = "all";
+  let visibleCount = PAGE;
 
   function moveInk() {
     if (!ink || !track) return;
@@ -401,9 +505,17 @@ if (heroName) {
     ink.style.transform = `translateX(${ar.left - tr.left}px)`;
   }
 
+  function matchedProjects() {
+    return projects.filter((p) => activeFilter === "all" || p.dataset.cat === activeFilter);
+  }
+
   function setHighlight() {
     projects.forEach((p) => p.classList.remove("is-highlight"));
-    const first = projects.find((p) => !p.classList.contains("is-filtered"));
+    const first = projects.find(
+      (p) =>
+        !p.classList.contains("is-filtered") &&
+        !p.classList.contains("is-page-hidden")
+    );
     if (first) first.classList.add("is-highlight");
   }
 
@@ -450,9 +562,75 @@ if (heroName) {
     });
   }
 
+  function updateMoreUI(total, shown) {
+    if (!moreWrap) return;
+    if (!mqMobile.matches || total <= PAGE) {
+      moreWrap.hidden = true;
+      return;
+    }
+    moreWrap.hidden = false;
+    moreTotalEls.forEach((el) => {
+      el.textContent = String(total);
+    });
+    const done = shown >= total;
+    if (moreBtn) moreBtn.hidden = done;
+    if (moreDone) moreDone.hidden = !done;
+    if (moreCount) {
+      moreCount.textContent = `${Math.min(shown, total)} / ${total}`;
+    }
+  }
+
+  /** Mobile: paginate matched cards; desktop: show all matched */
+  function applyPagination({ animateNew = null } = {}) {
+    const matched = matchedProjects();
+    const total = matched.length;
+    const mobile = mqMobile.matches;
+    const limit = mobile ? Math.min(visibleCount, total) : total;
+
+    projects.forEach((p) => {
+      const match = matched.includes(p);
+      p.classList.toggle("is-filtered", !match);
+      if (!match) {
+        p.classList.remove("is-page-hidden", "is-exiting");
+        return;
+      }
+      const idx = matched.indexOf(p);
+      const show = idx < limit;
+      p.classList.toggle("is-page-hidden", mobile && !show);
+      if (show) p.classList.remove("is-exiting");
+    });
+
+    if (animateNew && animateNew.length) staggerIn(animateNew);
+    else {
+      matched.slice(0, limit).forEach((p) => {
+        if (entered || reduceMotion) p.classList.add("is-in");
+      });
+    }
+
+    setHighlight();
+    updateMoreUI(total, limit);
+  }
+
   function applyFilter(f) {
     if (busy) return;
-    const nextShow = projects.filter((p) => f === "all" || p.dataset.cat === f);
+    activeFilter = f || "all";
+    visibleCount = PAGE;
+
+    if (mqMobile.matches) {
+      // Reset to first page for this category — no FLIP jank needed
+      projects.forEach((p) => {
+        p.classList.remove("is-exiting", "is-page-hidden");
+        p.classList.remove("is-in");
+      });
+      applyPagination();
+      const shown = matchedProjects().slice(0, Math.min(visibleCount, matchedProjects().length));
+      staggerIn(shown);
+      entered = true;
+      moveInk();
+      return;
+    }
+
+    const nextShow = matchedProjects();
     const nextHide = projects.filter((p) => !nextShow.includes(p));
     const currentlyShown = projects.filter((p) => !p.classList.contains("is-filtered"));
     const willHide = currentlyShown.filter((p) => nextHide.includes(p));
@@ -463,33 +641,34 @@ if (heroName) {
       projects.forEach((p) => {
         const show = nextShow.includes(p);
         p.classList.toggle("is-filtered", !show);
+        p.classList.toggle("is-page-hidden", false);
         p.classList.toggle("is-in", show);
         p.classList.remove("is-exiting");
       });
       setHighlight();
+      updateMoreUI(nextShow.length, nextShow.length);
       moveInk();
       return;
     }
 
     busy = true;
     const playFlip = flip(stay);
-
     willHide.forEach((p) => p.classList.add("is-exiting"));
 
     window.setTimeout(() => {
       willHide.forEach((p) => {
         p.classList.add("is-filtered");
-        p.classList.remove("is-in", "is-exiting");
+        p.classList.remove("is-in", "is-exiting", "is-page-hidden");
       });
       willShow.forEach((p) => {
-        p.classList.remove("is-filtered");
+        p.classList.remove("is-filtered", "is-page-hidden");
         p.classList.remove("is-in");
       });
       setHighlight();
       if (playFlip) playFlip();
       staggerIn(willShow.length ? willShow : nextShow.filter((p) => !p.classList.contains("is-in")));
-      // Ensure stay cards remain visible
       stay.forEach((p) => p.classList.add("is-in"));
+      updateMoreUI(nextShow.length, nextShow.length);
       busy = false;
       moveInk();
     }, willHide.length ? 280 : 40);
@@ -505,8 +684,25 @@ if (heroName) {
     });
   });
 
-  // Initial highlight + ink
-  setHighlight();
+  if (moreBtn) {
+    moreBtn.addEventListener("click", () => {
+      if (!mqMobile.matches || busy) return;
+      const matched = matchedProjects();
+      const prev = visibleCount;
+      visibleCount = Math.min(prev + PAGE, matched.length);
+      const newlyShown = matched.slice(prev, visibleCount);
+      newlyShown.forEach((p) => {
+        p.classList.remove("is-page-hidden", "is-filtered");
+        p.classList.remove("is-in");
+      });
+      staggerIn(newlyShown);
+      updateMoreUI(matched.length, visibleCount);
+      setHighlight();
+    });
+  }
+
+  // Initial highlight + ink + mobile page
+  applyPagination();
   let inkRaf = 0;
   const syncInk = () => {
     if (inkRaf) return;
@@ -517,11 +713,22 @@ if (heroName) {
   };
   syncInk();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncInk);
-  addEventListener("resize", syncInk, { passive: true });
+  addEventListener("resize", () => {
+    syncInk();
+    // Crossing the mobile breakpoint: re-apply pagination without resetting filter
+    if (!mqMobile.matches) {
+      visibleCount = matchedProjects().length || PAGE;
+    } else if (visibleCount < PAGE) {
+      visibleCount = PAGE;
+    }
+    applyPagination();
+  }, { passive: true });
 
-  // Scroll-in stagger for project cards (once)
+  // Scroll-in stagger for currently visible cards (once)
   if (reduceMotion) {
-    projects.forEach((p) => p.classList.add("is-in"));
+    projects
+      .filter((p) => !p.classList.contains("is-filtered") && !p.classList.contains("is-page-hidden"))
+      .forEach((p) => p.classList.add("is-in"));
     entered = true;
     return;
   }
@@ -531,7 +738,11 @@ if (heroName) {
       entries.forEach((entry) => {
         if (!entry.isIntersecting || entered) return;
         entered = true;
-        const visible = projects.filter((p) => !p.classList.contains("is-filtered"));
+        const visible = projects.filter(
+          (p) =>
+            !p.classList.contains("is-filtered") &&
+            !p.classList.contains("is-page-hidden")
+        );
         staggerIn(visible);
         io.disconnect();
       });

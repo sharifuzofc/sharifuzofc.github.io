@@ -11,7 +11,7 @@ const ROOT = resolve(__dirname, "..");
 const OUT = resolve(ROOT, "work");
 
 const ACCENT = {
-  web: { badge: "Web Dev", class: "badge-web", accent: "cyan", css: "web" },
+  web: { badge: "Web App", class: "badge-web", accent: "cyan", css: "web" },
   sqa: { badge: "SQA", class: "badge-sqa", accent: "green", css: "sqa" },
   design: { badge: "Design", class: "badge-design", accent: "violet", css: "design" },
   video: { badge: "Video", class: "badge-video", accent: "orange", css: "video" },
@@ -33,10 +33,10 @@ const CASES = [
     tools: ["React", "Tailwind", "REST API", "JavaScript", "Git"],
     useSvg: "finance",
     process: [
-      { n: "01", t: "Scope & IA", d: "Mapped dashboard flows, auth edges, and mobile breakpoints before pixels." },
-      { n: "02", t: "UI Build", d: "Shipped componentized React views with a performance-first Tailwind layout." },
-      { n: "03", t: "API Wire-up", d: "Integrated REST endpoints for balances, transfers, and live chart data." },
-      { n: "04", t: "Polish & Ship", d: "Lighthouse pass, cross-browser QA, then production deploy." },
+      { n: "I", t: "Scope & IA", d: "Mapped dashboard flows, auth edges, and mobile breakpoints before pixels." },
+      { n: "II", t: "UI Build", d: "Shipped componentized React views with a performance-first Tailwind layout." },
+      { n: "III", t: "API Wire-up", d: "Integrated REST endpoints for balances, transfers, and live chart data." },
+      { n: "IV", t: "Polish & Ship", d: "Lighthouse pass, cross-browser QA, then production deploy." },
     ],
     brief: "A fintech product needed a clear, mobile-ready dashboard that stayed fast under real API load — not a slide-deck mock.",
     myRole: "End-to-end web build: UI architecture, REST integration, responsive polish, and pre-launch performance QA.",
@@ -68,10 +68,10 @@ const CASES = [
     useSvg: "pulse",
     process: [
       // EDIT-ME: replace process steps with the real delivery narrative
-      { n: "01", t: "Roles & Metrics", d: "Mapped viewer vs admin permissions and the KPI set that had to stay live." },
-      { n: "02", t: "Chart System", d: "Built Chart.js views with a shared dark-glass visual language for donut, bars, and tiles." },
-      { n: "03", t: "Live Data", d: "Wired REST polling/streams so role-gated panels refresh without full reloads." },
-      { n: "04", t: "Handoff QA", d: "Performance pass, empty/error states, and responsive checks before launch." },
+      { n: "I", t: "Roles & Metrics", d: "Mapped viewer vs admin permissions and the KPI set that had to stay live." },
+      { n: "II", t: "Chart System", d: "Built Chart.js views with a shared dark-glass visual language for donut, bars, and tiles." },
+      { n: "III", t: "Live Data", d: "Wired REST polling/streams so role-gated panels refresh without full reloads." },
+      { n: "IV", t: "Handoff QA", d: "Performance pass, empty/error states, and responsive checks before launch." },
     ],
     brief: "<!-- EDIT-ME: replace with the real product brief -->",
     myRole: "Built the analytics UI end-to-end — chart composition, role-based views, and REST-backed live panels.",
@@ -102,10 +102,10 @@ const CASES = [
     tools: ["React", "JavaScript", "REST API"],
     image: "/assets/images/project-2.png",
     process: [
-      { n: "01", t: "Flow Map", d: "Defined search → results → booking → confirmation paths." },
-      { n: "02", t: "UI System", d: "Built responsive React screens with analytics widgets." },
-      { n: "03", t: "Data Views", d: "Wired REST-backed charts and booking state." },
-      { n: "04", t: "QA Pass", d: "Device smoke + empty/error states before handoff." },
+      { n: "I", t: "Flow Map", d: "Defined search → results → booking → confirmation paths." },
+      { n: "II", t: "UI System", d: "Built responsive React screens with analytics widgets." },
+      { n: "III", t: "Data Views", d: "Wired REST-backed charts and booking state." },
+      { n: "IV", t: "QA Pass", d: "Device smoke + empty/error states before handoff." },
     ],
     brief: "<!-- EDIT-ME: replace with the real product brief -->",
     myRole: "Built the booking UI and live analytics surfaces, then validated flows before handoff.",
@@ -136,10 +136,10 @@ const CASES = [
     tools: ["Photoshop", "Illustrator", "Figma"],
     image: "/assets/images/project-3.jpg",
     process: [
-      { n: "01", t: "Discovery", d: "Positioning, audience cues, and competitive visual audit." },
-      { n: "02", t: "Concept", d: "Logo directions and mood frames until one system won." },
-      { n: "03", t: "System", d: "Color, type, and component rules for web + social." },
-      { n: "04", t: "Delivery", d: "Export-ready kits and usage notes for handoff." },
+      { n: "I", t: "Discovery", d: "Positioning, audience cues, and competitive visual audit." },
+      { n: "II", t: "Concept", d: "Logo directions and mood frames until one system won." },
+      { n: "III", t: "System", d: "Color, type, and component rules for web + social." },
+      { n: "IV", t: "Delivery", d: "Export-ready kits and usage notes for handoff." },
     ],
     brief: "<!-- EDIT-ME: replace with the real brand brief -->",
     myRole: "Owned identity direction through delivery — logo, palette, type, and web-ready visual system.",
@@ -169,10 +169,10 @@ const CASES = [
     tools: ["Cypress", "Selenium", "JIRA", "Postman", "TestRail"],
     image: "/assets/images/project-4.png",
     process: [
-      { n: "01", t: "Test Plan", d: "Risk-based scope: auth, matchmaking edges, payments-adjacent flows." },
-      { n: "02", t: "Cases", d: "Wrote executable cases covering happy path + failure modes." },
-      { n: "03", t: "Automation", d: "Cypress regression suite for the highest-churn paths." },
-      { n: "04", t: "Report", d: "JIRA defects with repro steps; pass-rate summary for stakeholders." },
+      { n: "I", t: "Test Plan", d: "Risk-based scope: auth, matchmaking edges, payments-adjacent flows." },
+      { n: "II", t: "Cases", d: "Wrote executable cases covering happy path + failure modes." },
+      { n: "III", t: "Automation", d: "Cypress regression suite for the highest-churn paths." },
+      { n: "IV", t: "Report", d: "JIRA defects with repro steps; pass-rate summary for stakeholders." },
     ],
     brief: "<!-- EDIT-ME: replace with the real QA engagement brief -->",
     myRole: "Owned manual + automation coverage — plan, cases, Cypress suite, and defect reporting in JIRA.",
@@ -207,10 +207,10 @@ const CASES = [
     tools: ["Figma", "Illustrator", "Brand"],
     image: "/assets/images/project-5.png",
     process: [
-      { n: "01", t: "Position", d: "Clarified product story and launch channel mix." },
-      { n: "02", t: "Identity", d: "Wordmark, marks, and lockup rules." },
-      { n: "03", t: "Launch Kit", d: "Packaging/social/web assets from one system." },
-      { n: "04", t: "Handoff", d: "Figma library + export specs." },
+      { n: "I", t: "Position", d: "Clarified product story and launch channel mix." },
+      { n: "II", t: "Identity", d: "Wordmark, marks, and lockup rules." },
+      { n: "III", t: "Launch Kit", d: "Packaging/social/web assets from one system." },
+      { n: "IV", t: "Handoff", d: "Figma library + export specs." },
     ],
     brief: "<!-- EDIT-ME: replace with the real product branding brief -->",
     myRole: "Designed the product brand system and launch kit assets end-to-end in Figma + Illustrator.",
@@ -240,10 +240,10 @@ const CASES = [
     tools: ["Premiere Pro", "After Effects", "Photoshop"],
     image: "/assets/images/project-6.png",
     process: [
-      { n: "01", t: "Script / Hook", d: "Locked the first-3-seconds retention cut." },
-      { n: "02", t: "Edit", d: "Paced A-roll/B-roll with caption rhythm." },
-      { n: "03", t: "Grade & Motion", d: "Color pass + AE lower-thirds / transitions." },
-      { n: "04", t: "Deliver", d: "Export packs for Reels and 4K masters." },
+      { n: "I", t: "Script / Hook", d: "Locked the first-3-seconds retention cut." },
+      { n: "II", t: "Edit", d: "Paced A-roll/B-roll with caption rhythm." },
+      { n: "III", t: "Grade & Motion", d: "Color pass + AE lower-thirds / transitions." },
+      { n: "IV", t: "Deliver", d: "Export packs for Reels and 4K masters." },
     ],
     brief: "<!-- EDIT-ME: replace with the real campaign brief -->",
     myRole: "Edited campaign motion creatives — hooks, captions, grade, and multi-format delivery.",
@@ -273,10 +273,10 @@ const CASES = [
     tools: ["JavaScript", "CSS3", "SEO"],
     image: "/assets/images/project-7.png",
     process: [
-      { n: "01", t: "IA", d: "Prioritized core SaaS loops over decorative chrome." },
-      { n: "02", t: "Layout", d: "Performance-first CSS with lean JS interactions." },
-      { n: "03", t: "SEO Base", d: "Semantic structure and meta foundations." },
-      { n: "04", t: "Ship Check", d: "Lighthouse + responsive QA before release." },
+      { n: "I", t: "IA", d: "Prioritized core SaaS loops over decorative chrome." },
+      { n: "II", t: "Layout", d: "Performance-first CSS with lean JS interactions." },
+      { n: "III", t: "SEO Base", d: "Semantic structure and meta foundations." },
+      { n: "IV", t: "Ship Check", d: "Lighthouse + responsive QA before release." },
     ],
     brief: "<!-- EDIT-ME: replace with the real SaaS brief -->",
     myRole: "Built the SaaS UI shell with a performance-first layout and SEO-ready structure.",
@@ -307,10 +307,10 @@ const CASES = [
     tools: ["Postman", "JMeter", "TestRail"],
     image: "/assets/images/project-8.jpg",
     process: [
-      { n: "01", t: "Contract Map", d: "Catalogued endpoints, auth, and expected status codes." },
-      { n: "02", t: "Collections", d: "Postman suites for CRUD + negative paths." },
-      { n: "03", t: "Load Spot", d: "JMeter smoke on critical task APIs." },
-      { n: "04", t: "Traceability", d: "TestRail cases linked to defects and results." },
+      { n: "I", t: "Contract Map", d: "Catalogued endpoints, auth, and expected status codes." },
+      { n: "II", t: "Collections", d: "Postman suites for CRUD + negative paths." },
+      { n: "III", t: "Load Spot", d: "JMeter smoke on critical task APIs." },
+      { n: "IV", t: "Traceability", d: "TestRail cases linked to defects and results." },
     ],
     brief: "<!-- EDIT-ME: replace with the real API testing brief -->",
     myRole: "Designed and executed API validation — Postman flows, JMeter smoke, TestRail traceability.",
@@ -345,10 +345,10 @@ const CASES = [
     tools: ["JavaScript", "CSS3", "Performance"],
     image: "/assets/images/project-9.png",
     process: [
-      { n: "01", t: "Storyboard", d: "Section narrative mapped to scroll beats." },
-      { n: "02", t: "Build", d: "Semantic HTML + CSS motion with JS scroll cues." },
-      { n: "03", t: "Perf Guard", d: "Reduced paint cost; prefers-reduced-motion fallback." },
-      { n: "04", t: "Launch QA", d: "Device pass + Lighthouse check." },
+      { n: "I", t: "Storyboard", d: "Section narrative mapped to scroll beats." },
+      { n: "II", t: "Build", d: "Semantic HTML + CSS motion with JS scroll cues." },
+      { n: "III", t: "Perf Guard", d: "Reduced paint cost; prefers-reduced-motion fallback." },
+      { n: "IV", t: "Launch QA", d: "Device pass + Lighthouse check." },
     ],
     brief: "<!-- EDIT-ME: replace with the real campaign site brief -->",
     myRole: "Coded the campaign experience — scroll-driven motion, responsive layout, and performance guardrails.",
@@ -379,10 +379,10 @@ const CASES = [
     tools: ["Selenium", "TestRail", "JIRA"],
     image: "/assets/images/project-4.png",
     process: [
-      { n: "01", t: "Risk Matrix", d: "Cart → payment → confirmation as P0 paths." },
-      { n: "02", t: "Cases", d: "Device matrix smoke + edge coupons/shipping." },
-      { n: "03", t: "Automation", d: "Selenium scripts for repeatable checkout." },
-      { n: "04", t: "Report", d: "TestRail runs + JIRA bugs with screenshots." },
+      { n: "I", t: "Risk Matrix", d: "Cart → payment → confirmation as P0 paths." },
+      { n: "II", t: "Cases", d: "Device matrix smoke + edge coupons/shipping." },
+      { n: "III", t: "Automation", d: "Selenium scripts for repeatable checkout." },
+      { n: "IV", t: "Report", d: "TestRail runs + JIRA bugs with screenshots." },
     ],
     brief: "<!-- EDIT-ME: replace with the real checkout QA brief -->",
     myRole: "Ran end-to-end checkout smoke across devices — Selenium automation, TestRail, JIRA defects.",
@@ -417,10 +417,10 @@ const CASES = [
     tools: ["Photoshop", "Figma", "Illustrator"],
     image: "/assets/images/project-5.png",
     process: [
-      { n: "01", t: "Channel Map", d: "Formats for feed, stories, and thumbnails." },
-      { n: "02", t: "System", d: "Grid, type, and accent rules that survive crop." },
-      { n: "03", t: "Templates", d: "Editable Figma + Photoshop masters." },
-      { n: "04", t: "Launch Pack", d: "Export set ready for first posting week." },
+      { n: "I", t: "Channel Map", d: "Formats for feed, stories, and thumbnails." },
+      { n: "II", t: "System", d: "Grid, type, and accent rules that survive crop." },
+      { n: "III", t: "Templates", d: "Editable Figma + Photoshop masters." },
+      { n: "IV", t: "Launch Pack", d: "Export set ready for first posting week." },
     ],
     brief: "<!-- EDIT-ME: replace with the real social kit brief -->",
     myRole: "Designed the social brand kit and thumbnail system — templates, type, and export-ready assets.",
@@ -606,45 +606,70 @@ function proofBlock(c) {
 function navHtml() {
   return `<header class="nav" data-nav>
     <div class="nav-glass liquid-glass liquid-glass--bar" aria-hidden="true"><span class="lg-shine"></span></div>
-    <a href="/#home" class="nav-logo" data-nav-logo aria-label="Sharifuz Zaman — web developer, SQA engineer, graphics designer, video editor">
-      <span class="nav-logo-avatar" aria-hidden="true">
-        <span class="nav-logo-ring" data-logo-ring></span>
-        <img src="/assets/profile.jpg" alt="" width="38" height="38" decoding="async" />
-      </span>
-      <span class="nav-logo-copy">
-        <span class="nav-logo-name">SharifuzZaman<span class="nav-logo-cursor">_</span></span>
-        <span class="nav-logo-role" data-logo-role aria-hidden="true">
-          <span class="nav-logo-role-stage" data-logo-role-stage></span>
-          <span class="nav-logo-playhead" data-logo-playhead hidden></span>
+        <a href="/#home" class="srf-mark" data-srf-mark aria-label="SRF — Sharifuz Zaman, home">
+      <span class="srf-mark__stage" data-srf-stage>
+        <span class="srf-mark__chip liquid-glass" data-srf-chip>
+          <span class="lg-shine"></span>
+          <span class="srf-mark__text" aria-hidden="true">
+            <span class="srf-mark__letters" data-srf-letters>SRF</span>
+            <span class="srf-mark__caret" data-srf-caret hidden>▮</span>
+          </span>
         </span>
-        <span class="nav-logo-role-static" data-logo-role-static hidden>web · sqa · design · video</span>
       </span>
     </a>
     <nav class="nav-desktop" aria-label="Primary" data-nav-desktop>
       <span class="nav-pill liquid-glass" data-nav-pill aria-hidden="true"><span class="lg-shine"></span></span>
-      <a href="/#home" data-nav-link data-section="home"><sup>01</sup> <span class="c-cyan">//</span> home</a>
-      <a href="/#services" data-nav-link data-section="services"><sup>02</sup> <span class="c-cyan">//</span> services</a>
-      <a href="/#work" data-nav-link data-section="work" class="is-active"><sup>03</sup> <span class="c-cyan">//</span> work</a>
-      <a href="/#process" data-nav-link data-section="process"><sup>04</sup> <span class="c-cyan">//</span> process</a>
-      <a href="/#about" data-nav-link data-section="about"><sup>05</sup> <span class="c-cyan">//</span> about</a>
-      <a href="/#contact" data-nav-link data-section="contact"><sup>06</sup> <span class="c-cyan">//</span> contact</a>
+      <a href="/#home" data-nav-link data-section="home"><sup>I</sup> <span class="c-cyan">//</span> home</a>
+      <a href="/#services" data-nav-link data-section="services"><sup>II</sup> <span class="c-cyan">//</span> services</a>
+      <a href="/#work" data-nav-link data-section="work" class="is-active"><sup>III</sup> <span class="c-cyan">//</span> work</a>
+      <a href="/#process" data-nav-link data-section="process"><sup>IV</sup> <span class="c-cyan">//</span> process</a>
+      <a href="/#about" data-nav-link data-section="about"><sup>V</sup> <span class="c-cyan">//</span> about</a>
+      <a href="/#contact" data-nav-link data-section="contact"><sup>VI</sup> <span class="c-cyan">//</span> contact</a>
     </nav>
     <span class="nav-avail liquid-glass liquid-glass--green mono" aria-label="Availability status">
       <span class="lg-shine"></span><span class="avail-dot" aria-hidden="true"></span> Available for projects
     </span>
     <a class="nav-hire liquid-glass liquid-glass--cyan" href="/#contact"><span class="lg-shine"></span>Hire me <span aria-hidden="true">→</span></a>
-    <button class="nav-burger" type="button" data-burger aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-      <span></span><span></span><span></span>
+    <button class="nav-dots liquid-glass" type="button" data-burger data-nav-dots aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer" style="--lg-radius: 16px">
+      <span class="lg-shine"></span>
+      <span class="nav-dots__scene" aria-hidden="true">
+        <span class="nav-dots__dot" data-dot="0"></span>
+        <span class="nav-dots__dot" data-dot="1"></span>
+        <span class="nav-dots__dot" data-dot="2"></span>
+      </span>
     </button>
   </header>
-  <nav class="nav-drawer" id="nav-drawer" data-nav-drawer aria-label="Mobile">
-    <a href="/#home"><sup>01</sup> <span class="c-cyan">//</span> home</a>
-    <a href="/#services"><sup>02</sup> <span class="c-cyan">//</span> services</a>
-    <a href="/#work"><sup>03</sup> <span class="c-cyan">//</span> work</a>
-    <a href="/#process"><sup>04</sup> <span class="c-cyan">//</span> process</a>
-    <a href="/#about"><sup>05</sup> <span class="c-cyan">//</span> about</a>
-    <a href="/#contact"><sup>06</sup> <span class="c-cyan">//</span> contact</a>
-  </nav>`;
+  <div class="nav-drawer" id="nav-drawer" data-nav-drawer role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <button type="button" class="nav-drawer__backdrop" data-drawer-close tabindex="-1" aria-label="Close menu"></button>
+    <button type="button" class="nav-dots menu-close liquid-glass" data-menu-close data-drawer-close aria-label="Close menu" style="--lg-radius: 16px">
+      <span class="lg-shine"></span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <nav class="nav-drawer__panel" data-drawer-panel>
+      <div class="nav-drawer__links">
+        <a href="/#home" data-drawer-link><sup>I</sup> <span class="c-cyan">//</span> home</a>
+        <a href="/#services" data-drawer-link><sup>II</sup> <span class="c-cyan">//</span> services</a>
+        <a href="/#work" data-drawer-link><sup>III</sup> <span class="c-cyan">//</span> work</a>
+        <a href="/#process" data-drawer-link><sup>IV</sup> <span class="c-cyan">//</span> process</a>
+        <a href="/#about" data-drawer-link><sup>V</sup> <span class="c-cyan">//</span> about</a>
+        <a href="/#contact" data-drawer-link><sup>VI</sup> <span class="c-cyan">//</span> contact</a>
+      </div>
+      <div class="nav-drawer__divider" aria-hidden="true"></div>
+      <div class="nav-drawer__foot">
+        <span class="nav-drawer__avail liquid-glass liquid-glass--green mono">
+          <span class="lg-shine"></span>
+          <span class="avail-dot" aria-hidden="true"></span>
+          Available for projects
+        </span>
+        <a class="nav-drawer__hire liquid-glass liquid-glass--cyan" href="/#contact" data-drawer-link>
+          <span class="lg-shine"></span>
+          Hire me <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </nav>
+  </div>`;
 }
 
 function footerHtml() {
@@ -691,7 +716,7 @@ function footerHtml() {
           <ul>
             <li>
               <a class="footer-link footer-svc" href="/#svc-web">
-                <span class="footer-svc-dot" style="--svc:#22d3ee" aria-hidden="true"></span>Web-App Dev
+                <span class="footer-svc-dot" style="--svc:#22d3ee" aria-hidden="true"></span>Web-App
               </a>
             </li>
             <li>
@@ -729,11 +754,7 @@ function footerHtml() {
       </nav>
     </div>
     <div class="footer-bar">
-      <p class="mono footer-copy">
-        <span class="footer-copy-brand">© 2026 AZAdemy Studio</span>
-        <span class="footer-copy-sep" aria-hidden="true">·</span>
-        <span class="footer-oma">ONE MAN ARMY</span>
-      </p>
+      <p class="footer-copy">© 2026 AZAdemy Studio</p>
       <p class="mono footer-terminal" aria-label="Built, tested, branded, and edited by one person">
         $ built · tested · branded · edited — by one person<span class="nav-logo-cursor" aria-hidden="true">_</span>
       </p>
