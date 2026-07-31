@@ -1,0 +1,25 @@
+{
+  "name": "Sharifuz Zaman — Web App Developer & SQA Engineer",
+  "short_name": "Sharifuz Zaman",
+  "description": "Portfolio of Sharifuz Zaman — web apps, SQA, design, and video editing from Dhaka, Bangladesh.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071525",
+  "theme_color": "#071525",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/logo.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ]
+}

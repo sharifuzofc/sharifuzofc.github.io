@@ -63,6 +63,22 @@
   max-width: 40rem;
 }
 
+.cs-seo-lead {
+  margin: 0 0 0.85rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+.cs-updated {
+  margin: 0 0 1.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0.75;
+}
+
 .cs-meta {
   list-style: none;
   display: flex;
@@ -387,6 +403,38 @@ p.cs-draft-copy[data-draft="true"],
 
 .cs-result {
   margin-bottom: 2.5rem;
+}
+
+.cs-related {
+  margin-bottom: 2.5rem;
+}
+
+.cs-related h2 {
+  font-family: "Clash Display", var(--head), sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: var(--ice);
+  margin: 0 0 0.85rem;
+}
+
+.cs-related-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cs-related-list a {
+  color: var(--sky-soft);
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.cs-related-list a:hover {
+  color: var(--sky);
+  text-decoration: underline;
 }
 
 .cs-result-copy {

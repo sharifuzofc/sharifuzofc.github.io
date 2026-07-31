@@ -1,0 +1,5 @@
+/* Critical pre-module styles for boot intro (CSP: no inline <style>) */
+html.awaiting-intro,
+html.awaiting-intro body {
+  overflow: hidden !important;
+}

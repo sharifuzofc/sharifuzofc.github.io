@@ -337,37 +337,70 @@
 
     const wrap = document.createElement("div");
     wrap.className = "scroll-xp-win" + (reduceMotion ? " is-reduced" : "");
-    wrap.innerHTML = `
-      <div class="scroll-xp-win-backdrop" data-scroll-xp-win-dismiss></div>
-      <div
-        class="scroll-xp-win-card liquid-glass liquid-glass--card"
-        role="status"
-        aria-live="polite"
-        aria-labelledby="scroll-xp-win-title"
-        tabindex="-1"
-        data-scroll-xp-win-card
-      >
-        <span class="lg-shine"></span>
-        <button type="button" class="scroll-xp-win-close" data-scroll-xp-win-dismiss aria-label="Close celebration">✕</button>
-        <div class="scroll-xp-win-trophy" aria-hidden="true">🏆</div>
-        <h2 class="scroll-xp-win-title" id="scroll-xp-win-title">Journey complete!</h2>
-        <p class="scroll-xp-win-copy">You explored 100% — that's the whole story.</p>
-        <p class="scroll-xp-win-level mono">Level: Pro · 4 🏅</p>
-        <a class="scroll-xp-win-cta liquid-glass liquid-glass--cyan" href="#contact" data-scroll-xp-win-cta>
-          <span class="lg-shine"></span>
-          Start a project <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    `;
+
+    const backdrop = document.createElement("div");
+    backdrop.className = "scroll-xp-win-backdrop";
+    backdrop.setAttribute("data-scroll-xp-win-dismiss", "");
+
+    const card = document.createElement("div");
+    card.className = "scroll-xp-win-card liquid-glass liquid-glass--card";
+    card.setAttribute("role", "status");
+    card.setAttribute("aria-live", "polite");
+    card.setAttribute("aria-labelledby", "scroll-xp-win-title");
+    card.tabIndex = -1;
+    card.setAttribute("data-scroll-xp-win-card", "");
+
+    const shine = document.createElement("span");
+    shine.className = "lg-shine";
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "scroll-xp-win-close";
+    closeBtn.setAttribute("data-scroll-xp-win-dismiss", "");
+    closeBtn.setAttribute("aria-label", "Close celebration");
+    closeBtn.textContent = "✕";
+
+    const trophy = document.createElement("div");
+    trophy.className = "scroll-xp-win-trophy";
+    trophy.setAttribute("aria-hidden", "true");
+    trophy.textContent = "🏆";
+
+    const title = document.createElement("h2");
+    title.className = "scroll-xp-win-title";
+    title.id = "scroll-xp-win-title";
+    title.textContent = "Journey complete!";
+
+    const copy = document.createElement("p");
+    copy.className = "scroll-xp-win-copy";
+    copy.textContent = "You explored 100% — that's the whole story.";
+
+    const level = document.createElement("p");
+    level.className = "scroll-xp-win-level mono";
+    level.textContent = "Level: Pro · 4 🏅";
+
+    const cta = document.createElement("a");
+    cta.className = "scroll-xp-win-cta liquid-glass liquid-glass--cyan";
+    cta.href = "#contact";
+    cta.setAttribute("data-scroll-xp-win-cta", "");
+    const ctaShine = document.createElement("span");
+    ctaShine.className = "lg-shine";
+    cta.appendChild(ctaShine);
+    cta.appendChild(document.createTextNode("Start a project "));
+    const ctaArrow = document.createElement("span");
+    ctaArrow.setAttribute("aria-hidden", "true");
+    ctaArrow.textContent = "→";
+    cta.appendChild(ctaArrow);
+
+    card.append(shine, closeBtn, trophy, title, copy, level, cta);
+    wrap.append(backdrop, card);
     document.body.appendChild(wrap);
     cardEl = wrap;
 
     spawnConfetti();
 
-    const card = wrap.querySelector("[data-scroll-xp-win-card]");
     requestAnimationFrame(() => {
       wrap.classList.add("is-in");
-      card?.focus({ preventScroll: true });
+      card.focus({ preventScroll: true });
     });
 
     const onKey = (e) => {

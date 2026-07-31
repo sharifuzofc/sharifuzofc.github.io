@@ -1,20 +1,130 @@
 /**
- * Generates all case-study HTML pages under /work/.
- * Run: node scripts/generate-cases.mjs
+ * Generates case-study HTML under /work/, plus sitemap.xml, sitemap-images.xml, llms.txt.
+ * Run: node scripts/generate-cases.mjs  (also runs before `npm run build`)
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, statSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { securityMetaHtml } from "./csp.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const OUT = resolve(ROOT, "work");
+const PUBLIC = resolve(ROOT, "public");
+const SITE = "https://sharifuzofc.github.io";
+const PERSON_ID = `${SITE}/#person`;
+const THEME = "#071525";
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
 const ACCENT = {
   web: { badge: "Web App", class: "badge-web", accent: "cyan", css: "web" },
   sqa: { badge: "SQA", class: "badge-sqa", accent: "green", css: "sqa" },
   design: { badge: "Design", class: "badge-design", accent: "violet", css: "design" },
   video: { badge: "Video", class: "badge-video", accent: "orange", css: "video" },
+};
+
+/**
+ * Unique SEO per case — primary keyword, title, description, dedicated OG image path.
+ * Never reuse a shared site-wide OG fallback.
+ * @type {Record<string, { primary: string, title: string, description: string, ogPath: string, ogAlt: string }>}
+ */
+const CASE_SEO = {
+  finance: {
+    primary: "Finance fintech web app case study",
+    title: "Finance Fintech Web App Case Study | Sharifuz Zaman",
+    description:
+      "How Sharifuz Zaman shipped a fintech web app with React, Tailwind, REST APIs, and 90+ Lighthouse — a Dhaka-based developer case study.",
+    ogPath: "/assets/images/og-finance.jpg",
+    ogAlt: "Finance fintech web app dashboard case study by Sharifuz Zaman",
+  },
+  pulse: {
+    primary: "Pulse analytics dashboard case study",
+    title: "Pulse Analytics Dashboard Case Study | Sharifuz Zaman",
+    description:
+      "Real-time analytics dashboard with Chart.js, role-based views, and live REST panels — web app case study by Sharifuz Zaman in Dhaka.",
+    ogPath: "/assets/images/og-pulse.jpg",
+    ogAlt: "Pulse analytics dashboard UI case study by Sharifuz Zaman",
+  },
+  orizon: {
+    primary: "Orizon travel booking UI case study",
+    title: "Orizon Travel Platform Case Study | Sharifuz Zaman",
+    description:
+      "Travel booking UI with live analytics views — React platform case study by freelance web developer Sharifuz Zaman, Dhaka.",
+    ogPath: "/assets/images/project-2.png",
+    ogAlt: "Orizon travel booking platform UI by Sharifuz Zaman",
+  },
+  fundo: {
+    primary: "Fundo brand identity case study",
+    title: "Fundo Brand Identity Case Study | Sharifuz Zaman",
+    description:
+      "Full brand identity and web visual system for Fundo — logo, color, type, and social kits by graphics designer Sharifuz Zaman.",
+    ogPath: "/assets/images/project-3.jpg",
+    ogAlt: "Fundo brand identity and web design by Sharifuz Zaman",
+  },
+  brawlhalla: {
+    primary: "Brawlhalla mobile app QA case study",
+    title: "Brawlhalla Mobile App QA Case Study | Sharifuz Zaman",
+    description:
+      "98% pass rate with 120+ Cypress regression cases — mobile app QA case study by SQA engineer Sharifuz Zaman, Bangladesh.",
+    ogPath: "/assets/images/project-4.png",
+    ogAlt: "Brawlhalla mobile app QA automation case study",
+  },
+  dsm: {
+    primary: "DSM product branding case study",
+    title: "DSM Product Branding Case Study | Sharifuz Zaman",
+    description:
+      "Product brand system and launch kits in Figma — branding case study by graphics designer Sharifuz Zaman from Dhaka.",
+    ogPath: "/assets/images/project-5.png",
+    ogAlt: "DSM product branding system by Sharifuz Zaman",
+  },
+  metaspark: {
+    primary: "MetaSpark video editing case study",
+    title: "MetaSpark Video Visuals Case Study | Sharifuz Zaman",
+    description:
+      "Motion creatives and campaign visuals in Premiere Pro & After Effects — video editing case study by Sharifuz Zaman.",
+    ogPath: "/assets/images/project-6.png",
+    ogAlt: "MetaSpark motion and video campaign visuals",
+  },
+  summary: {
+    primary: "Summary SaaS UI case study",
+    title: "Summary SaaS App UI Case Study | Sharifuz Zaman",
+    description:
+      "Performance-first SaaS UI with semantic structure and SEO foundations — web case study by Sharifuz Zaman, Dhaka.",
+    ogPath: "/assets/images/project-7.png",
+    ogAlt: "Summary SaaS application UI case study",
+  },
+  taskflow: {
+    primary: "TaskFlow API testing case study",
+    title: "TaskFlow API Testing Case Study | Sharifuz Zaman",
+    description:
+      "80+ API flows validated with Postman and JMeter — API QA case study by SQA engineer Sharifuz Zaman, Bangladesh.",
+    ogPath: "/assets/images/project-8.jpg",
+    ogAlt: "TaskFlow API testing with Postman and JMeter",
+  },
+  arrival: {
+    primary: "Arrival campaign site case study",
+    title: "Arrival Campaign Site Case Study | Sharifuz Zaman",
+    description:
+      "Scroll-driven campaign site with performance guardrails — frontend case study by web developer Sharifuz Zaman.",
+    ogPath: "/assets/images/project-9.png",
+    ogAlt: "Arrival scroll-driven campaign website case study",
+  },
+  shoplane: {
+    primary: "ShopLane checkout QA case study",
+    title: "ShopLane Checkout QA Case Study | Sharifuz Zaman",
+    description:
+      "96% pass rate on end-to-end checkout smoke across devices — e-commerce QA case study by Sharifuz Zaman.",
+    ogPath: "/assets/images/og-shoplane.jpg",
+    ogAlt: "ShopLane e-commerce checkout QA case study",
+  },
+  lumen: {
+    primary: "Lumen social brand kit case study",
+    title: "Lumen Social Brand Kit Case Study | Sharifuz Zaman",
+    description:
+      "Social templates and thumbnail system for launch week — brand kit case study by designer Sharifuz Zaman, Dhaka.",
+    ogPath: "/assets/images/og-lumen.jpg",
+    ogAlt: "Lumen social media brand kit and thumbnails",
+  },
 };
 
 /** @typedef {{ slug: string, short: string, title: string, cat: keyof typeof ACCENT, outcome: string, year: string, type: string, role: string, tools: string[], image?: string, useSvg?: "finance" | "pulse" | boolean, process: {n:string,t:string,d:string}[], brief: string, myRole: string, result: string, stats: {v:string,l:string}[], proof: object, draft?: boolean }} Case */
@@ -518,7 +628,26 @@ function pulseSvg() {
 function caseArt(c) {
   if (c.useSvg === "pulse") return pulseSvg();
   if (c.useSvg === "finance" || c.useSvg === true) return financeSvg();
-  return `<img src="${esc(c.image)}" alt="${esc(c.title)}" width="1200" height="750" decoding="async" />`;
+  return `<img src="${esc(c.image)}" alt="${esc(c.title)} project preview by Sharifuz Zaman" width="1200" height="750" loading="lazy" decoding="async" />`;
+}
+
+function seoFor(c) {
+  const s = CASE_SEO[c.slug];
+  if (!s) throw new Error(`Missing CASE_SEO for ${c.slug}`);
+  return s;
+}
+
+function fileLastmod(relPath) {
+  try {
+    return statSync(resolve(ROOT, relPath)).mtime.toISOString().slice(0, 10);
+  } catch {
+    return BUILD_DATE;
+  }
+}
+
+function relatedCases(c) {
+  const same = CASES.filter((x) => x.cat === c.cat && x.slug !== c.slug).slice(0, 2);
+  return same;
 }
 
 function proofBlock(c) {
@@ -630,7 +759,7 @@ function navHtml() {
       <span class="lg-shine"></span><span class="avail-dot" aria-hidden="true"></span> Available for projects
     </span>
     <a class="nav-hire liquid-glass liquid-glass--cyan" href="/#contact"><span class="lg-shine"></span>Hire me <span aria-hidden="true">→</span></a>
-    <button class="nav-dots liquid-glass" type="button" data-burger data-nav-dots aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer" style="--lg-radius: 16px">
+    <button class="nav-dots liquid-glass" type="button" data-burger data-nav-dots aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer">
       <span class="lg-shine"></span>
       <span class="nav-dots__scene" aria-hidden="true">
         <span class="nav-dots__dot" data-dot="0"></span>
@@ -641,7 +770,7 @@ function navHtml() {
   </header>
   <div class="nav-drawer" id="nav-drawer" data-nav-drawer role="dialog" aria-modal="true" aria-label="Menu" hidden>
     <button type="button" class="nav-drawer__backdrop" data-drawer-close tabindex="-1" aria-label="Close menu"></button>
-    <button type="button" class="nav-dots menu-close liquid-glass" data-menu-close data-drawer-close aria-label="Close menu" style="--lg-radius: 16px">
+    <button type="button" class="nav-dots menu-close liquid-glass" data-menu-close data-drawer-close aria-label="Close menu">
       <span class="lg-shine"></span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
         <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/>
@@ -701,51 +830,54 @@ function footerHtml() {
       </div>
       <nav class="footer-cols" aria-label="Footer">
         <div>
-          <h4 class="mono">Navigate</h4>
+          <h3 class="mono">Navigate</h3>
           <ul>
             <li><a class="footer-link" href="/#home">Home</a></li>
             <li><a class="footer-link" href="/#services">Services</a></li>
-            <li><a class="footer-link" href="/#work">Work</a></li>
+            <li><a class="footer-link" href="/#work">Selected work</a></li>
             <li><a class="footer-link" href="/#process">Process</a></li>
-            <li><a class="footer-link" href="/#about">About</a></li>
+            <li><a class="footer-link" href="/#about">About Sharifuz Zaman</a></li>
             <li><a class="footer-link" href="/#contact">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="mono">Services</h4>
+          <h3 class="mono">Services</h3>
           <ul>
             <li>
               <a class="footer-link footer-svc" href="/#svc-web">
-                <span class="footer-svc-dot" style="--svc:#22d3ee" aria-hidden="true"></span>Web-App
+                <span class="footer-svc-dot" style="--svc:#22d3ee" aria-hidden="true"></span>Web app development
               </a>
             </li>
             <li>
               <a class="footer-link footer-svc" href="/#svc-sqa">
-                <span class="footer-svc-dot" style="--svc:#34d399" aria-hidden="true"></span>SQA Engineering
+                <span class="footer-svc-dot" style="--svc:#34d399" aria-hidden="true"></span>SQA engineering
               </a>
             </li>
             <li>
               <a class="footer-link footer-svc" href="/#svc-design">
-                <span class="footer-svc-dot" style="--svc:#a78bfa" aria-hidden="true"></span>Graphics Design
+                <span class="footer-svc-dot" style="--svc:#a78bfa" aria-hidden="true"></span>Graphics design
               </a>
             </li>
             <li>
               <a class="footer-link footer-svc" href="/#svc-video">
-                <span class="footer-svc-dot" style="--svc:#fb923c" aria-hidden="true"></span>Video Editing
+                <span class="footer-svc-dot" style="--svc:#fb923c" aria-hidden="true"></span>Video editing
               </a>
             </li>
           </ul>
         </div>
         <div>
-          <h4 class="mono">Connect</h4>
+          <h3 class="mono">Connect</h3>
           <div class="footer-connect">
-            <a class="footer-social liquid-glass" href="https://github.com/sharifuzofc" target="_blank" rel="noopener">
+            <a class="footer-social liquid-glass" href="https://github.com/sharifuzofc" target="_blank" rel="noopener noreferrer">
               <span class="lg-shine"></span>GitHub
             </a>
-            <a class="footer-social liquid-glass" href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener">
+            <a class="footer-social liquid-glass" href="https://www.linkedin.com/in/sharifuzofc/" target="_blank" rel="noopener noreferrer">
+              <span class="lg-shine"></span>LinkedIn
+            </a>
+            <a class="footer-social liquid-glass" href="https://www.facebook.com/sharifuzz/" target="_blank" rel="noopener noreferrer">
               <span class="lg-shine"></span>Facebook
             </a>
-            <a class="footer-social liquid-glass" href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener">
+            <a class="footer-social liquid-glass" href="https://www.instagram.com/muhammad_sharifuz/" target="_blank" rel="noopener noreferrer">
               <span class="lg-shine"></span>Instagram
             </a>
             <a class="footer-phone mono" href="tel:+8801919729159">+880 1919-729159</a>
@@ -766,69 +898,140 @@ function footerHtml() {
   <button class="to-top liquid-glass" data-back-to-top aria-label="Back to top"><span class="lg-shine"></span>↑</button>`;
 }
 
-function renderCase(c, next) {
+function renderCase(c, next, prev) {
   const meta = ACCENT[c.cat];
-  const url = `https://sharifuzofc.github.io/work/${c.slug}.html`;
+  const seo = seoFor(c);
+  const url = `${SITE}/work/${c.slug}.html`;
+  const ogImage = `${SITE}${seo.ogPath}`;
   const art = caseArt(c);
+  const published = `${c.year}-06-01`;
+  const updated = fileLastmod(`work/${c.slug}.html`);
+  const related = relatedCases(c);
+  const schemaType = c.cat === "web" ? "SoftwareApplication" : "CreativeWork";
 
   const briefBody = c.brief.startsWith("<!--")
     ? `${c.brief}\n          <p class="cs-draft-copy"${draftAttr(c)}>Product needed a clear, shippable outcome — scoped tightly, executed end-to-end, and validated before handoff.</p>`
     : `<p>${esc(c.brief)}</p>`;
+
+  const relatedHtml =
+    related.length > 0
+      ? `<section class="cs-related cs-reveal" aria-label="Related case studies">
+        <h2>Related ${meta.badge.toLowerCase()} work</h2>
+        <ul class="cs-related-list">
+          ${related
+            .map(
+              (r) => `<li><a href="/work/${r.slug}.html">${esc(seoFor(r).primary)} — ${esc(r.short)}</a></li>`
+            )
+            .join("\n          ")}
+        </ul>
+      </section>`
+      : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${esc(c.title)} | Sharifuz Zaman</title>
-  <meta name="description" content="${esc(c.outcome)} — case study by Sharifuz Zaman." />
+${securityMetaHtml()}
+  <title>${esc(seo.title)}</title>
+  <meta name="description" content="${esc(seo.description)}" />
+  <meta name="author" content="Sharifuz Zaman" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="${THEME}" />
   <link rel="canonical" href="${url}" />
-  <meta property="og:title" content="${esc(c.title)} | Sharifuz Zaman" />
-  <meta property="og:description" content="${esc(c.outcome)}" />
+  <meta property="og:title" content="${esc(seo.title)}" />
+  <meta property="og:description" content="${esc(seo.description)}" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="${url}" />
-  <meta property="og:image" content="https://sharifuzofc.github.io/assets/images/logo.svg" />
+  <meta property="og:site_name" content="Sharifuz Zaman" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="${esc(ogImage)}" />
+  <meta property="og:image:alt" content="${esc(seo.ogAlt)}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${esc(seo.title)}" />
+  <meta name="twitter:description" content="${esc(seo.description)}" />
+  <meta name="twitter:image" content="${esc(ogImage)}" />
+  <meta name="twitter:image:alt" content="${esc(seo.ogAlt)}" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="shortcut icon" href="/assets/images/logo.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/assets/images/logo.svg" />
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" />
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Work", "item": "https://sharifuzofc.github.io/#work" },
-      { "@type": "ListItem", "position": 2, "name": "${esc(c.short)}", "item": "${url}" }
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "${PERSON_ID}",
+        "name": "Sharifuz Zaman",
+        "url": "${SITE}/",
+        "copyrightHolder": { "@id": "${PERSON_ID}" }
+      },
+      {
+        "@type": "${schemaType}",
+        "@id": "${url}#work",
+        "name": "${esc(c.title)}",
+        "headline": "${esc(seo.title)}",
+        "description": "${esc(seo.description)}",
+        "url": "${url}",
+        "image": "${esc(ogImage)}",
+        "datePublished": "${published}",
+        "dateModified": "${updated}",
+        "inLanguage": "en",
+        "keywords": "${esc([seo.primary, c.role, ...c.tools.slice(0, 4)].join(", "))}",
+        "about": "${esc(seo.primary)}",
+        "author": { "@id": "${PERSON_ID}" },
+        "copyrightHolder": { "@id": "${PERSON_ID}" },
+        "copyrightYear": 2026
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "${url}#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "${SITE}/#work" },
+          { "@type": "ListItem", "position": 3, "name": "${esc(c.short)}", "item": "${url}" }
+        ]
+      }
     ]
   }
   </script>
   <script type="module" src="/src/case-study.js"></script>
 </head>
-<body class="cs-body" data-case="${esc(c.slug)}" data-discipline="${esc(c.cat)}">
+<body class="cs-body" data-case="${esc(c.slug)}" data-discipline="${esc(c.cat)}" data-sz-origin="sharifuzofc.github.io">
   <div class="noise" aria-hidden="true"></div>
   ${navHtml()}
 
   <main class="cs-page" id="top">
     <div class="cs-wrap">
       <nav class="cs-breadcrumb mono" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
         <a href="/#work">Work</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">${esc(c.short)}</span>
       </nav>
 
+      <article>
       <header class="cs-hero cs-reveal">
         <span class="proj-badge ${meta.class} mono">${meta.badge}</span>
         <h1 class="cs-title">${esc(c.title)}</h1>
         <p class="cs-outcome">${esc(c.outcome)}</p>
+        <p class="cs-seo-lead">${esc(seo.primary)} by Sharifuz Zaman — ${esc(c.role)} using ${esc(c.tools.slice(0, 3).join(", "))}.</p>
         <ul class="cs-meta" aria-label="Project meta">
           <li class="cs-chip mono"><span>Role</span>${esc(c.role)}</li>
           <li class="cs-chip mono"><span>Tools</span>${esc(c.tools.slice(0, 3).join(" · "))}</li>
           <li class="cs-chip mono"><span>Year</span>${esc(c.year)}</li>
           <li class="cs-chip mono"><span>Type</span>${esc(c.type)}</li>
         </ul>
+        <p class="cs-updated mono">Last updated: <time datetime="${updated}">${updated}</time></p>
       </header>
 
       <figure class="cs-visual liquid-glass liquid-glass--card cs-reveal" data-accent="${meta.css}">
@@ -839,18 +1042,18 @@ function renderCase(c, next) {
       <section class="cs-overview cs-reveal"${draftAttr(c)}>
         <div class="cs-panel liquid-glass liquid-glass--tile">
           <span class="lg-shine"></span>
-          <h2>The brief</h2>
+          <h2>The problem</h2>
           ${briefBody}
         </div>
         <div class="cs-panel liquid-glass liquid-glass--tile">
           <span class="lg-shine"></span>
-          <h2>My role</h2>
+          <h2>My role as ${esc(c.role)}</h2>
           <p${draftClass(c) ? ' class="cs-draft-copy"' + draftAttr(c) : ""}>${esc(c.myRole)}</p>
         </div>
       </section>
 
       <section class="cs-process cs-reveal">
-        <h2>Process</h2>
+        <h2>Process &amp; tools</h2>
         <ol class="cs-steps">
           ${c.process
             .map(
@@ -868,7 +1071,7 @@ function renderCase(c, next) {
       ${proofBlock(c)}
 
       <section class="cs-result cs-reveal"${draftAttr(c)}>
-        <h2>Result</h2>
+        <h2>Measurable outcome</h2>
         <p class="cs-result-copy${draftClass(c)}"${c.draft ? ' data-draft="true"' : ""}>${esc(c.result)}</p>
         <ul class="cs-stat-row">
           ${c.stats
@@ -883,6 +1086,8 @@ function renderCase(c, next) {
         </ul>
       </section>
 
+      ${relatedHtml}
+
       <aside class="cs-next-banner liquid-glass liquid-glass--card cs-reveal">
         <span class="lg-shine"></span>
         <div>
@@ -890,15 +1095,17 @@ function renderCase(c, next) {
           <p class="cs-next-title">${esc(next.title)}</p>
         </div>
         <div class="cs-next-actions">
-          <a class="cs-next-link" href="/work/${next.slug}.html">View case →</a>
-          <a class="cs-all-link mono" href="/#work">← All work</a>
+          <a class="cs-next-link" href="/work/${next.slug}.html">View ${esc(next.short)} case study <span aria-hidden="true">→</span></a>
+          ${prev ? `<a class="cs-all-link mono" href="/work/${prev.slug}.html">← ${esc(prev.short)} case study</a>` : ""}
+          <a class="cs-all-link mono" href="/#work">← Back to selected work</a>
         </div>
       </aside>
 
       <p class="cs-cta-slim">
         Want results like this?
-        <a href="/#contact">Start a project <span aria-hidden="true">→</span></a>
+        <a href="/#contact">Contact Sharifuz Zaman to start a project <span aria-hidden="true">→</span></a>
       </p>
+      </article>
     </div>
   </main>
 
@@ -908,13 +1115,105 @@ function renderCase(c, next) {
 `;
 }
 
+function writeSitemap() {
+  mkdirSync(PUBLIC, { recursive: true });
+  const urls = [
+    { loc: `${SITE}/`, priority: "1.0", lastmod: fileLastmod("index.html") },
+    ...CASES.map((c) => ({
+      loc: `${SITE}/work/${c.slug}.html`,
+      priority: "0.8",
+      lastmod: fileLastmod(`work/${c.slug}.html`),
+    })),
+  ];
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (u) => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${u.lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`
+  )
+  .join("\n")}
+</urlset>
+`;
+  writeFileSync(resolve(PUBLIC, "sitemap.xml"), xml, "utf8");
+
+  const imgEntries = CASES.map((c) => {
+    const seo = seoFor(c);
+    return `  <url>
+    <loc>${SITE}/work/${c.slug}.html</loc>
+    <image:image>
+      <image:loc>${SITE}${seo.ogPath}</image:loc>
+      <image:title>${esc(c.title)}</image:title>
+      <image:caption>${esc(seo.ogAlt)}</image:caption>
+    </image:image>
+  </url>`;
+  }).join("\n");
+
+  const imgXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${imgEntries}
+</urlset>
+`;
+  writeFileSync(resolve(PUBLIC, "sitemap-images.xml"), imgXml, "utf8");
+  console.log("wrote sitemap.xml + sitemap-images.xml");
+}
+
+function writeLlmsTxt() {
+  const caseLines = CASES.map((c) => `- ${c.title}: ${SITE}/work/${c.slug}.html`).join("\n");
+  const txt = `# Sharifuz Zaman
+
+> Web App Developer, SQA Engineer, Graphics Designer, and Video Editor based in Dhaka, Bangladesh. Works with clients worldwide through AZAdemy Studio.
+
+## Who
+Sharifuz Zaman (also: sharifuzofc) delivers one accountable pipeline: build → test → design → edit.
+
+## Services
+- Web app development (React, JavaScript, REST APIs)
+- SQA engineering (Selenium, Cypress, Postman, JMeter, TestRail)
+- Graphics design (Figma, Photoshop, Illustrator, brand kits)
+- Video editing (Premiere Pro, After Effects, Reels & ads)
+
+## Key pages
+- Home / portfolio: ${SITE}/
+- Services: ${SITE}/#services
+- Selected work: ${SITE}/#work
+- Process: ${SITE}/#process
+- About: ${SITE}/#about
+- Contact: ${SITE}/#contact
+
+## Case studies
+${caseLines}
+
+## Contact
+- Email: sharifuzofc@gmail.com
+- Phone: +880 1919-729159
+- GitHub: https://github.com/sharifuzofc
+- LinkedIn: https://www.linkedin.com/in/sharifuzofc/
+- Location: Dhaka, Bangladesh · Worldwide remote
+
+## Optional
+- Sitemap: ${SITE}/sitemap.xml
+- Image sitemap: ${SITE}/sitemap-images.xml
+`;
+  writeFileSync(resolve(PUBLIC, "llms.txt"), txt, "utf8");
+  console.log("wrote llms.txt");
+}
+
 mkdirSync(OUT, { recursive: true });
 CASES.forEach((c, i) => {
   const next = CASES[(i + 1) % CASES.length];
-  const html = renderCase(c, next);
+  const prev = CASES[(i - 1 + CASES.length) % CASES.length];
+  const html = renderCase(c, next, prev);
   const path = resolve(OUT, `${c.slug}.html`);
   writeFileSync(path, html, "utf8");
   console.log("wrote", path);
 });
+writeSitemap();
+writeLlmsTxt();
 
-console.log(`\nGenerated ${CASES.length} case pages.`);
+console.log(`\nGenerated ${CASES.length} case pages + crawl assets.`);

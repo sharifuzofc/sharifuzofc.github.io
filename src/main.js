@@ -7,6 +7,9 @@ import "../assets/css/bubble-strip.css";
 import "../assets/css/scroll-xp.css";
 import "../assets/css/nav-mobile.css";
 
+/* Ownership canary — bundles comment + data-sz-canary on <html> */
+import "../assets/js/canary.js";
+
 /* Boot intro first — gates hero letter rise via .intro-done */
 import "../assets/js/boot-intro.js";
 
