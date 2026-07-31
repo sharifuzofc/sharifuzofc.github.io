@@ -3,23 +3,28 @@ import { defineConfig } from "vite";
 import { ownershipBannerPlugin } from "./scripts/ownership-banner-plugin.mjs";
 import { cspInjectPlugin } from "./scripts/csp-inject-plugin.mjs";
 
+/**
+ * Build config for https://sharifuzofc.github.io/ (user site = domain root).
+ * `base` must stay '/' — never '/repo-name/'.
+ */
 export default defineConfig({
-  // User site: https://sharifuzofc.github.io/ (domain root — not a /repo-name/ project site)
   base: "/",
   root: ".",
   publicDir: "public",
   plugins: [ownershipBannerPlugin(), cspInjectPlugin()],
   build: {
-    // Must match .github/workflows/deploy-pages.yml artifact path
+    // Published to sharifuzofc/sharifuzofc.github.io via .github/workflows/deploy.yml
     outDir: "dist",
     emptyOutDir: true,
-    // Keep /*! … */ ownership banners inside minified JS/CSS (not moved to EOF)
+    // Never ship sourcemaps to the public Pages repo (would expose original source)
+    sourcemap: false,
     minify: "esbuild",
     cssMinify: "esbuild",
     esbuild: {
+      // Keep /*! … */ ownership banners inside minified JS/CSS
       legalComments: "inline",
     },
-    // If switching to terser later: format.comments = /^!/
+    assetsDir: "assets",
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
@@ -36,6 +41,12 @@ export default defineConfig({
         arrival: resolve(__dirname, "work/arrival.html"),
         shoplane: resolve(__dirname, "work/shoplane.html"),
         lumen: resolve(__dirname, "work/lumen.html"),
+      },
+      output: {
+        // Content-hashed filenames so deploys cache-bust correctly
+        entryFileNames: "assets/[name]-[hash].js",
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
       },
     },
   },

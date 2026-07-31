@@ -1,0 +1,62 @@
+# Optional path: private source repo → public Pages repo (build output only).
+#
+# Use this workflow ONLY when this repository is the PRIVATE source
+# (e.g. sharifuzofc/portfolio) and PAGES_DEPLOY_TOKEN can write to
+# sharifuzofc/sharifuzofc.github.io.
+#
+# Do NOT enable this on sharifuzofc.github.io itself with force_orphan —
+# that would wipe the source tree from main.
+#
+# For the current public user-site repo, prefer:
+#   - .github/workflows/deploy-pages.yml  (GitHub Pages)
+#   - vercel.json                         (Vercel Git integration)
+
+name: Deploy dist to public Pages repo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-external-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    # Skip on the public Pages repo so force_orphan cannot destroy source
+    if: github.repository == 'sharifuzofc/portfolio'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate case studies + sitemaps
+        run: node scripts/generate-cases.mjs
+
+      - name: Production build
+        run: npm run build
+
+      - name: Publish dist/ to public Pages repo
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
+        with:
+          personal_token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          external_repository: sharifuzofc/sharifuzofc.github.io
+          publish_branch: main
+          publish_dir: ./dist
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_message: "deploy: portfolio build ${{ github.sha }}"

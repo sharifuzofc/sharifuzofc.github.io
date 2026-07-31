@@ -34,9 +34,9 @@
   cursor.append(dotEl, ringEl, rippleEl);
   document.body.appendChild(cursor);
 
-  const dot = cursor.querySelector(".c-cursor__dot");
-  const ring = cursor.querySelector(".c-cursor__ring");
-  const ripple = cursor.querySelector(".c-cursor__ripple");
+  const dot = dotEl;
+  const ring = ringEl;
+  const ripple = rippleEl;
 
   /* Bubble layer — under header (z:100), under cursor (z:10000) */
   const bubbleLayer = document.createElement("div");
@@ -52,7 +52,6 @@
   let clicking = false;
   let rafId = 0;
   let magneticEl = null;
-  const labelEl = cursor.querySelector(".c-cursor__label");
 
   const RING_LERP = reduceMotion ? 1 : 0.15;
 

@@ -1,4 +1,8 @@
-# Deploy Vite MPA to GitHub Pages (user site → https://sharifuzofc.github.io/)
+# Deploy Vite MPA to GitHub Pages for this user site:
+# https://sharifuzofc.github.io/
+#
+# Pages settings → Source: GitHub Actions
+
 name: Deploy to GitHub Pages
 
 on:
@@ -22,14 +26,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22
+          node-version: 20
           cache: npm
 
       - name: Install
         run: npm ci
 
       - name: Generate case studies + sitemaps
-        run: npm run cases
+        run: node scripts/generate-cases.mjs
 
       - name: Build
         run: npm run build
