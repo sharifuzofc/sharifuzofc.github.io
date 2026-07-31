@@ -1,9 +1,26 @@
-.vercel
-.env*
+# Dependencies & build
 node_modules/
 dist/
-lighthouse-report.json
-lighthouse-report*.json
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Vercel local
+.vercel
+
+# OS / editor junk
 .DS_Store
 Thumbs.db
 *.log
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Local audit outputs
+lighthouse-report.json
+lighthouse-report*.json
