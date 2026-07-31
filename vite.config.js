@@ -2,6 +2,8 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  // User site: https://sharifuzofc.github.io/ (not a /repo-name/ project site)
+  base: "/",
   root: ".",
   publicDir: "public",
   build: {

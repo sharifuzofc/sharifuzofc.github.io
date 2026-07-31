@@ -152,6 +152,11 @@
     if (completed) return;
     completed = true;
     clearTimeout(failsafeTimer);
+    try {
+      clearTimeout(window.__introFailsafe);
+    } catch (_) {
+      /* inline failsafe may be absent */
+    }
 
     try {
       sessionStorage.setItem(FLAG, "1");
@@ -285,13 +290,10 @@
     if (!completed) destroyOverlay();
   }, FAILSAFE_MS);
 
+  /* Progress is timeline-driven only — never wait on asset/font load events */
   const start = () => {
     runSequence().catch(() => destroyOverlay());
   };
 
-  if (document.fonts && document.fonts.ready) {
-    Promise.race([document.fonts.ready, sleep(350)]).then(start);
-  } else {
-    start();
-  }
+  start();
 })();

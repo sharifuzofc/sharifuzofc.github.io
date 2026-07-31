@@ -55,6 +55,26 @@
   <style>
     html.awaiting-intro, html.awaiting-intro body { overflow: hidden !important; }
   </style>
+  <!-- Failsafe OUTSIDE the loader module — unlocks even if every external script 404s -->
+  <script>
+    (function () {
+      var FAILSAFE_MS = 4000;
+      window.__introFailsafe = setTimeout(function () {
+        var root = document.documentElement;
+        var intro = document.getElementById("intro");
+        if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+        root.classList.add("intro-done");
+        root.classList.remove("awaiting-intro");
+        try {
+          document.body.style.overflow = "";
+          root.style.overflow = "";
+        } catch (e) {}
+        try {
+          sessionStorage.setItem("introSeen", "1");
+        } catch (e) {}
+      }, FAILSAFE_MS);
+    })();
+  </script>
 </head>
 
 <body>
