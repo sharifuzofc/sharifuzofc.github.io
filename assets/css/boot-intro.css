@@ -13,21 +13,35 @@
   background: #070b14;
   color: #e8eefb;
   opacity: 1;
+  transform: translate3d(0, 0, 0);
   /* Explicit: no blur / no filter — solid paint only */
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   filter: none !important;
-  transition: opacity 400ms ease;
-  will-change: opacity;
+  transition:
+    opacity 500ms cubic-bezier(0.65, 0, 0.35, 1),
+    transform 500ms cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: opacity, transform;
 }
 
-/* Exit class (on #intro): fade then JS remove() */
-#intro.intro-done {
+/* Exit: wipe up + fade */
+#intro.intro-done,
+#intro.intro-wipe {
   opacity: 0;
+  transform: translate3d(0, -12%, 0);
   pointer-events: none;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   filter: none !important;
+}
+
+#intro.intro-done .boot-intro__panel,
+#intro.intro-wipe .boot-intro__panel {
+  transform: scale(0.96);
+  opacity: 0;
+  transition:
+    transform 480ms cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 480ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 #intro *,
@@ -39,6 +53,11 @@
 
 .boot-intro__panel {
   width: min(92vw, 640px);
+  transition:
+    transform 480ms cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 480ms cubic-bezier(0.65, 0, 0.35, 1);
+  transform: scale(1);
+  opacity: 1;
 }
 
 /* Solid liquid-glass look — no backdrop-filter */
@@ -110,6 +129,8 @@
   line-height: 1.55;
   font-weight: 500;
   letter-spacing: 0.01em;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .boot-intro__line {
@@ -117,11 +138,23 @@
   white-space: pre-wrap;
   word-break: break-word;
   color: #e8eefb;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.boot-intro__line.is-in {
   opacity: 1;
-  transition: opacity 220ms ease;
+  transform: translateY(0);
 }
 
 .boot-intro__line.is-aged {
+  opacity: 0.38;
+}
+
+.boot-intro__line.is-in.is-aged {
   opacity: 0.38;
 }
 
@@ -143,6 +176,7 @@
   font-weight: 700;
   transform: scale(0);
   transform-origin: center;
+  opacity: 0;
 }
 .boot-intro__ok--cyan { color: #22d3ee; }
 .boot-intro__ok--green { color: #34d399; }
@@ -170,10 +204,12 @@
 
 .boot-intro__bar {
   height: 100%;
-  width: 0%;
+  width: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6);
-  transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .boot-intro__pct {
@@ -183,9 +219,13 @@
   letter-spacing: 0.08em;
   color: rgba(125, 211, 252, 0.75);
   text-align: left;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Gate hero letter rise until html.intro-done (set after #intro.remove()) */
+/*
+ * Gate hero letter rise until html.intro-done.
+ * Handoff: JS adds intro-done ~100ms before wipe clears — slight overlap.
+ */
 html:not(.intro-done) .hero-name .char {
   animation: none !important;
   opacity: 0;
@@ -204,13 +244,30 @@ html.intro-done .hero-name .char {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #intro { transition-duration: 180ms; }
+  #intro {
+    transition-duration: 180ms;
+    transform: none !important;
+  }
+  #intro.intro-done .boot-intro__panel,
+  #intro.intro-wipe .boot-intro__panel {
+    transform: none;
+    transition-duration: 180ms;
+  }
+  .boot-intro__line {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
   .boot-intro__ok,
   .boot-intro__caret {
     animation: none;
     transform: none;
+    opacity: 1;
   }
   .boot-intro__caret { opacity: 1; }
+  .boot-intro__term {
+    transition: none !important;
+  }
   html:not(.intro-done) .hero-name .char,
   html.intro-done .hero-name .char {
     animation: none !important;
