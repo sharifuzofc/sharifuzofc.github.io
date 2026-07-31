@@ -1,0 +1,233 @@
+/* ============================================================
+   Apple Liquid Glass — DARK mode (macOS Tahoe Control Center)
+   Smoked navy surface; white ONLY on 1px rim + text.
+   ============================================================ */
+
+:root {
+  --lg-blur: 20px;
+  --lg-saturate: 160%;
+  --lg-bg-top: rgba(20, 30, 48, 0.55);
+  --lg-bg-bottom: rgba(10, 16, 30, 0.35);
+  --lg-rim-bright: rgba(255, 255, 255, 0.55);
+  --lg-rim-mid: rgba(255, 255, 255, 0.06);
+  --lg-rim-low: rgba(255, 255, 255, 0.16);
+  --lg-shadow: 0 10px 36px rgba(0, 0, 0, 0.45);
+  --lg-tint: transparent;
+  --lg-radius: 999px;
+  --lg-text: #e8eefb;
+}
+
+.liquid-glass {
+  position: relative;
+  border-radius: var(--lg-radius);
+  color: var(--lg-text);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--lg-tint), var(--lg-tint)) padding-box,
+    linear-gradient(160deg, var(--lg-bg-top), var(--lg-bg-bottom)) padding-box,
+    linear-gradient(
+      135deg,
+      var(--lg-rim-bright),
+      var(--lg-rim-mid) 42%,
+      var(--lg-rim-low)
+    ) border-box;
+  background-clip: padding-box, padding-box, border-box;
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
+  backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    var(--lg-shadow);
+  isolation: isolate;
+}
+
+/* 1px rim — white lives here only */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--lg-rim-bright),
+    var(--lg-rim-mid) 42%,
+    var(--lg-rim-low)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Edge lensing — dark double-blur ring (no brightness wash) */
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-mask: radial-gradient(closest-side, transparent 82%, #000 96%);
+  mask: radial-gradient(closest-side, transparent 82%, #000 96%);
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 1;
+}
+
+/* Cards: dark smoked glass, no lensing */
+.liquid-glass--card {
+  --lg-radius: 22px;
+  --lg-blur: 16px;
+  --lg-bg-top: rgba(16, 26, 44, 0.62);
+  --lg-bg-bottom: rgba(8, 14, 26, 0.48);
+  --lg-rim-bright: rgba(255, 255, 255, 0.32);
+  --lg-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
+    var(--lg-shadow);
+}
+.liquid-glass--card::after {
+  content: none;
+  display: none;
+}
+
+/* Stat tiles — iOS widget / Tahoe control tiles (not capsules) */
+.liquid-glass--tile {
+  --lg-radius: 16px;
+  --lg-blur: 16px;
+  --lg-bg-top: rgba(18, 28, 46, 0.62);
+  --lg-bg-bottom: rgba(10, 16, 30, 0.42);
+  --lg-rim-bright: rgba(255, 255, 255, 0.4);
+}
+
+/* Full-width scrolled header — dark bar, no white smear */
+.liquid-glass--bar {
+  --lg-radius: 0;
+  --lg-blur: 18px;
+  --lg-bg-top: rgba(7, 14, 28, 0.78);
+  --lg-bg-bottom: rgba(5, 10, 20, 0.72);
+  --lg-rim-bright: rgba(255, 255, 255, 0.14);
+  --lg-rim-mid: rgba(255, 255, 255, 0.04);
+  --lg-rim-low: rgba(255, 255, 255, 0.08);
+  --lg-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    var(--lg-shadow);
+}
+.liquid-glass--bar::after {
+  content: none;
+  display: none;
+}
+
+.liquid-glass.nav-glass,
+.liquid-glass.liquid-glass--bar {
+  position: absolute;
+  inset: 0;
+}
+.liquid-glass.nav-pill {
+  position: absolute;
+  --lg-bg-top: rgba(22, 34, 54, 0.7);
+  --lg-bg-bottom: rgba(12, 20, 36, 0.5);
+  --lg-blur: 14px;
+}
+
+.liquid-glass--cyan {
+  --lg-tint: rgba(34, 211, 238, 0.14);
+  --lg-rim-bright: rgba(180, 240, 255, 0.55);
+  --lg-bg-top: rgba(14, 36, 48, 0.65);
+  --lg-bg-bottom: rgba(8, 22, 36, 0.45);
+  color: #e0f7ff;
+}
+
+.liquid-glass--green {
+  --lg-tint: rgba(52, 211, 153, 0.1);
+  --lg-rim-bright: rgba(180, 255, 220, 0.4);
+  --lg-bg-top: rgba(12, 36, 28, 0.6);
+  --lg-bg-bottom: rgba(8, 22, 18, 0.4);
+  color: #d1fae5;
+}
+
+.lg-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .liquid-glass .lg-shine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -60%;
+    width: 50%;
+    background: linear-gradient(
+      105deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: skewX(-18deg);
+  }
+  .liquid-glass:hover .lg-shine::before {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(340%) skewX(-18deg);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid-glass {
+    background:
+      linear-gradient(rgba(12, 18, 32, 0.92), rgba(12, 18, 32, 0.92)) padding-box,
+      linear-gradient(
+        135deg,
+        var(--lg-rim-bright),
+        var(--lg-rim-mid) 42%,
+        var(--lg-rim-low)
+      ) border-box;
+    background-clip: padding-box, border-box;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-glass {
+    background:
+      linear-gradient(rgba(10, 16, 28, 0.94), rgba(10, 16, 28, 0.94)) padding-box,
+      linear-gradient(
+        135deg,
+        var(--lg-rim-bright),
+        var(--lg-rim-mid) 42%,
+        var(--lg-rim-low)
+      ) border-box;
+    background-clip: padding-box, border-box;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .liquid-glass::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass .lg-shine::before {
+    display: none !important;
+  }
+  .nav-pill {
+    transition: none !important;
+  }
+  .avail-dot {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

@@ -1,2 +1,9 @@
 .vercel
 .env*
+node_modules/
+dist/
+lighthouse-report.json
+lighthouse-report*.json
+.DS_Store
+Thumbs.db
+*.log

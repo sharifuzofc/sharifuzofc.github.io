@@ -1,0 +1,53 @@
+/* ============================================================
+   Design tokens — site + liquid glass dark
+   Imported first in main.js / case-study.js
+   ============================================================ */
+
+:root {
+  /* Layout */
+  --nav-h: 76px;
+
+  /* Palette */
+  --bg: #071525;
+  --bg-2: #0b1f38;
+  --bg-3: #102a4a;
+  --sky: #38bdf8;
+  --sky-soft: #7dd3fc;
+  --sky-deep: #0284c7;
+  --ice: #f5fbff;
+  --muted: #c8ddf0;
+  --text: #ffffff;
+  --pink: #f472b6;
+  --orange: #fb923c;
+  --blue: #3b82f6;
+  --purple: #6366f1;
+  --violet: #818cf8;
+  --card-light: #dbeafe;
+  --line: rgba(56, 189, 248, 0.28);
+  --grid: rgba(56, 189, 248, 0.08);
+
+  /* Typography */
+  --head: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body: "Satoshi", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  /* Liquid glass — dark (re-exported from liquid-glass.css) */
+  --lg-blur: 20px;
+  --lg-saturate: 160%;
+  --lg-bg-top: rgba(20, 30, 48, 0.55);
+  --lg-bg-bottom: rgba(10, 16, 30, 0.35);
+  --lg-rim-bright: rgba(255, 255, 255, 0.55);
+  --lg-rim-mid: rgba(255, 255, 255, 0.06);
+  --lg-rim-low: rgba(255, 255, 255, 0.16);
+  --lg-shadow: 0 10px 36px rgba(0, 0, 0, 0.45);
+  --lg-tint: transparent;
+  --lg-radius: 999px;
+  --lg-text: #e8eefb;
+
+  /* Case study */
+  --cs-max: 760px;
+  --cs-gap: clamp(2rem, 4vw, 3.5rem);
+  --edit-me: rgba(200, 221, 240, 0.55);
+}
