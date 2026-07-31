@@ -1,7 +1,13 @@
 "use strict";
 
 /**
- * Hero discipline switcher — all 4 roles visible; one active pill cycles.
+ * Hero discipline switcher — sliding pill tracks the active segment.
+ *
+ * Positioning is screen-space only:
+ *   origin = pill.getBoundingClientRect() - current translate(x,y)
+ *   target = seg.getBoundingClientRect()
+ *   apply translate(target - origin) + width/height
+ * Never uses offsetLeft / hardcoded slots / cached geometry.
  */
 (function () {
   const root = document.querySelector("[data-hero-switcher]");
@@ -22,9 +28,11 @@
   let active = reduceMotion ? "sqa" : "web";
   let autoTimer = 0;
   let resumeTimer = 0;
+  let resizeTimer = 0;
   let pausedUntil = 0;
   let inView = true;
   let tabActive = !document.hidden;
+  let ready = false;
 
   function announce(id) {
     try {
@@ -39,34 +47,71 @@
     }
   }
 
+  function activeSeg() {
+    return segs.find((s) => s.dataset.discipline === active) || segs[0];
+  }
+
+  /** Read the pill's current translate from computed transform matrix. */
+  function readTranslate() {
+    const t = getComputedStyle(pill).transform;
+    if (!t || t === "none") return { x: 0, y: 0 };
+    try {
+      const m = new DOMMatrixReadOnly(t);
+      return { x: m.m41, y: m.m42 };
+    } catch (_) {
+      const match = t.match(/matrix\(([^)]+)\)/);
+      if (!match) return { x: 0, y: 0 };
+      const p = match[1].split(",").map((n) => parseFloat(n.trim()));
+      return { x: p[4] || 0, y: p[5] || 0 };
+    }
+  }
+
+  /**
+   * Bulletproof place: derive origin from the pill's own painted box minus
+   * its current translate. That cancels track border/padding, ancestor
+   * `translate` on .hero-content, and liquid-glass quirks — no guessing.
+   */
   function placePill(btn, animate) {
-    if (!btn) return;
-    const tr = track.getBoundingClientRect();
-    const br = btn.getBoundingClientRect();
-    const x = br.left - tr.left - 4;
-    const y = br.top - tr.top - 4;
-    if (!animate) {
+    if (!btn || !ready) return;
+
+    const segRect = btn.getBoundingClientRect();
+    const pillRect = pill.getBoundingClientRect();
+    const { x: tx, y: ty } = readTranslate();
+
+    /* Screen position of translate(0,0) top-left */
+    const originLeft = pillRect.left - tx;
+    const originTop = pillRect.top - ty;
+
+    /* Re-read segment in the same turn (layout may have settled) */
+    const seg = btn.getBoundingClientRect();
+    const x = seg.left - originLeft;
+    const y = seg.top - originTop;
+    const w = seg.width;
+    const h = seg.height;
+
+    if (!Number.isFinite(x) || !Number.isFinite(y) || w < 1 || h < 1) return;
+
+    if (!animate || reduceMotion) {
       const prev = pill.style.transition;
       pill.style.transition = "none";
-      track.style.setProperty("--pill-x", `${x}px`);
-      track.style.setProperty("--pill-y", `${y}px`);
-      track.style.setProperty("--pill-w", `${br.width}px`);
-      track.style.setProperty("--pill-h", `${br.height}px`);
-      // force reflow so transitionless snap sticks
+      pill.style.transform = `translate(${x}px, ${y}px)`;
+      pill.style.width = `${w}px`;
+      pill.style.height = `${h}px`;
       void pill.offsetWidth;
       pill.style.transition = prev;
       return;
     }
-    track.style.setProperty("--pill-x", `${x}px`);
-    track.style.setProperty("--pill-y", `${y}px`);
-    track.style.setProperty("--pill-w", `${br.width}px`);
-    track.style.setProperty("--pill-h", `${br.height}px`);
+
+    pill.style.transform = `translate(${x}px, ${y}px)`;
+    pill.style.width = `${w}px`;
+    pill.style.height = `${h}px`;
   }
 
   function setActive(id, { fromClick = false, animate = true } = {}) {
     if (!ORDER.includes(id)) return;
     active = id;
     track.dataset.active = id;
+    pill.dataset.discipline = id;
 
     segs.forEach((btn) => {
       const on = btn.dataset.discipline === id;
@@ -82,8 +127,8 @@
       else line.setAttribute("hidden", "");
     });
 
-    const btn = segs.find((s) => s.dataset.discipline === id);
-    placePill(btn, animate);
+    /* Fresh measure every activation — never reuse cached slots */
+    placePill(activeSeg(), animate);
     announce(id);
 
     if (fromClick) {
@@ -112,12 +157,16 @@
   function startAuto() {
     stopAuto();
     if (reduceMotion) return;
-    if (!inView || !tabActive) return;
+    if (!inView || !tabActive || !ready) return;
     if (Date.now() < pausedUntil) return;
     autoTimer = window.setInterval(() => {
       if (!inView || !tabActive || Date.now() < pausedUntil) return;
       setActive(nextId(), { animate: true });
     }, AUTO_MS);
+  }
+
+  function remeasureSnap() {
+    placePill(activeSeg(), false);
   }
 
   segs.forEach((btn) => {
@@ -149,37 +198,76 @@
     });
   });
 
-  const onResize = () => placePill(
-    segs.find((s) => s.dataset.discipline === active),
-    false
+  addEventListener(
+    "resize",
+    () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(remeasureSnap, 80);
+    },
+    { passive: true }
   );
-  addEventListener("resize", onResize, { passive: true });
+
+  if (typeof ResizeObserver !== "undefined") {
+    const ro = new ResizeObserver(() => {
+      remeasureSnap();
+    });
+    ro.observe(track);
+    segs.forEach((s) => ro.observe(s));
+  }
+
+  /* Hero identity fadeUp ends — transform clears; re-snap */
+  root.addEventListener("animationend", (e) => {
+    if (e.target === root || e.target === track) remeasureSnap();
+  });
 
   document.addEventListener("visibilitychange", () => {
     tabActive = !document.hidden;
-    if (tabActive) startAuto();
-    else stopAuto();
+    if (tabActive) {
+      remeasureSnap();
+      startAuto();
+    } else {
+      stopAuto();
+    }
   });
 
   if (heroEl && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       ([entry]) => {
         inView = entry.isIntersecting;
-        if (inView) startAuto();
-        else stopAuto();
+        if (inView) {
+          remeasureSnap();
+          startAuto();
+        } else {
+          stopAuto();
+        }
       },
       { threshold: 0.2 }
     );
     io.observe(heroEl);
   }
 
-  // Initial state
-  setActive(active, { animate: false });
-  requestAnimationFrame(() => {
-    placePill(
-      segs.find((s) => s.dataset.discipline === active),
-      false
-    );
-    startAuto();
-  });
+  function boot() {
+    ready = true;
+    setActive(active, { animate: false });
+    requestAnimationFrame(() => {
+      remeasureSnap();
+      requestAnimationFrame(() => {
+        remeasureSnap();
+        startAuto();
+      });
+    });
+  }
+
+  /* Fonts can change mono metrics after first paint — always re-snap */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      boot();
+      /* Late webfont swap */
+      if (document.fonts.addEventListener) {
+        document.fonts.addEventListener("loadingdone", () => remeasureSnap());
+      }
+    }).catch(boot);
+  } else {
+    boot();
+  }
 })();

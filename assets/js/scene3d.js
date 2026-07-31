@@ -476,10 +476,11 @@
       web.userData.accentMeshes = [chart];
     }
     attachMotion(web, {
-      x: -2.05,
-      y: 1.2,
-      z: -0.4,
-      depth: 0.55,
+      /* Outer third — ~14%x / 24%y @ 1440 (center clear of mesh radius) */
+      x: -4.55,
+      y: 2.15,
+      z: -0.9,
+      depth: 0.38,
       bobFreq: 0.48,
       bobAmp: 0.1,
       phase: 0.4,
@@ -532,10 +533,11 @@
       sqa.userData.accentMeshes = [check];
     }
     attachMotion(sqa, {
-      x: 2.1,
-      y: 1.15,
-      z: 0.95,
-      depth: 0.88,
+      /* Outer third — ~86%x / 22%y @ 1440 */
+      x: 4.55,
+      y: 2.25,
+      z: -0.4,
+      depth: 0.38,
       bobFreq: 0.42,
       bobAmp: 0.1,
       phase: 1.7,
@@ -591,10 +593,11 @@
       design.userData.accentMeshes = [ballB];
     }
     attachMotion(design, {
-      x: -2.05,
-      y: -0.95,
-      z: 0.35,
-      depth: 0.72,
+      /* Outer third — ~11%x / 76%y — mesh clears switcher/stats */
+      x: -4.85,
+      y: -1.7,
+      z: -0.8,
+      depth: 0.36,
       bobFreq: 0.5,
       bobAmp: 0.1,
       phase: 2.9,
@@ -656,10 +659,11 @@
       video.userData.accentMeshes = [playEmit];
     }
     attachMotion(video, {
-      x: 2.05,
-      y: -0.95,
-      z: 0.9,
-      depth: 0.85,
+      /* Outer third — ~89%x / 73%y @ 1440 */
+      x: 4.85,
+      y: -1.5,
+      z: -0.35,
+      depth: 0.36,
       bobFreq: 0.46,
       bobAmp: 0.1,
       phase: 4.1,
@@ -668,14 +672,14 @@
       extra: { spinAmpZ: 15 * DEG, spinFreqZ: 0.45, faceLock: true },
     });
 
-    /* Far depth glass planes — faint siblings for depth layering */
+    /* Far depth glass planes — corner accents, not stacked under mains */
     const bgCubes = [];
     const bgPlane = new THREE.PlaneGeometry(0.75, 0.5);
     [
-      { x: -3.5, y: 0.3, z: -2.2, s: 1.1, rx: 0.4, ry: 0.6 },
-      { x: 3.4, y: -0.4, z: -2.35, s: 0.9, rx: -0.3, ry: -0.5 },
-      { x: 1.5, y: 2.1, z: -2.1, s: 0.7, rx: 0.5, ry: 0.2 },
-      { x: -1.8, y: -2.0, z: -2.25, s: 0.85, rx: -0.2, ry: 0.7 },
+      { x: -4.2, y: 2.65, z: -2.95, s: 1.05, rx: 0.4, ry: 0.6 },
+      { x: 4.25, y: -2.55, z: -3.05, s: 0.9, rx: -0.3, ry: -0.5 },
+      { x: 4.05, y: 2.7, z: -3.15, s: 0.7, rx: 0.5, ry: 0.2 },
+      { x: -4.1, y: -2.7, z: -2.9, s: 0.85, rx: -0.2, ry: 0.7 },
     ].forEach((p, i) => {
       const mesh = new THREE.Mesh(bgPlane, matGlassBg.clone());
       mesh.scale.setScalar(p.s);
@@ -805,27 +809,91 @@
     addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
+    const clock = new THREE.Clock();
+    const _unprojOrigin = new THREE.Vector3();
+    const _unprojTarget = new THREE.Vector3();
+    const _exclTL = new THREE.Vector3();
+    const _exclBR = new THREE.Vector3();
+    const exclusion = { minX: -1.7, maxX: 1.7, minY: -2.0, maxY: 2.0, ready: false };
+    const contentEl = heroEl.querySelector(".hero-content");
+
+    /* Screen → world on a constant-z plane (for no-spawn box) */
+    function clientToWorldAtZ(clientX, clientY, worldZ, out) {
+      const rect = canvas.getBoundingClientRect();
+      const ndcX = ((clientX - rect.left) / Math.max(rect.width, 1)) * 2 - 1;
+      const ndcY = -((clientY - rect.top) / Math.max(rect.height, 1)) * 2 + 1;
+      camera.getWorldPosition(_unprojOrigin);
+      _unprojTarget.set(ndcX, ndcY, 0.5).unproject(camera);
+      _unprojTarget.sub(_unprojOrigin);
+      if (Math.abs(_unprojTarget.z) < 1e-5) {
+        out.set(0, 0, worldZ);
+        return out;
+      }
+      const tHit = (worldZ - _unprojOrigin.z) / _unprojTarget.z;
+      out.set(
+        _unprojOrigin.x + _unprojTarget.x * tHit,
+        _unprojOrigin.y + _unprojTarget.y * tHit,
+        worldZ
+      );
+      return out;
+    }
+
+    function updateExclusionBox() {
+      if (!contentEl) {
+        exclusion.ready = false;
+        return;
+      }
+      const r = contentEl.getBoundingClientRect();
+      const margin = 60;
+      const zPlane = -0.5;
+      clientToWorldAtZ(r.left - margin, r.top - margin, zPlane, _exclTL);
+      clientToWorldAtZ(r.right + margin, r.bottom + margin, zPlane, _exclBR);
+      exclusion.minX = Math.min(_exclTL.x, _exclBR.x);
+      exclusion.maxX = Math.max(_exclTL.x, _exclBR.x);
+      exclusion.minY = Math.min(_exclTL.y, _exclBR.y);
+      exclusion.maxY = Math.max(_exclTL.y, _exclBR.y);
+      exclusion.ready = true;
+    }
+
     function onResize() {
       sizeTo(renderer, camera, canvas);
+      updateExclusionBox();
     }
     onResize();
     addEventListener("resize", onResize);
-
-    const clock = new THREE.Clock();
 
     function placeObject(m, t, fade, ease) {
       const u = m.userData;
       const depthMul = 0.35 + u.depthFactor * 0.65;
       const bob = Math.sin(t * u.bobFreq + u.phase) * u.bobAmp * depthMul;
 
-      const px = -pointerSmooth.x * 0.35 * u.depthFactor;
-      const py = pointerSmooth.y * 0.22 * u.depthFactor;
+      /* Lower drift near center — depthFactor already reduced for mains */
+      const px = -pointerSmooth.x * 0.18 * u.depthFactor;
+      const py = pointerSmooth.y * 0.12 * u.depthFactor;
       u.parallaxX = lerp(u.parallaxX, px, ease);
       u.parallaxY = lerp(u.parallaxY, py, ease);
 
-      m.position.x = u.baseX + u.parallaxX;
-      m.position.y = u.baseY + bob + u.parallaxY;
-      m.position.z = u.baseZ - scrollSmooth * 0.35 * u.depthFactor;
+      let x = u.baseX + u.parallaxX;
+      let y = u.baseY + bob + u.parallaxY;
+      const z = u.baseZ - scrollSmooth * 0.35 * u.depthFactor;
+
+      /* Eject only if center enters content AABB (already includes +60px) */
+      if (u.discipline && exclusion.ready) {
+        const pad = 0.35;
+        if (
+          x > exclusion.minX &&
+          x < exclusion.maxX &&
+          y > exclusion.minY &&
+          y < exclusion.maxY
+        ) {
+          x = u.baseX < 0 ? exclusion.minX - pad : exclusion.maxX + pad;
+          y = u.baseY < 0 ? exclusion.minY - pad : exclusion.maxY + pad;
+        }
+      }
+
+      m.position.x = x;
+      m.position.y = y;
+      m.position.z = z;
 
       if (u.isBg && m.material && u.baseOpacity != null) {
         m.material.opacity = u.baseOpacity * fade;
@@ -853,6 +921,9 @@
       scrollSmooth = lerp(scrollSmooth, scrollTarget, scrollEase);
       const fade = 1 - scrollSmooth * 0.9;
 
+      /* Recompute no-spawn from live content rect (badge→stats + 60px) */
+      updateExclusionBox();
+
       /* ~600ms settle for active-discipline emissive boost */
       const boostEase = 1 - Math.exp(-dt * 5);
 
@@ -879,6 +950,23 @@
         c.rotation.x = u.rotX0 + t * u.spinX;
         c.rotation.y = u.rotY0 + t * u.spinY;
       });
+
+      if (window.__hero3dStats) {
+        window.__hero3dStats.objects = stars.map((s) => ({
+          id: s.userData.discipline,
+          x: +s.position.x.toFixed(2),
+          y: +s.position.y.toFixed(2),
+          z: +s.position.z.toFixed(2),
+        }));
+        window.__hero3dStats.exclusion = exclusion.ready
+          ? {
+              minX: +exclusion.minX.toFixed(2),
+              maxX: +exclusion.maxX.toFixed(2),
+              minY: +exclusion.minY.toFixed(2),
+              maxY: +exclusion.maxY.toFixed(2),
+            }
+          : null;
+      }
 
       const tiltY = pointerSmooth.x * TILT_MAX;
       const tiltX = -pointerSmooth.y * TILT_MAX * 0.75;

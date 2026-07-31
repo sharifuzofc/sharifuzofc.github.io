@@ -198,6 +198,93 @@ if (heroName) {
     cards.forEach((c) => liveIo.observe(c));
   })();
 
+  // SQA gauge: rAF count-up synced to CSS ring timeline (paused off-screen)
+  (function initSqaGaugeCount() {
+    const card = document.querySelector(".svc-sqa");
+    const gauge = card?.querySelector(".svc-anim-gauge");
+    const label = card?.querySelector("[data-gauge-pct]");
+    if (!card || !gauge || !label) return;
+
+    const TARGET = 98;
+    // Fractions of the 7.7s poster loop (must match svc-gauge-fill keyframes)
+    const T_FILL_START = 0.23377;
+    const T_FILL_END = 0.44156;
+    const T_HOLD_END = 0.96104;
+
+    let raf = 0;
+    let lastShown = -1;
+
+    const setPct = (n) => {
+      const pct = Math.min(TARGET, Math.max(0, n | 0));
+      if (pct === lastShown) return;
+      lastShown = pct;
+      label.textContent = pct + "%";
+    };
+
+    if (reduceMotion) {
+      setPct(TARGET);
+      return;
+    }
+
+    setPct(0);
+
+    const readProgress = () => {
+      const anims = gauge.getAnimations();
+      for (let i = 0; i < anims.length; i++) {
+        const a = anims[i];
+        if (a.playState === "idle") continue;
+        const timing = a.effect?.getComputedTiming?.();
+        const dur = timing?.duration;
+        if (!dur || dur === Infinity) continue;
+        const t = a.currentTime;
+        if (t == null) continue;
+        return ((t % dur) + dur) % dur / dur;
+      }
+      return null;
+    };
+
+    const tick = () => {
+      raf = 0;
+      if (!card.classList.contains("live")) {
+        return;
+      }
+
+      const p = readProgress();
+      if (p == null) {
+        setPct(0);
+      } else if (p < T_FILL_START) {
+        setPct(0);
+      } else if (p < T_FILL_END) {
+        const u = (p - T_FILL_START) / (T_FILL_END - T_FILL_START);
+        setPct(Math.round(u * TARGET));
+      } else if (p < T_HOLD_END) {
+        setPct(TARGET);
+      } else {
+        const u = (p - T_HOLD_END) / (1 - T_HOLD_END);
+        setPct(Math.round(TARGET * (1 - u)));
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      if (raf) return;
+      lastShown = -1;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    const mo = new MutationObserver(() => {
+      if (card.classList.contains("live")) start();
+      else stop();
+    });
+    mo.observe(card, { attributes: true, attributeFilter: ["class"] });
+    if (card.classList.contains("live")) start();
+  })();
+
   const animated = document.querySelectorAll(".reveal, .reveal-card, .reveal-title");
 
   function finalizeStat(el) {
@@ -454,7 +541,7 @@ if (heroName) {
   io.observe(grid);
 })();
 
-/* ============ PROCESS SECTION (reveal + proof count-up) ============ */
+/* ============ PROCESS SECTION (pipeline draw + proof count-up) ============ */
 (function initProcessSection() {
   const section = document.getElementById("process");
   if (!section) return;
@@ -465,10 +552,14 @@ if (heroName) {
   const proofs = [...section.querySelectorAll(".proof-chip")];
   const engages = [...section.querySelectorAll(".engage-card")];
   const countEls = [...section.querySelectorAll("[data-proof-count]")];
+  const CHIP_STAGGER = 150;
+  const LINE_DELAY = 160;
 
   function finalizeCounts() {
     countEls.forEach((el) => {
-      el.textContent = el.dataset.proofCount || "0";
+      const target = el.dataset.proofCount || "0";
+      const suffix = el.dataset.proofSuffix || "";
+      el.textContent = target + suffix;
     });
   }
 
@@ -481,15 +572,38 @@ if (heroName) {
     const easeOut = (t) => 1 - Math.pow(1 - t, 3);
     countEls.forEach((el, i) => {
       const target = Number(el.dataset.proofCount) || 0;
+      const suffix = el.dataset.proofSuffix || "";
       window.setTimeout(() => {
         const start = performance.now();
         const tick = (now) => {
           const p = Math.min(1, (now - start) / DUR);
-          el.textContent = String(Math.round(target * easeOut(p)));
-          if (p < 1) requestAnimationFrame(tick);
+          // Number only while counting — suffix lands on the final frame
+          if (p < 1) {
+            el.textContent = String(Math.round(target * easeOut(p)));
+            requestAnimationFrame(tick);
+          } else {
+            el.textContent = String(target) + suffix;
+          }
         };
         requestAnimationFrame(tick);
       }, i * 80);
+    });
+  }
+
+  function lightPipeline() {
+    steps.forEach((step, i) => {
+      window.setTimeout(() => {
+        step.classList.add("is-lit");
+        if (step.classList.contains("is-qa")) {
+          const chip = step.querySelector(".process-qa-chip");
+          if (chip) {
+            chip.classList.remove("is-pulse");
+            // Restart one-shot pulse
+            void chip.offsetWidth;
+            chip.classList.add("is-pulse");
+          }
+        }
+      }, LINE_DELAY + i * CHIP_STAGGER);
     });
   }
 
@@ -498,7 +612,12 @@ if (heroName) {
       window.setTimeout(() => el.classList.add("is-in"), i * 80);
     });
     if (rail) {
-      window.setTimeout(() => rail.classList.add("is-drawn"), reduceMotion ? 0 : 120);
+      window.setTimeout(() => {
+        rail.classList.add("is-drawn");
+        lightPipeline();
+      }, LINE_DELAY);
+    } else {
+      lightPipeline();
     }
     proofs.forEach((el, i) => {
       window.setTimeout(() => el.classList.add("is-in"), 80 * steps.length + i * 80);
@@ -513,7 +632,7 @@ if (heroName) {
   }
 
   if (reduceMotion) {
-    steps.forEach((el) => el.classList.add("is-in"));
+    steps.forEach((el) => el.classList.add("is-in", "is-lit"));
     proofs.forEach((el) => el.classList.add("is-in"));
     engages.forEach((el) => el.classList.add("is-in"));
     if (rail) rail.classList.add("is-drawn");
@@ -612,13 +731,3 @@ if (heroName) {
   });
 })();
 
-/* ============ BACK TO TOP ============ */
-const toTop = document.querySelector("[data-back-to-top]");
-if (toTop) {
-  addEventListener("scroll", () =>
-    toTop.classList.toggle("show", scrollY > 600)
-  );
-  toTop.addEventListener("click", () =>
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  );
-}

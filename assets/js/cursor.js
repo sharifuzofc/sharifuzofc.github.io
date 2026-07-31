@@ -50,14 +50,14 @@
   const trailPts = [];
 
   const hoverSel =
-    "a, button, .btn-sky, .btn-ghost, .f-btn, .nav-hire, .nav-burger, .to-top, .contact-mail, summary, [role='button']";
+    "a, button, .btn-sky, .btn-ghost, .f-btn, .nav-hire, .nav-burger, .contact-chip, .contact-submit, .contact-type-pill, summary, [role='button']";
   const viewSel =
     ".proj-card, .proj-thumb, .proj-thumb img, .flagship, .flagship-chrome, .flagship-poster";
   const invertSel =
     ".hero-name, .big-title, .footer-title, .contact-left > h2";
   const rotateSel = ".mini-3d.is-interactive-3d, .mini-3d.is-interactive-3d canvas";
   const magneticSel =
-    "a.btn-sky, a.btn-ghost, a.btn-primary, a.btn-secondary, a.nav-hire, button, .f-btn, .nav-desktop a, .nav-drawer a, .nav-logo, .contact-mail, .to-top";
+    "a.btn-sky, a.btn-ghost, a.btn-primary, a.btn-secondary, a.nav-hire, button, .f-btn, .nav-desktop a, .nav-drawer a, .nav-logo, .contact-chip, .contact-submit, .footer-top-chip";
 
   function closest(el, sel) {
     return el && el.closest ? el.closest(sel) : null;
