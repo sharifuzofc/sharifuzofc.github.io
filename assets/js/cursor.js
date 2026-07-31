@@ -21,10 +21,17 @@
   const cursor = document.createElement("div");
   cursor.className = "c-cursor";
   cursor.setAttribute("aria-hidden", "true");
-  cursor.innerHTML =
-    '<div class="c-cursor__dot"></div>' +
-    '<div class="c-cursor__ring"><span class="c-cursor__label">VIEW</span></div>' +
-    '<div class="c-cursor__ripple"></div>';
+  const dotEl = document.createElement("div");
+  dotEl.className = "c-cursor__dot";
+  const ringEl = document.createElement("div");
+  ringEl.className = "c-cursor__ring";
+  const labelEl = document.createElement("span");
+  labelEl.className = "c-cursor__label";
+  labelEl.textContent = "VIEW";
+  ringEl.appendChild(labelEl);
+  const rippleEl = document.createElement("div");
+  rippleEl.className = "c-cursor__ripple";
+  cursor.append(dotEl, ringEl, rippleEl);
   document.body.appendChild(cursor);
 
   const dot = cursor.querySelector(".c-cursor__dot");

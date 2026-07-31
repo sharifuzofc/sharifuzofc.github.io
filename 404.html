@@ -3,59 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://api.fontshare.com https://fonts.googleapis.com; font-src 'self' https://cdn.fontshare.com https://fonts.gstatic.com data:; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.googletagmanager.com https://formspree.io; form-action 'self' https://formspree.io mailto:; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>404 — Page Not Found | Sharifuz Zaman</title>
-  <meta name="robots" content="noindex" />
+  <meta name="description" content="This page was not found on Sharifuz Zaman’s portfolio. Return home or browse selected work, services, and contact." />
+  <meta name="robots" content="noindex,follow" />
+  <meta name="theme-color" content="#071525" />
+  <meta name="author" content="Sharifuz Zaman" />
+  <meta name="copyright" content="© 2026 Sharifuz Zaman" />
+  <link rel="canonical" href="https://sharifuzofc.github.io/404.html" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="shortcut icon" href="/assets/images/logo.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://sharifuzofc.github.io/#person",
+    "name": "Sharifuz Zaman",
+    "url": "https://sharifuzofc.github.io/",
+    "copyrightHolder": { "@id": "https://sharifuzofc.github.io/#person" }
+  }
+  </script>
   <script type="module" src="/src/case-study.js"></script>
-  <style>
-    .nf-wrap {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-    .nf-code {
-      font-family: var(--mono);
-      font-size: clamp(4rem, 12vw, 8rem);
-      color: var(--sky);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .nf-title {
-      font-size: clamp(1.5rem, 4vw, 2.25rem);
-      margin-bottom: 0.75rem;
-    }
-    .nf-copy {
-      color: var(--muted);
-      max-width: 36ch;
-      margin: 0 auto 2rem;
-      line-height: 1.7;
-    }
-    .nf-home {
-      display: inline-block;
-      font-family: var(--mono);
-      text-decoration: none;
-      color: var(--bg);
-      background: var(--sky);
-      padding: 0.75rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-    .nf-home:hover { background: var(--sky-soft); }
-  </style>
 </head>
-<body>
+<body data-sz-origin="sharifuzofc.github.io">
   <div class="noise" aria-hidden="true"></div>
   <main class="nf-wrap">
-    <div>
-      <p class="nf-code mono">404</p>
-      <h1 class="nf-title">Lost in the grid</h1>
-      <p class="nf-copy mono">This page doesn’t exist — or it moved. Head back to the portfolio.</p>
-      <a class="nf-home" href="/">← Back to home</a>
-    </div>
+    <p class="nf-code" aria-hidden="true">404</p>
+    <h1 class="nf-title">Page not found</h1>
+    <p class="nf-copy">This URL isn’t on Sharifuz Zaman’s portfolio. Head home or jump to work, services, or contact.</p>
+    <nav class="nf-nav" aria-label="Helpful links">
+      <a href="/#work">Work</a>
+      <a href="/#services">Services</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <a class="nf-home" href="/">Back to home</a>
   </main>
 </body>
 </html>

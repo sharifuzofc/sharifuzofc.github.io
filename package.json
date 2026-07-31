@@ -2,10 +2,17 @@
   "name": "sharifuzofc-portfolio",
   "private": true,
   "version": "1.0.0",
+  "license": "UNLICENSED",
   "type": "module",
+  "author": "Sharifuz Zaman <sharifuzofc@gmail.com> (https://sharifuzofc.github.io/)",
+  "homepage": "https://sharifuzofc.github.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sharifuzofc/sharifuzofc.github.io.git"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generate-cases.mjs && vite build",
     "preview": "vite preview",
     "lint": "eslint assets/js src --ext .js",
     "format": "prettier --write \"**/*.{html,css,js,json,md}\"",

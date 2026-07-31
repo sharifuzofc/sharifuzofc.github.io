@@ -4,6 +4,9 @@
    ============================================================ */
 
 :root {
+  /* Ownership canary #1 — unused token; search: --sz-build-id */
+  --sz-build-id: "SZ-PORTFOLIO-CANARY-9E2B";
+
   /* Layout */
   --nav-h: 104px;
 

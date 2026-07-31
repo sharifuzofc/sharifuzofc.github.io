@@ -3209,9 +3209,18 @@ html.has-custom-cursor .mini-3d.is-interactive-3d canvas {
   }
 }
 
+.engage-heading {
+  max-width: 1150px;
+  margin: 48px auto 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .engage-row {
   max-width: 1150px;
-  margin: 56px auto 0;
+  margin: 20px auto 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
@@ -3694,6 +3703,22 @@ a.contact-chip:hover {
   color: #f0f9ff;
 }
 
+/* Honeypot — visually hidden, off-screen (not display:none — some bots skip that) */
+.contact-hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.lg-refract-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -3951,6 +3976,13 @@ a.contact-chip:hover {
 }
 
 /* ============ PREMIUM FOOTER ============ */
+.about-updated {
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -4075,6 +4107,7 @@ a.contact-chip:hover {
   gap: 1.2rem;
   padding-top: 0.35rem;
 }
+.footer-cols h3,
 .footer-cols h4 {
   font-family: var(--mono);
   font-size: 11px;

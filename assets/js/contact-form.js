@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Contact form — custom validation, Formspree endpoint or mailto fallback.
+ * Contact form — validation, sanitisation, honeypot + time-based bot checks.
+ * Submits to data-endpoint (Formspree JSON) or mailto fallback.
+ * Never renders user input with innerHTML.
  */
 (function initContactForm() {
   const form = document.querySelector("[data-contact-form]");
@@ -12,13 +14,34 @@
   const typePills = [...form.querySelectorAll(".contact-type-pill")];
   const submitBtn = form.querySelector('button[type="submit"]');
   const mailto = form.dataset.mailto || "sharifuzofc@gmail.com";
+  const honeypot = form.querySelector("#contact-company");
+  const loadedAtInput = form.querySelector("#contact-loaded-at");
+  const MIN_MS = 3000;
+  const MAX_NAME = 120;
+  const MAX_EMAIL = 254;
+  const MAX_MESSAGE = 5000;
+
+  if (loadedAtInput) {
+    loadedAtInput.value = String(Date.now());
+  }
+
+  /** Strip control chars / HTML angle brackets from free text */
+  function sanitise(value, maxLen) {
+    return String(value || "")
+      .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+      .replace(/[<>]/g, "")
+      .trim()
+      .slice(0, maxLen);
+  }
 
   const fields = {
     name: {
       el: form.querySelector("#contact-name"),
       error: form.querySelector("#contact-name-error"),
       validate(v) {
-        if (!v.trim()) return "Please enter your name.";
+        const s = sanitise(v, MAX_NAME);
+        if (!s) return "Please enter your name.";
+        if (s.length < 2) return "Name is too short.";
         return "";
       },
     },
@@ -26,8 +49,9 @@
       el: form.querySelector("#contact-email"),
       error: form.querySelector("#contact-email-error"),
       validate(v) {
-        if (!v.trim()) return "Please enter your email.";
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())) {
+        const s = sanitise(v, MAX_EMAIL);
+        if (!s) return "Please enter your email.";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)) {
           return "Enter a valid email address.";
         }
         return "";
@@ -37,8 +61,9 @@
       el: form.querySelector("#contact-message"),
       error: form.querySelector("#contact-message-error"),
       validate(v) {
-        if (!v.trim()) return "Tell me a bit about what you’re building.";
-        if (v.trim().length < 12) return "A little more detail helps — 12+ characters.";
+        const s = sanitise(v, MAX_MESSAGE);
+        if (!s) return "Tell me a bit about what you’re building.";
+        if (s.length < 12) return "A little more detail helps — 12+ characters.";
         return "";
       },
     },
@@ -100,6 +125,14 @@
     toast.classList.remove("is-error");
   }
 
+  /** Silent success for bots — do not tip them off */
+  function botTrapTriggered() {
+    if (honeypot && honeypot.value.trim() !== "") return true;
+    const loaded = Number(loadedAtInput?.value || 0);
+    if (!loaded || Date.now() - loaded < MIN_MS) return true;
+    return false;
+  }
+
   typePills.forEach((pill) => {
     pill.addEventListener("click", () => {
       const type = pill.dataset.type || "";
@@ -144,6 +177,13 @@
     e.preventDefault();
     hideToast();
 
+    if (botTrapTriggered()) {
+      showToast("Sent — I’ll reply within 24h ✓", false);
+      form.reset();
+      if (loadedAtInput) loadedAtInput.value = String(Date.now());
+      return;
+    }
+
     const { ok, firstInvalid } = validateAll();
     if (!ok) {
       if (firstInvalid === typeInput) {
@@ -155,9 +195,9 @@
     }
 
     const data = {
-      name: fields.name.el.value.trim(),
-      email: fields.email.el.value.trim(),
-      message: fields.message.el.value.trim(),
+      name: sanitise(fields.name.el.value, MAX_NAME),
+      email: sanitise(fields.email.el.value, MAX_EMAIL),
+      message: sanitise(fields.message.el.value, MAX_MESSAGE),
       project_type: typeInput?.value || "",
     };
 
@@ -189,10 +229,14 @@
       form.reset();
       typePills.forEach((p) => p.setAttribute("aria-pressed", "false"));
       if (typeInput) typeInput.value = "";
+      if (loadedAtInput) loadedAtInput.value = String(Date.now());
       Object.values(fields).forEach((f) => showError(f, ""));
       showToast("Sent — I’ll reply within 24h ✓", false);
     } catch {
-      showToast("Couldn’t send — try email instead, or check the form endpoint.", true);
+      showToast(
+        "Couldn’t send — try email instead, or check the form endpoint.",
+        true
+      );
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
