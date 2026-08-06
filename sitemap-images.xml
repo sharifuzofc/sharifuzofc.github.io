@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sharifuzofc.github.io/</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/og-home.jpg</image:loc>
+      <image:title>Sharifuz Zaman portfolio</image:title>
+      <image:caption>Sharifuz Zaman - web developer and SQA engineer, Dhaka · Worldwide</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/sharifuz-zaman-web-developer.webp</image:loc>
+      <image:title>Sharifuz Zaman portrait</image:title>
+      <image:caption>Sharifuz Zaman, freelance web developer and SQA engineer based in Dhaka</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/finance.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-1.jpg</image:loc>
+      <image:title>Finance - Fintech Web App</image:title>
+      <image:caption>Finance fintech web app dashboard case study by Sharifuz Zaman</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/pulse.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-7.png</image:loc>
+      <image:title>Pulse - Analytics Dashboard</image:title>
+      <image:caption>Pulse analytics dashboard UI case study by Sharifuz Zaman</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/orizon.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-2.png</image:loc>
+      <image:title>Orizon - Travel Platform</image:title>
+      <image:caption>Orizon travel booking platform UI by Sharifuz Zaman</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/fundo.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-3.jpg</image:loc>
+      <image:title>Fundo - Brand Design</image:title>
+      <image:caption>Fundo brand identity and web design by Sharifuz Zaman</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/brawlhalla.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-4.png</image:loc>
+      <image:title>Brawlhalla - Mobile App QA</image:title>
+      <image:caption>Brawlhalla mobile app QA automation case study</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/dsm.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-5.png</image:loc>
+      <image:title>DSM. - Product Branding</image:title>
+      <image:caption>DSM product branding system by Sharifuz Zaman</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/metaspark.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-6.png</image:loc>
+      <image:title>MetaSpark - Visuals &amp; Video</image:title>
+      <image:caption>MetaSpark motion and video campaign visuals</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/summary.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-7.png</image:loc>
+      <image:title>Summary - SaaS App</image:title>
+      <image:caption>Summary SaaS application UI case study</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/taskflow.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-8.jpg</image:loc>
+      <image:title>TaskFlow - API Testing</image:title>
+      <image:caption>TaskFlow API testing with Postman and JMeter</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/arrival.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-9.png</image:loc>
+      <image:title>Arrival - Campaign Site</image:title>
+      <image:caption>Arrival scroll-driven campaign website case study</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/shoplane.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-8.jpg</image:loc>
+      <image:title>ShopLane - Checkout QA</image:title>
+      <image:caption>ShopLane e-commerce checkout QA case study</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sharifuzofc.github.io/work/lumen.html</loc>
+    <image:image>
+      <image:loc>https://sharifuzofc.github.io/assets/images/project-3.jpg</image:loc>
+      <image:title>Lumen - Social Brand Kit</image:title>
+      <image:caption>Lumen social media brand kit and thumbnails</image:caption>
+    </image:image>
+  </url>
+</urlset>

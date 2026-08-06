@@ -1,0 +1,19 @@
+/* Critical pre-module styles for cinematic intro (CSP: no inline <style> for #intro) */
+html.awaiting-intro,
+html.awaiting-intro body {
+  overflow: hidden !important;
+}
+
+#intro.intro-sequence {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  width: 100dvw;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  /* Same token as the site - full atmosphere layers arrive with intro-sequence.css */
+  background-color: var(--bg, #071525);
+  color: #e8eefb;
+}

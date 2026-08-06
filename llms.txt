@@ -1,0 +1,51 @@
+# Sharifuz Zaman
+
+> Web App Developer, SQA Engineer, Graphics Designer, and Video Editor based in Dhaka, Bangladesh. Works with clients worldwide through AZAdemy Studio.
+
+## Who
+Sharifuz Zaman (also: sharifuzofc) delivers one accountable pipeline: build → test → design → edit.
+
+## Services
+- Web app development (React, JavaScript, REST APIs)
+- SQA engineering (Selenium, Cypress, Postman, JMeter, TestRail)
+- Graphics design (Figma, Photoshop, Illustrator, brand kits)
+- Video editing (Premiere Pro, After Effects, Reels & ads)
+
+## Key pages
+- Home / portfolio: https://sharifuzofc.github.io/
+- Services: https://sharifuzofc.github.io/#services
+- Selected work: https://sharifuzofc.github.io/#work
+- Process: https://sharifuzofc.github.io/#process
+- About: https://sharifuzofc.github.io/#about
+- Contact: https://sharifuzofc.github.io/#contact
+
+## Case studies
+- Finance - Fintech Web App: https://sharifuzofc.github.io/work/finance.html
+- Pulse - Analytics Dashboard: https://sharifuzofc.github.io/work/pulse.html
+- Orizon - Travel Platform: https://sharifuzofc.github.io/work/orizon.html
+- Fundo - Brand Design: https://sharifuzofc.github.io/work/fundo.html
+- Brawlhalla - Mobile App QA: https://sharifuzofc.github.io/work/brawlhalla.html
+- DSM. - Product Branding: https://sharifuzofc.github.io/work/dsm.html
+- MetaSpark - Visuals & Video: https://sharifuzofc.github.io/work/metaspark.html
+- Summary - SaaS App: https://sharifuzofc.github.io/work/summary.html
+- TaskFlow - API Testing: https://sharifuzofc.github.io/work/taskflow.html
+- Arrival - Campaign Site: https://sharifuzofc.github.io/work/arrival.html
+- ShopLane - Checkout QA: https://sharifuzofc.github.io/work/shoplane.html
+- Lumen - Social Brand Kit: https://sharifuzofc.github.io/work/lumen.html
+
+## Contact
+- Email: sharifuzofc@gmail.com
+- Phone: +880 1919-729159
+- GitHub: https://github.com/sharifuzofc
+- LinkedIn: https://www.linkedin.com/in/sharifuzofc/
+- Facebook: https://www.facebook.com/sharifuzz/
+- Instagram: https://www.instagram.com/muhammad_sharifuz/
+- Location: Dhaka, Bangladesh · Worldwide remote
+
+## Profiles (entity consolidation)
+Use the same website URL (https://sharifuzofc.github.io/) on every platform profile.
+
+## Optional
+- Sitemap: https://sharifuzofc.github.io/sitemap.xml
+- Image sitemap: https://sharifuzofc.github.io/sitemap-images.xml
+- robots.txt: https://sharifuzofc.github.io/robots.txt

@@ -1,0 +1,30 @@
+/**
+ * Metric-matched system fallbacks - reduce FOUT shift while webfonts load.
+ * Primary faces still come from Fontshare / Google (display=swap on those CSS URLs).
+ */
+@font-face {
+  font-family: "Satoshi Fallback";
+  src: local("Segoe UI"), local("Helvetica Neue"), local(Arial);
+  size-adjust: 100%;
+  ascent-override: 95%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Fallback";
+  src: local("Segoe UI Semibold"), local("Helvetica Neue Bold"), local(Arial);
+  size-adjust: 98%;
+  ascent-override: 92%;
+  descent-override: 20%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Cascadia Mono"), local("Consolas"), local(monospace);
+  size-adjust: 100%;
+  font-display: swap;
+}
